@@ -1,4 +1,5 @@
 import "./App.css";
+import { RecipeComp1 } from "./components/Recipe";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
         </h3>      
         </div>
+        <RecipeComp1></RecipeComp1>
+        <h3 className="text-x1 text-center">Alexander, testa att connecta mot API</h3>
     </>
   );
 }
