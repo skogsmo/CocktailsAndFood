@@ -16,9 +16,12 @@ function App() {
           <span>En knapp som kan leda någonstans i framtiden</span>
           <span className="text-xs font-thin ml-2">(Benjamin)</span>
         </button>
-        <h3 className="text-xl text-center">
-          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
-        </h3>
+        <div className="flex flex-col items-center">
+          <img src="images/profile.png" />
+          <p className="text-indigo-800 hover:text-indigo-500 font-bold select-none">
+            Niclas
+          </p>
+        </div>
       </div>
       <RecipeComp1></RecipeComp1>
       <h3 className="text-x1 text-center">
