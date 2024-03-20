@@ -20,7 +20,7 @@ function App() {
         </button>
         <h3 className="text-xl text-center">
           Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
-        </h3>      
+        </h3>
         </div>
     </>
   );
