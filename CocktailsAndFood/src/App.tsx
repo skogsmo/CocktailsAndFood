@@ -18,7 +18,10 @@ function App() {
             (Benjamin)
           </span>
         </button>
-      </div>
+        <h3 className="text-xl text-center">
+          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
+        </h3>      
+        </div>
     </>
   );
 }
