@@ -21,6 +21,8 @@ function App() {
         <h3 className="text-xl text-center">
           Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
         </h3>
+        <span>Vi skriver massor av extra text här för att se hur min
+          egna branch fungerar, funkar det?</span>
         </div>
     </>
   );
