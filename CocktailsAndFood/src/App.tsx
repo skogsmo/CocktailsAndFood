@@ -25,6 +25,9 @@ function App() {
             Niclas
           </p>
         </div>
+        <button className="shadow-none py-4 px-6 bg-emerald-200 text-black rounded-full hover hover:bg-emerald-300">
+          <span>Emerald Button - Dan</span>
+        </button>
       </div>
       <RecipeComp1></RecipeComp1>
       <h3 className="text-x1 text-center">
