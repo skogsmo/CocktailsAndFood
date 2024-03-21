@@ -16,6 +16,9 @@ function App() {
           <span>En knapp som kan leda någonstans i framtiden</span>
           <span className="text-xs font-thin ml-2">(Benjamin)</span>
         </button>
+        <h2 className="text-2xl text-center">
+          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
+        </h2>
         <div className="flex flex-col items-center">
           <img src="images/profile.png" />
           <p className="text-indigo-800 hover:text-indigo-500 font-bold select-none">
