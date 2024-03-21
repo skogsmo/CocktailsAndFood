@@ -22,6 +22,9 @@ function App() {
             Niclas
           </p>
         </div>
+        <h2 className="text-2xl text-center">
+          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
+        </h2>
         <button className="shadow-none py-4 px-6 bg-emerald-200 text-black rounded-full hover hover:bg-emerald-300">
           <span>Emerald Button - Dan</span>
         </button>
