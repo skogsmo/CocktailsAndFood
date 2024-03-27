@@ -1,0 +1,1 @@
+export const USE_CACHED_API_CALLS = true;

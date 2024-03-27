@@ -1,0 +1,17 @@
+[
+    {
+        "id": "c5a0c993-9c15-4014-8cc8-21882d0a4d31",
+        "name": "Ris",
+        "price": 10
+    },
+    {
+        "id": "f4d70d6f-7bb5-42b9-b74b-787b3fc9f178",
+        "name": "Romansallad",
+        "price": 10
+    },
+    {
+        "id": "4141c7a1-10a1-40ff-9e85-67b86dd8c217",
+        "name": "Ris & romansallad",
+        "price": 15
+    }
+]
