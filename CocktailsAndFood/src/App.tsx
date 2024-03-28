@@ -1,31 +1,20 @@
 import "./App.css";
+import {Route, Routes} from "react-router-dom"
+import Start from "./pages/Start"
+import Menu from "./pages/Menu"
+import Testapi from "./pages/TutorialApiFetching"
+import { Link } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div className="flex flex-col gap-4 h-screen justify-center items-center">
-        <h2 className="text-2xl text-center">
-          Välkommen till <span className="text-xs font-thin">(Linnea)</span>
-        </h2>
-        <h1 className="text-5xl font-bold text-center">
-          Bowls & Cocktails <span className="text-xs font-thin">(Claes)</span>
-        </h1>
-        <button className="py-4 px-6 bg-gray-50 text-gray-600 rounded-full shadow hover:bg-gray-100 hover:shadow-md">
-          <span>
-            En knapp som kan leda någonstans i framtiden
-          </span>
-          <span className="text-xs font-thin ml-2">
-            (Benjamin)
-          </span>
-        </button>
-        <h3 className="text-xl text-center">
-          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
-        </h3>
-        <span>Vi skriver massor av extra text här för att se hur min
-          egna branch fungerar, funkar det?</span>
-        </div>
-    </>
-  );
+  <Routes>
+    <Route path="/" element={<Start/>} />   
+    <Route path="/menu" element={<Menu/>} />
+    <Route path="/testapi" element={<Testapi/>} />
+  </Routes>
+  </>
+  )
 }
 
 export default App;
