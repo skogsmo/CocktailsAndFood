@@ -9,9 +9,6 @@ export type Meal = {
     protein?: ExtraIngredient;
     carb?: ExtraIngredient;
     drink?: Drink;
-    // suggestedDrinkId?: string;
-    // chosenDrinkId?: string;
-    // chosenDrinkCategory?: string;
 };
 
 export function createMeal(food: Food, protein?: ExtraIngredient, drink?: Drink): Meal {
