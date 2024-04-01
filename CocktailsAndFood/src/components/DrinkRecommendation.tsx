@@ -25,8 +25,6 @@ function DrinkRecommendation() {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     useEffect(() => {
-        setImageLoaded(false);
-
         newRecommendation();
 
         return () => {
