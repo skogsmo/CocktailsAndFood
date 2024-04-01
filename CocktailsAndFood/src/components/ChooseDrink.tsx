@@ -41,8 +41,12 @@ export function ChooseDrink() {
         const signal = abortControllerRef.current.signal;
 
         try {
-            const response = await fetch(cachableGetUrl(API_CACHER_BASE_URL, "www.thecocktaildb.com/api/json/v1/1/list.php?c=list", USE_CACHED_API_CALLS), { signal });
+            const response = await fetch(cachableGetUrl(API_CACHER_BASE_URL, "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list", USE_CACHED_API_CALLS), { signal });
+            console.log("response: ");
+            console.log(response);
             const json: ICategoriesResponse = await response.json();
+            console.log("json: ");
+            console.log(json);
             const categories: string[] = json.drinks.map(cat => cat.strCategory)
 
             setDrinkCategories(categories);
@@ -69,7 +73,7 @@ export function ChooseDrink() {
         const signal = abortControllerRef.current.signal;
 
         try {
-            const response = await fetch(cachableGetUrl(API_CACHER_BASE_URL, `www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`, USE_CACHED_API_CALLS), { signal });
+            const response = await fetch(cachableGetUrl(API_CACHER_BASE_URL, `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`, USE_CACHED_API_CALLS), { signal });
             const drinksResponse: IDrinksResponse = await response.json();
             const drinks: Drink[] = drinksResponse.drinks.map((drink) => {
                 return {
