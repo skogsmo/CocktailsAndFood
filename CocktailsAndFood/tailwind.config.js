@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        "ultra": ["Ultra"],
+        "montserrat": ["Montserrat"]
+      }
+
+    },
   },
   plugins: [],
 }
