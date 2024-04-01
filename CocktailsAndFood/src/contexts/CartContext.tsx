@@ -11,7 +11,7 @@ export type CartContextType = {
     emptyCart: () => void;
 };
 
-export const CartProvider = ({children}: { children: React.ReactNode }) => {
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [meals, setMeals] = useState<Meal[]>([]);
 
