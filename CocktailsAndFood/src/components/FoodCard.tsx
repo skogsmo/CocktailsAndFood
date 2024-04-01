@@ -4,12 +4,8 @@ import { CartContext, CartContextType } from "../contexts/CartContext";
 import { useContext } from "react";
 import { createMeal } from "../types/Meal";
 
-type FoodCardProps = {
-    food: Food;
-}
+export function FoodCard({ food }: { food: Food }) {
 
-export function FoodCard(props: FoodCardProps) {
-    const { food } = props;
     const { addMeal } = useContext(CartContext) as CartContextType;
     const meal = createMeal(food)
 
@@ -25,8 +21,8 @@ export function FoodCard(props: FoodCardProps) {
                 <div>
                     <h2 className="font-bold text-xl">{food.title}</h2>
                     <p className="font-semibold text-xl">{food.price} kr</p>
-                    
-                <p className="">{food.description}</p>
+
+                    <p className="">{food.description}</p>
                 </div>
                 <div>
                     <Link to="/customize-order">
