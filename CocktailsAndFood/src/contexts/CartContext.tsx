@@ -21,12 +21,9 @@ export const CartProvider = ({children}: { children: React.ReactNode }) => {
 
     const updateMeal = (updatedMeal: Meal) => {
         setMeals(prevMeals =>
-            prevMeals.map(m => {
-                if (m.id === updatedMeal.id) {
-                    return updatedMeal;
-                }
-                return m;
-            })
+            prevMeals.map(m =>
+                m.id === updatedMeal.id ? updatedMeal : m
+            )
         );
     };
 
