@@ -42,15 +42,15 @@ export function Menu() {
 
     return (
         <div className="p-4 bg-slate-100 min-h-screen flex justify-center">
-                <div className="max-w-[1200px]">
-                    <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-around gap-4">
-                        {foods.map(food => (
-                            <li key={food._id} className="">
-                                <FoodCard food={food} />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+            <div className="max-w-[1200px]">
+                <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-around gap-4">
+                    {foods.map(food => (
+                        <li key={food._id} className="">
+                            <FoodCard food={food} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
