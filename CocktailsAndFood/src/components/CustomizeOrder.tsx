@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Meal } from "../types/Meal";
 import { ExtraIngredient } from "../types/ExtraIngredient";
 import { CartContext, CartContextType } from "../contexts/CartContext";
@@ -18,16 +18,9 @@ export function CustomizeOrder() {
             .then((data) => setCarbs(data));
     }, []);
 
-    const navigate = useNavigate();
     const { meals, updateMeal } = useContext(CartContext) as CartContextType;
-    const meal = meals.find(m => m.id === useLocation().state);
-
-    if (!meal) {
-        useEffect(() => {
-            navigate("/menu");
-        }, []);
-        return null;
-    }
+    const meal = meals.find(m => m.id === localStorage.getItem("currentMealId"));
+    if (!meal) return <Navigate to="/menu" />;
 
     const handleIngredientChange = (type: keyof Meal, event: React.ChangeEvent<HTMLInputElement>) => {
         const ingredientObject = JSON.parse(event.target.dataset[type] as string);
@@ -36,7 +29,7 @@ export function CustomizeOrder() {
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 p-4 bg-slate-200 min-h-screen">
             <img src={meal.food.imageUrl} className="w-[300px]" />
             <h2 className="font-bold text-xl">{meal.food.title}</h2>
             <p>{meal.food.description}</p>
@@ -55,7 +48,7 @@ export function CustomizeOrder() {
                             onChange={e => handleIngredientChange("protein", e)}
                             data-protein={JSON.stringify(protein)}
                         />
-                        <label htmlFor={`protein-${index}`}>{protein.name}</label>
+                        <label htmlFor={`protein-${index}`}>{protein.name} <span className="text-gray-400">(+{protein.price} kr)</span></label>
                     </div>
                 ))}
             </div>
@@ -73,13 +66,13 @@ export function CustomizeOrder() {
                             onChange={e => handleIngredientChange("carb", e)}
                             data-carb={JSON.stringify(carb)}
                         />
-                        <label htmlFor={`carb-${index}`}>{carb.name}</label>
+                        <label htmlFor={`carb-${index}`}>{carb.name} <span className="text-gray-400">(+{carb.price} kr)</span></label>
                     </div>
                 ))}
             </div>
             {meal.carb && meal.protein &&
                 <div>
-                    <Link to="/drink-recommendation" state={meal.id}>
+                    <Link to="/drink-recommendation" onClick={() => {meal.drink = undefined; updateMeal(meal)}}>
                         <button className="px-4 py-2 bg-amber-500 hover:bg-amber-400 rounded-full text-white font-bold">
                             Till drinkrekommendation!
                         </button>

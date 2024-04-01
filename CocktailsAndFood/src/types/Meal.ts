@@ -9,6 +9,9 @@ export type Meal = {
     protein?: ExtraIngredient;
     carb?: ExtraIngredient;
     drink?: Drink;
+    // suggestedDrinkId?: string;
+    // chosenDrinkId?: string;
+    // chosenDrinkCategory?: string;
 };
 
 export function createMeal(food: Food, protein?: ExtraIngredient, drink?: Drink): Meal {
@@ -19,3 +22,9 @@ export function createMeal(food: Food, protein?: ExtraIngredient, drink?: Drink)
         drink
     };
 }
+
+export const getMealTotalPrice = (meal: Meal) =>
+    meal.food.price +
+    (meal.carb ? meal.carb.price : 0) +
+    (meal.drink?.price ? meal.drink.price : 0) +
+    (meal.protein ? meal.protein?.price : 0);

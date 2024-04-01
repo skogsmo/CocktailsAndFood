@@ -2,7 +2,7 @@
     {
         "id": "d1c8828b-2fbc-4d83-a537-bf6e268e4b3b",
         "name": "Barbacoa (biff)",
-        "price": 25,
+        "price": 34,
         "recommendedDrinkIngredients": [
             "Creme de Cacao",
             "Mango",
@@ -30,7 +30,7 @@
     {
         "id": "e869fa24-83b1-43a0-b891-eafbb2e44c63",
         "name": "Chipotlegrillad kyckling",
-        "price": 20,
+        "price": 27,
         "recommendedDrinkIngredients": [
             "Tequila",
             "Coffee",
@@ -56,7 +56,7 @@
     {
         "id": "07ce10c4-db6f-4998-a02f-7e73f9725927",
         "name": "Carnitas (fläsk)",
-        "price": 20,
+        "price": 23,
         "recommendedDrinkIngredients": [
             "Bitters",
             "Southern Comfort",
@@ -82,7 +82,7 @@
     {
         "id": "d542af12-7c42-4425-94a8-73abbc412541",
         "name": "Veggie strips (gluten)",
-        "price": 10,
+        "price": 20,
         "recommendedDrinkIngredients": [
             "Sambuca",
             "Carbonated water",

@@ -5,17 +5,17 @@ export const CartContext = createContext<CartContextType | null>(null);
 
 export type CartContextType = {
     meals: Meal[];
-    addToCart: (meal: Meal) => void;
+    addMeal: (meal: Meal) => void;
     updateMeal: (updatedMeal: Meal) => void;
+    removeMeal: (mealId: string) => void;
+    emptyCart: () => void;
 };
 
-// TODO: persist med localstorage?
-
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider = ({children}: { children: React.ReactNode }) => {
 
     const [meals, setMeals] = useState<Meal[]>([]);
 
-    const addToCart = (meal: Meal) => {
+    const addMeal = (meal: Meal) => {
         setMeals([...meals, meal]);
     }
 
@@ -29,11 +29,19 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
             });
         });
         
-        console.log(meals)
+        // console.log(meals)
+    };
+
+    const removeMeal = (mealId: string) => {
+        setMeals(prevMeals => prevMeals.filter(m => m.id !== mealId));
+    };
+
+    const emptyCart = () => {
+        setMeals([]);
     };
 
     return (
-        <CartContext.Provider value={{ meals, addToCart, updateMeal }}>
+        <CartContext.Provider value={{ meals, addMeal, updateMeal, removeMeal, emptyCart }}>
             {children}
         </CartContext.Provider>
     );
