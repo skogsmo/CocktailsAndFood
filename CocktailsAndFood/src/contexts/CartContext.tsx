@@ -20,16 +20,14 @@ export const CartProvider = ({children}: { children: React.ReactNode }) => {
     }
 
     const updateMeal = (updatedMeal: Meal) => {
-        setMeals(prevMeals => {
-            return prevMeals.map((m) => {
+        setMeals(prevMeals =>
+            prevMeals.map(m => {
                 if (m.id === updatedMeal.id) {
                     return updatedMeal;
                 }
                 return m;
-            });
-        });
-        
-        // console.log(meals)
+            })
+        );
     };
 
     const removeMeal = (mealId: string) => {
