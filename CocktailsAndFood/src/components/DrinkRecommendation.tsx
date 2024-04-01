@@ -103,7 +103,7 @@ function DrinkRecommendation() {
         meal.drink = recommendedDrink;
         updateMeal(meal);
 
-        navigate("/summary", { state: { key: meal.id } })
+        navigate("/summary")
     }
 
     return (
@@ -153,7 +153,7 @@ function DrinkRecommendation() {
                         </button>
                     </div>
                     <div>
-                        <Link to="/choose-drink" state={meal.id}>
+                        <Link to="/choose-drink">
                             <button className="px-4 py-2 bg-sky-500 hover:bg-sky-400 rounded-full text-white font-bold">
                                 Välj annan dryck
                             </button>

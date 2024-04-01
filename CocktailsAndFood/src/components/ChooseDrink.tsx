@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { CartContextType, CartContext } from "../contexts/CartContext";
 import cachableGetUrl from "../utils/apiUrl";
 import { API_CACHER_BASE_URL, USE_CACHED_API_CALLS } from "../constants";
@@ -14,7 +14,7 @@ import DrinksList from "./DrinksList";
 export function ChooseDrink() {
 
     const { meals, updateMeal } = useContext(CartContext) as CartContextType;
-    const meal = meals.find(m => m.id === useLocation().state);
+    const meal = meals.find(m => m.id === localStorage.getItem("currentMealId"));
     if (!meal) return <Navigate to="/menu" />;
 
     const navigate = useNavigate();
