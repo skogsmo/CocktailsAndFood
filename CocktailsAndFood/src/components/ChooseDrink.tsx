@@ -136,7 +136,14 @@ export function ChooseDrink() {
 
     return (
         <div className="flex flex-col gap-4 p-4">
-            <div className="flex flex-col gap-2">
+            
+            <Link to="/drink-recommendation">
+                <button className="px-4 py-2 hover:bg-slate-100 rounded-full text-cyan-700 font-bold flex gap-4 items-center">
+                    <FontAwesomeIcon icon={faArrowLeftLong} />
+                    <p>Tillbaka till drinkrekommendationer</p>
+                </button>
+            </Link>
+            <div className="flex flex-col gap-4">
                 <h2 className="font-bold text-3xl text-orange-600">Välj kategori:</h2>
                 <ul className="flex flex-wrap gap-2">
                     {drinkCategories.map(category => (
@@ -162,11 +169,13 @@ export function ChooseDrink() {
                             <DrinksList key={currentCategory} items={drinksInCategory} onDrinkClick={handleDrinkClick} />
 
                         </div>
-                        <hr className="border-t-4 border-slate-500 border-dotted" />
                         {selectedDrink &&
-                            <div className="flex flex-col gap-4">
-                                <DrinkDetails drink={selectedDrink} onImageLoad={() => setImageLoaded(true)} hidden={!imageLoaded} />
-                            </div>
+                            <>
+                                <hr className="border-t-4 border-slate-500 border-dotted" />
+                                <div className="flex flex-col gap-4">
+                                    <DrinkDetails drink={selectedDrink} onImageLoad={() => setImageLoaded(true)} hidden={!imageLoaded} />
+                                </div>
+                            </>
                         }
                         <div className={`${!imageLoaded ? "invisible" : "visible"}`}>
                             <button onClick={handleSubmitClick} className="px-4 py-2 bg-amber-500 hover:bg-amber-400 rounded-full text-white font-bold">
@@ -176,12 +185,6 @@ export function ChooseDrink() {
                     </div>
                 </>
             }
-            <Link to="/drink-recommendation">
-                <button className="px-4 py-2 bg-slate-400 hover:bg-slate-500 rounded-full text-white font-bold flex gap-4 items-center">
-                    <FontAwesomeIcon icon={faArrowLeftLong} />
-                    <p>Tillbaka till drinkrekommendationer</p>
-                </button>
-            </Link>
         </div>
     )
 }
