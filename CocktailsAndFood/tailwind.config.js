@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: theme => ({
+        'burrito-bowl': "url('/img/Bakgrund.jpeg')",
+      })
+    },
   },
   plugins: [],
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FoodCard } from "./FoodCard";
 import { Food } from "../types/Food";
-import { API_CACHER_BASE_URL, USE_CACHED_API_CALLS } from "../constants";
+import { MENU_URL, USE_CACHED_API_CALLS } from "../constants";
 import cachableGetUrl from "../utils/apiUrl";
 import IFoodResponse from "../interfaces/IFoodResponse";
 import foodResponseToFood from "../utils/foodResponseToFood";
@@ -19,7 +19,8 @@ export function Menu() {
             const signal = abortControllerRef.current.signal;
 
             try {
-                const data = await fetch(cachableGetUrl(API_CACHER_BASE_URL, "https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes", USE_CACHED_API_CALLS), { signal });
+                console.log("fetching menu from " + cachableGetUrl(MENU_URL, USE_CACHED_API_CALLS))
+                const data = await fetch(cachableGetUrl(MENU_URL, USE_CACHED_API_CALLS), { signal });
                 const foodsResponse: IFoodResponse[] = await data.json();
                 const foods: Food[] = foodsResponse.map(foodResponseToFood);
                 setFoods(foods);

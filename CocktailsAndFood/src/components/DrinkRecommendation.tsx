@@ -75,14 +75,14 @@ function DrinkRecommendation() {
         const signal = abortControllerRef.current.signal;
 
         try {
-            const response = await fetch(cachableGetUrl(API_CACHER_BASE_URL, `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`, USE_CACHED_API_CALLS), { signal });
+            const response = await fetch(cachableGetUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`, USE_CACHED_API_CALLS, API_CACHER_BASE_URL), { signal });
             const drinksResponse: IDrinksResponse = await response.json();
             const drinkIds = drinksResponse.drinks.map((drink) => drink.idDrink);
             const randomDrinkId = drinkIds[getRandomIndex(drinkIds.length)];
 
             console.log(`Fetching drink: ${randomDrinkId}`);
 
-            const result = await fetch(cachableGetUrl(API_CACHER_BASE_URL, `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomDrinkId}`, USE_CACHED_API_CALLS), { signal });
+            const result = await fetch(cachableGetUrl(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomDrinkId}`, USE_CACHED_API_CALLS, API_CACHER_BASE_URL), { signal });
             const drinkDetailsResponse: IDrinkDetailsResponse = await result.json();
             const drink = drinkResponseToDrink(drinkDetailsResponse);
 
