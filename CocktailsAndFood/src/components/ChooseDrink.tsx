@@ -10,6 +10,8 @@ import IDrinkDetailsResponse from "../interfaces/IDrinkDetailsResponse";
 import drinkResponseToDrink from "../utils/drinkResponseToDrink";
 import DrinkDetails from "./DrinkDetails";
 import DrinksList from "./DrinksList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 export function ChooseDrink() {
 
@@ -175,8 +177,8 @@ export function ChooseDrink() {
                 </>
             }
             <Link to="/drink-recommendation">
-                <button className="px-4 py-2 bg-sky-500 hover:bg-sky-400 rounded-full text-white font-bold">
-                    Tillbaka till drinkrekommendationer
+                <button className="px-4 py-2 bg-slate-400 hover:bg-slate-500 rounded-full text-white font-bold flex gap-4 items-center">
+                    <FontAwesomeIcon icon={faArrowLeftLong} /> <span>Tillbaka till drinkrekommendationer</span>
                 </button>
             </Link>
         </div>
