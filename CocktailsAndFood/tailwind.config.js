@@ -6,11 +6,10 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage: theme => ({
+      backgroundImage: {
         'burrito-bowl': "url('/img/Bakgrund.jpeg')",
-      })
+      }
     },
   },
   plugins: [],
 }
-
