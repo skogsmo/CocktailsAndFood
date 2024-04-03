@@ -15,6 +15,7 @@ function App() {
             (Benjamin)
           </span>
         </button>
+        <h5>Lotta was here</h5>
       </div>
     </>
   );
