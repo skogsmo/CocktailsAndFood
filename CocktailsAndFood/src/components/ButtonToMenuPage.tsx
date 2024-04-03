@@ -5,7 +5,7 @@ const ButtonToMenuPage: React.FunctionComponent= () => {
     return (
         <>
             <Link to="/menu"> 
-                <button className="py-4 px-6 bg-gray-50 text-gray-600 rounded-full shadow hover:bg-gray-100 hover:shadow-md">
+                <button className="py-6 px-10 bg-yellow-300 text-gray-600 rounded-full shadow hover:bg-yellow-200 hover:shadow-md">
                     <span>
                         Till menyn
                     </span>
