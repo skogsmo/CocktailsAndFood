@@ -1,3 +1,5 @@
+import { ProteinSelectionGroup } from "../components/ProteinSelectionGroup";
+
 type Placeholder = {
   img_src: string;
   name: string;
@@ -19,6 +21,8 @@ const Detail = () => {
       <h1>{placeholder.name}</h1>
       <p>{placeholder.description}</p>
       <span>{placeholder.price.toFixed(2)}</span>
+
+      <ProteinSelectionGroup />
     </>
   );
 };
