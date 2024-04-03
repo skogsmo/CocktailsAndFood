@@ -1,10 +1,16 @@
 import "./App.css";
-import { Welcome } from "./components/Welcome";
+import { Route, Routes } from "react-router-dom";
+import Start from "./pages/Start";
+import Menu from "./pages/Menu";
+
 
 function App() {
   return (
     <>
-      <Welcome />
+  <Routes>
+    <Route path="/" element={<Start />} />
+    <Route path="/menu" element={<Menu />} />
+  </Routes>
     </>
   );
 }
