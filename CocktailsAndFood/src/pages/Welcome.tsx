@@ -1,4 +1,4 @@
-import ButtonToMenuPage from "./ButtonToMenuPage";
+import ButtonToMenuPage from "../components/ButtonToMenuPage";
 
 export const Welcome = () => {
   return (
