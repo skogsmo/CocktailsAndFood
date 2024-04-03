@@ -1,11 +1,12 @@
 import ButtonToMenuPage from "../components/ButtonToMenuPage"
+import { Welcome } from "../components/Welcome";
 import React from "react"
 
 const Start: React.FC = () => {
     return (
         <>
         <div>
-        <h1>Välkommen</h1>
+        <Welcome/>
 
         <ButtonToMenuPage/>
         </div>
