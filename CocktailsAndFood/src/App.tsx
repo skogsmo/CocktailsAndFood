@@ -1,39 +1,30 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { RecipeComp1 } from "./components/Recipe";
+import { Welcome } from "./pages/Welcome";
+import { Menu } from "./pages/Menu";
+import { NavButton } from "./components/NavButton";
+import Detail from "./pages/Detail";
 
 function App() {
   return (
     <>
-      <p>test</p>
-      <div className="flex flex-col gap-4 h-screen justify-center items-center">
-        <h2 className="text-2xl text-center">
-          Välkommen till <span className="text-xs font-thin">(Linnea)</span>
-        </h2>
-        <h1 className="text-5xl font-bold text-center">
-          Bowls & Cocktails <span className="text-xs font-thin">(Claes)</span>
-        </h1>
-        <button className="py-4 px-6 bg-gray-50 text-gray-600 rounded-full shadow hover:bg-gray-100 hover:shadow-md">
-          <span>En knapp som kan leda någonstans i framtiden</span>
-          <span className="text-xs font-thin ml-2">(Benjamin)</span>
-        </button>
-        <div className="flex flex-col items-center">
-          <img src="images/profile.png" />
-          <p className="text-indigo-800 hover:text-indigo-500 font-bold select-none">
-            Niclas
-          </p>
-        </div>
-        <h2 className="text-2xl text-center">
-          Smaklig måltid! <span className="text-xs font-thin">(Lotta)</span>
-        </h2>
-        <button className="shadow-none py-4 px-6 bg-emerald-200 text-black rounded-full hover hover:bg-emerald-300">
-          <span>Emerald Button - Dan</span>
-        </button>
-        <h5>Lotta was here</h5>
-      </div>
-      <RecipeComp1></RecipeComp1>
-      <h3 className="text-x1 text-center">
-        Alexander, testa att connecta mot API
-      </h3>
+      <ul>
+        <li>
+          <NavButton param={""}>Hem</NavButton>
+        </li>
+        <li>
+          <NavButton param={"menu"}>Menu</NavButton>
+        </li>
+        <li>
+          <NavButton param={"detail"}>Detail</NavButton>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/detail" element={<Detail />} />
+      </Routes>
+
     </>
   );
 }
