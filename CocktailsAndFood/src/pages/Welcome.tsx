@@ -1,3 +1,5 @@
+import ButtonToMenuPage from "./ButtonToMenuPage";
+
 export const Welcome = () => {
   return (
     <>
@@ -16,7 +18,9 @@ export const Welcome = () => {
             matupplevelser, kombinerat med unika cocktailrekommendationer, som
             kompletterar din måltid perfekt.
           </p>
+          <ButtonToMenuPage />
         </div>
+
         <img
           className="h-full w-full min-h-screen min-w-screen object-cover"
           src="/images/Bakgrund.jpeg"
