@@ -1,4 +1,5 @@
 import { ProteinSelectionGroup } from "../components/ProteinSelectionGroup";
+import { SidesSelectionGroup } from "../components/SidesSelectionGroup";
 
 type Placeholder = {
   img_src: string;
@@ -23,6 +24,7 @@ const Detail = () => {
       <span>{placeholder.price.toFixed(2)}</span>
 
       <ProteinSelectionGroup />
+      <SidesSelectionGroup />
     </>
   );
 };
