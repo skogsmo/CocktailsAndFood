@@ -24,6 +24,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/detail" element={<Detail />} />
       </Routes>
+
     </>
   );
 }
