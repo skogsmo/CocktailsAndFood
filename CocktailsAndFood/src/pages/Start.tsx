@@ -1,4 +1,4 @@
-import { Welcome } from "../components/Welcome";
+import { Welcome } from "./Welcome";
 import React from "react"
 
 const Start: React.FC = () => {
