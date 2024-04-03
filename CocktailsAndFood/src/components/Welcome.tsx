@@ -18,7 +18,7 @@ export const Welcome = () => {
             matupplevelser, kombinerat med unika cocktailrekommendationer, som
             kompletterar din måltid perfekt.
           </p>
-        <ButtonToMenuPage/>
+          <ButtonToMenuPage />
         </div>
 
         <img
