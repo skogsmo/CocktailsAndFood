@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext } from "react";
 import { CartContext, CartContextType } from "../contexts/CartContext";
 import MealSummary from "./MealSummary";
 import { getMealTotalPrice } from "../types/Meal";

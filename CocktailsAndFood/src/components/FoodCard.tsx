@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Food } from "../types/Food";
 import { CartContext, CartContextType } from "../contexts/CartContext";
 import { useContext } from "react";
