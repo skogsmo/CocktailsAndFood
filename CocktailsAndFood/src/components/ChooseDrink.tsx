@@ -15,8 +15,9 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 export function ChooseDrink() {
 
-    const { meals, updateMeal } = useContext(CartContext) as CartContextType;
-    const meal = meals.find(m => m.id === localStorage.getItem("currentMealId"));
+    const { updateMeal, getCurrentMeal } = useContext(CartContext) as CartContextType;
+    // const [meal] = useState(() => {console.log("getting current meal from ChooseDrink"); return getCurrentMeal();});
+    const [meal] = useState(() => getCurrentMeal());
     if (!meal) return <Navigate to="/menu" />;
 
     const navigate = useNavigate();
@@ -44,11 +45,7 @@ export function ChooseDrink() {
 
         try {
             const response = await fetch(cachableGetUrl("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list", USE_CACHED_API_CALLS, API_CACHER_BASE_URL), { signal });
-            console.log("response: ");
-            console.log(response);
             const json: ICategoriesResponse = await response.json();
-            console.log("json: ");
-            console.log(json);
             const categories: string[] = json.drinks.map(cat => cat.strCategory)
 
             setDrinkCategories(categories);

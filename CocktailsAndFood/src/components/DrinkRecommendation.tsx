@@ -12,8 +12,8 @@ import DrinkDetails from "./DrinkDetails";
 
 function DrinkRecommendation() {
 
-    const { meals, updateMeal } = useContext(CartContext) as CartContextType;
-    const meal = meals.find(m => m.id === localStorage.getItem("currentMealId"));
+    const { updateMeal, getCurrentMeal } = useContext(CartContext) as CartContextType;
+    const [meal] = useState(() => getCurrentMeal());
     if (!meal) return <Navigate to="/menu" />;
 
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ function DrinkRecommendation() {
     }, []);
 
     const newRecommendation = async () => {
-        console.log("New recommendation on the way!");
+        console.log("New drink recommendation on the way!");
 
         const ingredients: string[] = meal.food.recommendedDrinkIngredients
             .filter(ingredient => meal.protein?.recommendedDrinkIngredients.includes(ingredient));

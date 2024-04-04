@@ -8,6 +8,8 @@ export function CustomizeOrder() {
 
     const [proteins, setProteins] = useState<ExtraIngredient[]>([]);
     const [carbs, setCarbs] = useState<ExtraIngredient[]>([]);
+    
+    const { updateMeal, getCurrentMeal } = useContext(CartContext) as CartContextType;
 
     useEffect(() => {
         fetch("data/proteins.json")
@@ -18,9 +20,12 @@ export function CustomizeOrder() {
             .then((data) => setCarbs(data));
     }, []);
 
-    const { meals, updateMeal } = useContext(CartContext) as CartContextType;
-    const meal = meals.find(m => m.id === localStorage.getItem("currentMealId"));
-    if (!meal) return <Navigate to="/menu" />;
+    const [meal] = useState(() => getCurrentMeal());
+
+    if (!meal) {
+        console.warn("Meal not found in CustomizeOrder");
+        return <Navigate to="/menu" />;
+    }
 
     const handleIngredientChange = (type: keyof Meal, event: React.ChangeEvent<HTMLInputElement>) => {
         const ingredientObject = JSON.parse(event.target.dataset[type] as string);

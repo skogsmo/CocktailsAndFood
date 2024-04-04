@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { CartContext, CartContextType } from "../contexts/CartContext";
 import MealSummary from "./MealSummary";
 import { getMealTotalPrice } from "../types/Meal";
@@ -6,7 +6,9 @@ import { Link, Navigate } from "react-router-dom";
 
 export default function Summary() {
 
-    const { meals, removeMeal, emptyCart } = useContext(CartContext) as CartContextType;
+    const { getFinalizedMeals, removeMeal, emptyCart } = useContext(CartContext) as CartContextType;
+
+    const meals = getFinalizedMeals();
 
     if (meals.length < 1) return <Navigate to="/menu" />;
 
@@ -22,12 +24,12 @@ export default function Summary() {
                 <div className="flex flex-col justify-center min-w-[300px] lg:min-w-[600px] max-w-[650px] py-16 min-h-full">
                     <div className="lg:border-l border-slate-300 px-8 flex flex-col gap-12">
                         {meals.map((meal) => (
-                            <>
-                                <MealSummary key={meal.id} meal={meal} onRemove={() => removeMeal(meal.id)} />
+                            <Fragment key={meal.id}>
+                                <MealSummary meal={meal} onRemove={() => removeMeal(meal.id)} />
                                 {meal !== meals[meals.length - 1] &&
                                     <hr className="border-t-2 border-slate-300 border-dotted" />
                                 }
-                            </>
+                            </Fragment>
                         ))}
                     </div>
                 </div>

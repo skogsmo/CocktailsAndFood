@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import { Drink } from "./Drink";
-import { Food } from "./Food";
+import { Food, createFood } from "./Food";
 import { ExtraIngredient } from "./ExtraIngredient";
 
 export type Meal = {
@@ -11,14 +11,17 @@ export type Meal = {
     drink?: Drink;
 };
 
-export function createMeal(food: Food, protein?: ExtraIngredient, drink?: Drink): Meal {
+export function createMeal(food?: Food, protein?: ExtraIngredient, drink?: Drink): Meal {
     return {
         id: v4(),
-        food,
+        food: food ?? createFood(),
         protein,
         drink
     };
 }
+
+export const mealIsFinalized = (meal: Meal) => 
+    (meal.id && meal.food && meal.protein && meal.carb && meal.drink) ? true : false;
 
 export const getMealTotalPrice = (meal: Meal) =>
     meal.food.price +
