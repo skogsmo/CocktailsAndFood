@@ -21,9 +21,9 @@ export type Extra = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Order = {
-  OrderId: string;
+  OrderId: number;
   Meal: Meal;
-  Cocktail: Cocktail;
-  Protein: Extra;
-  Side: Extra;
+  Cocktail?: Cocktail;
+  Protein?: Extra;
+  Side?: Extra;
 };

@@ -5,10 +5,35 @@ import { Menu } from "./pages/Menu";
 import { NavButton } from "./components/NavButton";
 import Detail from "./pages/Detail";
 import { useState } from "react";
-import { Order } from "./orderTypes";
+import { Meal, Order } from "./orderTypes";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
+
+  function createOrder(meal: Meal, newId: number): number {
+    console.log(
+      "Creating new order with title " + meal.title + " and id " + newId
+    );
+    const newOrder: Order = {
+      OrderId: newId,
+      Meal: meal,
+    };
+    setOrders([...orders, newOrder]);
+
+    return newOrder.OrderId;
+  }
+
+  // function updateOrder(updatedOrder: Order) {
+  //   setOrders((prevOrders) =>
+  //     prevOrders.map((order) => {
+  //       if (updatedOrder.OrderId === order.OrderId) {
+  //         return updatedOrder;
+  //       } else {
+  //         return order;
+  //       }
+  //     })
+  //   );
+  // }
 
   return (
     <>
@@ -25,8 +50,14 @@ function App() {
       </ul>
       <Routes>
         <Route path="/" element={<Welcome />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route
+          path="/menu"
+          element={<Menu createOrder={createOrder} currentOrders={orders} />}
+        />
+        <Route
+          path="/detail/:id"
+          element={<Detail updateOrder={updateOrder} />}
+        />
       </Routes>
     </>
   );
