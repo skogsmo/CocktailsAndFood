@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const ButtonToMenuPage: React.FunctionComponent= () => {
+const ButtonToMenuPage: React.FunctionComponent = () => {
     return (
         <>
             <Link to="/menu"> 
