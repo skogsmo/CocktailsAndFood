@@ -8,7 +8,7 @@ export const ProteinSelectionGroup = () => {
             type="radio"
             name="protein"
             value="1"
-            checked={true}
+            defaultChecked={true}
           />
           Nötkött
         </label>

@@ -4,7 +4,6 @@ import { Meal } from "../orderTypes";
 
 export const Menu = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
-
   useEffect(() => {
     fetch("https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes")
       .then((res) => res.json())
@@ -28,9 +27,6 @@ export const Menu = () => {
             <MenuCard meal={meal} />
           </li>
         ))}
-        {/* <MenuCard />
-        <MenuCard />
-        <MenuCard /> */}
       </ul>
     </>
   );

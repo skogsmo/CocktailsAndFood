@@ -1,6 +1,12 @@
 import { Meal } from "../orderTypes";
 
-export const MenuCard = ({ meal }: { meal: Meal }) => {
+export const MenuCard = ({
+  meal,
+  setOrders,
+}: {
+  meal: Meal;
+  setOrders: (meal: Meal) => void;
+}) => {
   return (
     <>
       <div className="flex">
@@ -11,7 +17,12 @@ export const MenuCard = ({ meal }: { meal: Meal }) => {
           <p className="font-bold my-2">{meal.title}</p>
           <p className="font-medium my-2">{meal.price.toFixed(2)}</p>
           <p className="my-2">{meal.description}</p>
-          <button className="my-2 text-black bg-yellow-400">Välj</button>
+          <button
+            className="my-2 text-black bg-yellow-400"
+            onClick={() => setOrders(meal)}
+          >
+            Välj
+          </button>
         </div>
       </div>
     </>
