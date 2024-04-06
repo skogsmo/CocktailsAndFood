@@ -56,6 +56,10 @@ function DrinkRecommendation() {
 
         const drink = await getRandomDrinkByIngredient(newIngredient);
 
+        if (drink?.id === recommendedDrink?.id) {
+            setImageLoaded(true);
+        }
+
         if (!drink) return;
 
         drink.price = getDrinkPrice(drink);
