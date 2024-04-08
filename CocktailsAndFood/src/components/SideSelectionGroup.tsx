@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Extra, Order } from "../orderTypes";
 
 export const SideSelectionGroup = ({
@@ -26,10 +26,13 @@ export const SideSelectionGroup = ({
     },
   ];
 
-  if (!currentOrder.Side) {
-    currentOrder.Side = sideList[0];
-    updateOrder(currentOrder);
-  }
+  useEffect(() => {
+    if (!currentOrder.Side) {
+      currentOrder.Side = sideList[0];
+      updateOrder(currentOrder);
+    }
+  }, []);
+  
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     currentOrder.Side = sideList.find(
