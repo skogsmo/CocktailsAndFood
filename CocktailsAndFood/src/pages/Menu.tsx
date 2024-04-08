@@ -1,6 +1,19 @@
 import { MenuCard } from "../components/MenuCard";
+import { useEffect, useState } from "react";
+import { Meal } from "../orderTypes";
 
-export const Menu = () => {
+export const Menu = ({
+  createOrder,
+}: {
+  createOrder: (meal: Meal) => void;
+}) => {
+  const [meals, setMeals] = useState<Meal[]>([]);
+  useEffect(() => {
+    fetch("https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes")
+      .then((res) => res.json())
+      .then((json) => setMeals(json));
+  }, []);
+
   return (
     <>
       <h1 className="text-center text-6xl font-ultra my-5">
@@ -12,11 +25,13 @@ export const Menu = () => {
       <p className="text-center font-ultra">
         Du anpassar din beställning i nästa steg.
       </p>
-      <div className="flex my-10">
-        <MenuCard />
-        <MenuCard />
-        <MenuCard />
-      </div>
+      <ul className="flex my-10">
+        {meals.map((meal) => (
+          <li>
+            <MenuCard meal={meal} createOrder={createOrder} />
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
