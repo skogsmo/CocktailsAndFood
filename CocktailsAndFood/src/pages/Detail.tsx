@@ -43,8 +43,8 @@ const Detail = ({
         updateAction={updateOrder}
         object={currentOrder}
         propertyName="Side"
-        idProperty={"Id"}
-        titleProperty={"Name"}
+        idProperty="Id"
+        titleProperty="Name"
         options={[
           {
             Id: 1,
@@ -68,8 +68,8 @@ const Detail = ({
         updateAction={updateOrder}
         object={currentOrder}
         propertyName="Protein"
-        idProperty={"Id"}
-        titleProperty={"Name"}
+        idProperty="Id"
+        titleProperty="Name"
         options={[
           {
             Id: 1,
