@@ -28,17 +28,17 @@ export const SideSelectionGroup = ({
 
   useEffect(() => {
     if (!currentOrder.Side) {
-      currentOrder.Side = sideList[0];
-      updateOrder(currentOrder);
+      const modifiedOrder: Order = { ...currentOrder, Side: sideList[0] };
+      updateOrder(modifiedOrder);
     }
   }, []);
-  
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    currentOrder.Side = sideList.find(
+    const chosenSide = sideList.find(
       (side) => side.Id === Number(e.target.value)
     );
-    updateOrder(currentOrder);
+    const modifiedOrder: Order = { ...currentOrder, Side: chosenSide };
+    updateOrder(modifiedOrder);
   };
 
   const mappedsides = sideList.map((side) => {

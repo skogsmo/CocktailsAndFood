@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { ProteinSelectionGroup } from "../components/ProteinSelectionGroup";
-import { SideSelectionGroup } from "../components/SideSelectionGroup";
-import { Order } from "../orderTypes";
+import { Extra, Order } from "../orderTypes";
+import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
 
 type Placeholder = {
   img_src: string;
@@ -26,10 +25,12 @@ const Detail = ({
     description: currentOrder.Meal.description,
   };
 
-  // const showLog = () => {
-  //   console.log("protein: " + currentOrder.Protein?.Name);
-  //   console.log("side: " + currentOrder.Side?.Name);
-  // };
+  const radioButtonLabelStructure = (option: Extra) => (
+    <>
+      {option.Name}
+      <span className="font-bold"> +{option.Price.toFixed(2)} kr</span>
+    </>
+  );
 
   return (
     <>
@@ -38,13 +39,65 @@ const Detail = ({
       <p>{placeholder.description}</p>
       <span>{placeholder.price.toFixed(2)}</span>
 
-      <ProteinSelectionGroup
-        currentOrder={currentOrder}
-        updateOrder={updateOrder}
+      <RadiobuttonSelector
+        updateAction={updateOrder}
+        object={currentOrder}
+        propertyName="Side"
+        idProperty={"Id"}
+        titleProperty={"Name"}
+        options={[
+          {
+            Id: 1,
+            Name: "Ris",
+            Price: 15,
+          },
+          {
+            Id: 2,
+            Name: "Romansallad",
+            Price: 25,
+          },
+          {
+            Id: 3,
+            Name: "Ris och romansallad",
+            Price: 35,
+          },
+        ]}
+        renderLabel={radioButtonLabelStructure}
       />
-      <SideSelectionGroup
-        currentOrder={currentOrder}
-        updateOrder={updateOrder}
+      <RadiobuttonSelector
+        updateAction={updateOrder}
+        object={currentOrder}
+        propertyName="Protein"
+        idProperty={"Id"}
+        titleProperty={"Name"}
+        options={[
+          {
+            Id: 1,
+            Name: "Chipotlegrillad kyckling",
+            Price: 5,
+          },
+          {
+            Id: 2,
+            Name: "Barbecue biff",
+            Price: 15,
+          },
+          {
+            Id: 3,
+            Name: "Carnitas",
+            Price: 10,
+          },
+          {
+            Id: 4,
+            Name: "Pulled jackfruit",
+            Price: 20,
+          },
+          {
+            Id: 5,
+            Name: "Veggie strips",
+            Price: 25,
+          },
+        ]}
+        renderLabel={radioButtonLabelStructure}
       />
 
       <Link to="/menu">
