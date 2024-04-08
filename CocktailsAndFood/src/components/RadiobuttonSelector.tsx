@@ -7,7 +7,9 @@ export function RadiobuttonSelector<T, U>({
   titleProperty,
   updateAction,
   object,
-  renderLabel: renderLabelText,
+  renderLabel,
+  labelClasses,
+  wrapperClasses = "flex gap-2",
 }: {
   options: U[];
   propertyName: keyof T;
@@ -16,6 +18,8 @@ export function RadiobuttonSelector<T, U>({
   updateAction: (updatedObject: T) => void;
   object: T;
   renderLabel: (option: U) => React.ReactNode;
+  labelClasses?: string;
+  wrapperClasses?: string;
 }) {
   const property = object[propertyName] as U;
 
@@ -36,7 +40,10 @@ export function RadiobuttonSelector<T, U>({
 
   const mapped = options.map((option) => {
     return (
-      <div key={`${String(propertyName)}-${option[idProperty]}`}>
+      <div
+        key={`${String(propertyName)}-${option[idProperty]}`}
+        className={wrapperClasses}
+      >
         <input
           id={`${String(propertyName)}-${option[idProperty]}`}
           type="radio"
@@ -45,12 +52,15 @@ export function RadiobuttonSelector<T, U>({
           checked={property?.[idProperty] === option[idProperty]}
           onChange={(e) => handleOnChange(e)}
         />
-        <label htmlFor={`${String(propertyName)}-${option[idProperty]}`}>
-          {renderLabelText(option)}
+        <label
+          htmlFor={`${String(propertyName)}-${option[idProperty]}`}
+          className={labelClasses}
+        >
+          {renderLabel(option)}
         </label>
       </div>
     );
   });
 
-  return <>{mapped}</>;
+  return mapped;
 }
