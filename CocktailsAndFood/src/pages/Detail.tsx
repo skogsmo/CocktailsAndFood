@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { ProteinSelectionGroup } from "../components/ProteinSelectionGroup";
-import { SidesSelectionGroup } from "../components/SidesSelectionGroup";
+import { SideSelectionGroup } from "../components/SideSelectionGroup";
+import { Order } from "../orderTypes";
 
 type Placeholder = {
   img_src: string;
@@ -8,13 +10,26 @@ type Placeholder = {
   description: string;
 };
 
-const Detail = () => {
+const Detail = ({
+  updateOrder,
+  currentOrder,
+  removeOrder,
+}: {
+  updateOrder: (order: Order) => void;
+  currentOrder: Order;
+  removeOrder: () => void;
+}) => {
   const placeholder: Placeholder = {
-    img_src: "/src/assets/images/chipotle-mexican-bowl.jpeg",
-    name: "Mexican Chipotle Bowl",
-    price: 120,
-    description: "Spicy bowl theme from Mexico",
+    img_src: currentOrder.Meal.imageUrl,
+    name: currentOrder.Meal.title,
+    price: currentOrder.Meal.price,
+    description: currentOrder.Meal.description,
   };
+
+  // const showLog = () => {
+  //   console.log("protein: " + currentOrder.Protein?.Name);
+  //   console.log("side: " + currentOrder.Side?.Name);
+  // };
 
   return (
     <>
@@ -23,8 +38,22 @@ const Detail = () => {
       <p>{placeholder.description}</p>
       <span>{placeholder.price.toFixed(2)}</span>
 
-      <ProteinSelectionGroup />
-      <SidesSelectionGroup />
+      <ProteinSelectionGroup
+        currentOrder={currentOrder}
+        updateOrder={updateOrder}
+      />
+      <SideSelectionGroup
+        currentOrder={currentOrder}
+        updateOrder={updateOrder}
+      />
+
+      <Link to="/menu">
+        <button onClick={removeOrder}>Avbryt</button>
+      </Link>
+
+      <Link to="/drinkselection">
+        <button>Gå vidare</button>
+      </Link>
     </>
   );
 };

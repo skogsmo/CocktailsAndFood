@@ -1,22 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { Meal, Order } from "../orderTypes";
-import { useState } from "react";
+import { Meal } from "../orderTypes";
 
 export const MenuCard = ({
   meal,
   createOrder,
-  currentOrders,
 }: {
   meal: Meal;
-  createOrder: (meal: Meal, newId: number) => number;
-  currentOrders: Order[];
+  createOrder: (meal: Meal) => void;
 }) => {
   // const [newOrderId, setNewOrderId] = useState(0);
   const navigate = useNavigate();
   const handleClick = () => {
-    const newId = currentOrders.length ? currentOrders.length + 1 : 1;
-    createOrder(meal, newId);
-    navigate(`/detail/${newId}`);
+    createOrder(meal);
+    navigate(`/detail`);
   };
   return (
     <>

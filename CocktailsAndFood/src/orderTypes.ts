@@ -15,8 +15,9 @@ export type Cocktail = {
 };
 
 export type Extra = {
-  name: string;
-  price: number;
+  Id: number;
+  Name: string;
+  Price: number;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
