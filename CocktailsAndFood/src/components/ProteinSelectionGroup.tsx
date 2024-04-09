@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Extra, Order } from "../orderTypes";
 
 export const ProteinSelectionGroup = ({
@@ -36,11 +36,13 @@ export const ProteinSelectionGroup = ({
     },
   ];
 
-  if (!currentOrder.Protein) {
-    currentOrder.Protein = proteinList[0];
-    updateOrder(currentOrder);
-  }
-
+  useEffect(() => {
+    if (!currentOrder.Protein) {
+      currentOrder.Protein = proteinList[0];
+      updateOrder(currentOrder);
+    }
+  }, [])
+  
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     currentOrder.Protein = proteinList.find(
       (protein) => protein.Id === Number(e.target.value)
