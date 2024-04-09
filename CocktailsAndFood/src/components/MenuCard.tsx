@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Meal } from "../orderTypes";
+import { CartModifiers } from "../App";
 
 export const MenuCard = ({
   meal,
   createOrder,
 }: {
   meal: Meal;
-  createOrder: (meal: Meal) => void;
+  createOrder: CartModifiers["createOrder"];
 }) => {
-  // const [newOrderId, setNewOrderId] = useState(0);
   const navigate = useNavigate();
   const handleClick = () => {
     createOrder(meal);

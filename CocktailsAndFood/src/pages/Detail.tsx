@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
+import { CartModifiers } from "../App";
 
 const Detail = ({
   updateOrder,
   currentOrder,
   removeOrder,
 }: {
-  updateOrder: (order: Order) => void;
+  updateOrder: CartModifiers["updateOrder"];
   currentOrder: Order;
-  removeOrder: () => void;
+  removeOrder: CartModifiers["removeCurrentOrder"];
 }) => {
 
   const sideOptions = [
