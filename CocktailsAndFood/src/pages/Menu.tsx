@@ -1,11 +1,12 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
+import { CartModifiers } from "../App";
 
 export const Menu = ({
   createOrder,
 }: {
-  createOrder: (meal: Meal) => void;
+  createOrder: CartModifiers["createOrder"];
 }) => {
   const [meals, setMeals] = useState<Meal[]>([]);
   useEffect(() => {

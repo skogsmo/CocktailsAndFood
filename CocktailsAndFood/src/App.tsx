@@ -8,6 +8,12 @@ import { useEffect, useState } from "react";
 import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
 
+export type CartModifiers = {
+  createOrder: (meal: Meal) => void;
+  updateOrder: (updatedOrder: Order) => void;
+  removeCurrentOrder: () => void;
+}
+
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -50,7 +56,6 @@ function App() {
         }
       })
     );
-    console.log(updatedOrder);
   }
 
   function removeCurrentOrder(): void {
