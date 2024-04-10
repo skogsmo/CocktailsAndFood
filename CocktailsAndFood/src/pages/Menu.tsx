@@ -1,11 +1,12 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
+import { CartModifiers } from "../App";
 
 export const Menu = ({
   createOrder,
 }: {
-  createOrder: (meal: Meal) => void;
+  createOrder: CartModifiers["createOrder"];
 }) => {
   const [meals, setMeals] = useState<Meal[]>([]);
   useEffect(() => {
@@ -27,7 +28,7 @@ export const Menu = ({
       </p>
       <ul className="flex my-10">
         {meals.map((meal) => (
-          <li>
+          <li key={meal._id}>
             <MenuCard meal={meal} createOrder={createOrder} />
           </li>
         ))}
