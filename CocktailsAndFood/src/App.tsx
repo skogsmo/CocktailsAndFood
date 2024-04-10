@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
@@ -12,7 +12,7 @@ export type CartModifiers = {
   createOrder: (meal: Meal) => void;
   updateOrder: (updatedOrder: Order) => void;
   removeCurrentOrder: () => void;
-}
+};
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -63,6 +63,22 @@ function App() {
     setOrders([...orders]);
   }
 
+  const currentOrder = orders[orders.length - 1];
+
+  const detailComponent = (
+    <Detail
+      updateOrder={updateOrder}
+      currentOrder={currentOrder}
+      removeOrder={removeCurrentOrder}
+    />
+  );
+
+  const drinkSelectionComponent = (
+    <DrinkSelection currentOrder={currentOrder} />
+  );
+
+  const redirectComponent = <Navigate to="/menu" replace />;
+
   return (
     <>
       <ul>
@@ -77,21 +93,16 @@ function App() {
         </li>
       </ul>
       <Routes>
+        <Route path="/*" element={redirectComponent} />
         <Route path="/" element={<Welcome />} />
-        <Route
-          path="/drinkselection"
-          element={<DrinkSelection currentOrder={orders[orders.length - 1]} />}
-        />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
         <Route
           path="/detail"
-          element={
-            <Detail
-              updateOrder={updateOrder}
-              currentOrder={orders[orders.length - 1]}
-              removeOrder={removeCurrentOrder}
-            />
-          }
+          element={currentOrder ? detailComponent : redirectComponent}
+        />
+        <Route
+          path="/drinkselection"
+          element={currentOrder ? drinkSelectionComponent : redirectComponent}
         />
       </Routes>
     </>
