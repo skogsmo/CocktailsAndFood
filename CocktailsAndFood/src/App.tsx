@@ -59,8 +59,7 @@ function App() {
   }
 
   function removeCurrentOrder(): void {
-    orders.pop();
-    setOrders([...orders]);
+    setOrders([...orders.filter((order) => order !== currentOrder)]);
   }
 
   const currentOrder = orders[orders.length - 1];
