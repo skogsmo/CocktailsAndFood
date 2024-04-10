@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
@@ -7,6 +7,8 @@ import Detail from "./pages/Detail";
 import { useEffect, useState } from "react";
 import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
+import { ConditionalRoute } from "./components/ConditionalRoute";
+import { NotFound } from "./pages/NotFound";
 
 export type CartModifiers = {
   createOrder: (meal: Meal) => void;
@@ -64,20 +66,6 @@ function App() {
 
   const currentOrder = orders[orders.length - 1];
 
-  const detailComponent = (
-    <Detail
-      updateOrder={updateOrder}
-      currentOrder={currentOrder}
-      removeOrder={removeCurrentOrder}
-    />
-  );
-
-  const drinkSelectionComponent = (
-    <DrinkSelection currentOrder={currentOrder} />
-  );
-
-  const redirectComponent = <Navigate to="/menu" replace />;
-
   return (
     <>
       <ul>
@@ -92,17 +80,27 @@ function App() {
         </li>
       </ul>
       <Routes>
-        <Route path="/*" element={redirectComponent} />
+        <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
-        <Route
-          path="/detail"
-          element={currentOrder ? detailComponent : redirectComponent}
-        />
-        <Route
-          path="/drinkselection"
-          element={currentOrder ? drinkSelectionComponent : redirectComponent}
-        />
+        {ConditionalRoute({
+          path: "/detail",
+          checkIfTrue: currentOrder,
+          elementIfTrue: (
+            <Detail
+              updateOrder={updateOrder}
+              currentOrder={currentOrder}
+              removeOrder={removeCurrentOrder}
+            />
+          ),
+          navigateIfFalse: "/menu",
+        })}
+        {ConditionalRoute({
+          path: "/drinkselection",
+          checkIfTrue: currentOrder,
+          elementIfTrue: <DrinkSelection currentOrder={currentOrder} />,
+          navigateIfFalse: "/menu",
+        })}
       </Routes>
     </>
   );
