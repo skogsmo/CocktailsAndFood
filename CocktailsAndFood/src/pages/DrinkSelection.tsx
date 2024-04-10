@@ -67,27 +67,22 @@ export const DrinkSelection = ({ currentOrder }: { currentOrder: Order }) => {
   const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
     undefined
   );
-  const [cocktailId, setCocktailId] = useState("");
-
-  switch (currentOrder.Protein?.Id) {
-    case 1:
-      setCocktailId("11410");
-      break;
-    case 2:
-      setCocktailId("12198");
-      break;
-    case 3:
-      setCocktailId("11422");
-      break;
-    case 4:
-      setCocktailId("13731");
-      break;
-    case 5:
-      setCocktailId("12690");
-      break;
-    default:
-      break;
-  }
+  const [cocktailId] = useState(() => {
+    switch (currentOrder.Protein?.Id) {
+      case 1:
+        return "11410";
+      case 2:
+        return "12198";
+      case 3:
+        return "11422";
+      case 4:
+        return "13731";
+      case 5:
+        return "12690";
+      default:
+        break;
+    }
+  });
 
   useEffect(() => {
     const getCocktails = async () => {

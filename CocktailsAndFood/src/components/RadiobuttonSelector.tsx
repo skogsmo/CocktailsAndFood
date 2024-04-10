@@ -28,7 +28,7 @@ export function RadiobuttonSelector<T, U>({
       const modifiedObject: T = { ...object, [propertyName]: options[0] };
       updateAction(modifiedObject);
     }
-  }, [object]);
+  }, [object, property, propertyName, options, updateAction]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const chosenOption = options.find(
