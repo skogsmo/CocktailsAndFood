@@ -27,7 +27,7 @@ export const Menu = ({
       </p>
       <ul className="flex my-10">
         {meals.map((meal) => (
-          <li>
+          <li key={meal._id}>
             <MenuCard meal={meal} createOrder={createOrder} />
           </li>
         ))}

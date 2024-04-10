@@ -6,6 +6,7 @@ import { NavButton } from "./components/NavButton";
 import Detail from "./pages/Detail";
 import { useEffect, useState } from "react";
 import { Meal, Order } from "./orderTypes";
+import { DrinkSelection } from "./pages/DrinkSelection";
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -67,11 +68,15 @@ function App() {
           <NavButton param={"menu"}>Menu</NavButton>
         </li>
         <li>
-          <NavButton param={"detail"}>Detail</NavButton>
+          <NavButton param={"drinkselection"}>Drink selection</NavButton>
         </li>
       </ul>
       <Routes>
         <Route path="/" element={<Welcome />} />
+        <Route
+          path="/drinkselection"
+          element={<DrinkSelection currentOrder={orders[orders.length - 1]} />}
+        />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
         <Route
           path="/detail"
