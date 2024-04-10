@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 export function RadiobuttonSelector<T, U>({
   options,
-  propertyName,
-  idProperty,
-  titleProperty,
+  property,
+  optionIdProperty,
+  optionTitleProperty,
   updateAction,
   object,
   renderLabel,
@@ -12,48 +12,48 @@ export function RadiobuttonSelector<T, U>({
   wrapperClasses = "flex gap-2",
 }: {
   options: U[];
-  propertyName: keyof T;
-  idProperty: keyof U;
-  titleProperty: keyof U;
+  property: keyof T;
+  optionIdProperty: keyof U;
+  optionTitleProperty: keyof U;
   updateAction: (updatedObject: T) => void;
   object: T;
   renderLabel: (option: U) => React.ReactNode;
   labelClasses?: string;
   wrapperClasses?: string;
 }) {
-  const property = object[propertyName] as U;
+  const propertyObject = object[property] as U;
 
   useEffect(() => {
-    if (!property) {
-      const modifiedObject: T = { ...object, [propertyName]: options[0] };
+    if (!propertyObject) {
+      const modifiedObject: T = { ...object, [property]: options[0] };
       updateAction(modifiedObject);
     }
-  }, [object, property, propertyName, options, updateAction]);
+  }, [object, propertyObject, property, options, updateAction]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const chosenOption = options.find(
-      (option) => option[idProperty] === +e.target.value
+      (option) => option[optionIdProperty] === +e.target.value
     );
-    const modifiedObject: T = { ...object, [propertyName]: chosenOption };
+    const modifiedObject: T = { ...object, [property]: chosenOption };
     updateAction(modifiedObject);
   };
 
   const mapped = options.map((option) => {
     return (
       <div
-        key={`${String(propertyName)}-${option[idProperty]}`}
+        key={`${String(property)}-${option[optionIdProperty]}`}
         className={wrapperClasses}
       >
         <input
-          id={`${String(propertyName)}-${option[idProperty]}`}
+          id={`${String(property)}-${option[optionIdProperty]}`}
           type="radio"
-          name={String(options[0][titleProperty])}
-          value={Number(option[idProperty])}
-          checked={property?.[idProperty] === option[idProperty]}
+          name={String(options[0][optionTitleProperty])}
+          value={Number(option[optionIdProperty])}
+          checked={propertyObject?.[optionIdProperty] === option[optionIdProperty]}
           onChange={(e) => handleOnChange(e)}
         />
         <label
-          htmlFor={`${String(propertyName)}-${option[idProperty]}`}
+          htmlFor={`${String(property)}-${option[optionIdProperty]}`}
           className={labelClasses}
         >
           {renderLabel(option)}
