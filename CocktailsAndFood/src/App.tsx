@@ -7,12 +7,14 @@ import Detail from "./pages/Detail";
 import { useEffect, useState } from "react";
 import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
+import { ConditionalRoute } from "./components/ConditionalRoute";
+import { NotFound } from "./pages/NotFound";
 
 export type CartModifiers = {
   createOrder: (meal: Meal) => void;
   updateOrder: (updatedOrder: Order) => void;
   removeCurrentOrder: () => void;
-}
+};
 
 function App() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -59,9 +61,10 @@ function App() {
   }
 
   function removeCurrentOrder(): void {
-    orders.pop();
-    setOrders([...orders]);
+    setOrders([...orders.filter((order) => order !== currentOrder)]);
   }
+
+  const currentOrder = orders[orders.length - 1];
 
   return (
     <>
@@ -77,22 +80,27 @@ function App() {
         </li>
       </ul>
       <Routes>
+        <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Welcome />} />
-        <Route
-          path="/drinkselection"
-          element={<DrinkSelection currentOrder={orders[orders.length - 1]} />}
-        />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
-        <Route
-          path="/detail"
-          element={
+        {ConditionalRoute({
+          path: "/detail",
+          checkIfTrue: currentOrder,
+          elementIfTrue: (
             <Detail
               updateOrder={updateOrder}
-              currentOrder={orders[orders.length - 1]}
+              currentOrder={currentOrder}
               removeOrder={removeCurrentOrder}
             />
-          }
-        />
+          ),
+          navigateIfFalse: "/menu",
+        })}
+        {ConditionalRoute({
+          path: "/drinkselection",
+          checkIfTrue: currentOrder,
+          elementIfTrue: <DrinkSelection currentOrder={currentOrder} />,
+          navigateIfFalse: "/menu",
+        })}
       </Routes>
     </>
   );

@@ -12,8 +12,7 @@ const Detail = ({
   currentOrder: Order;
   removeOrder: CartModifiers["removeCurrentOrder"];
 }) => {
-
-  const sideOptions = [
+  const sideOptions: Extra[] = [
     {
       Id: 1,
       Name: "Ris",
@@ -31,7 +30,7 @@ const Detail = ({
     },
   ];
 
-  const proteinOptions = [
+  const proteinOptions: Extra[] = [
     {
       Id: 1,
       Name: "Chipotlegrillad kyckling",
@@ -59,7 +58,7 @@ const Detail = ({
     },
   ];
 
-  const radioButtonLabelStructure = (option: Extra) => (
+  const radioButtonLabel = (option: Extra) => (
     <div className="flex gap-2 font-semibold">
       {option.Name}
       <span className="font-normal"> (+{option.Price.toFixed(2)} kr)</span>
@@ -78,22 +77,22 @@ const Detail = ({
           <RadiobuttonSelector
             updateAction={updateOrder}
             object={currentOrder}
-            propertyName="Side"
-            idProperty="Id"
-            titleProperty="Name"
-            options={sideOptions}
-            renderLabel={radioButtonLabelStructure}
+            property="Protein"
+            options={proteinOptions}
+            optionIdProperty="Id"
+            optionTitleProperty="Name"
+            renderLabel={radioButtonLabel}
           />
         </div>
         <div className="flex flex-col">
           <RadiobuttonSelector
             updateAction={updateOrder}
             object={currentOrder}
-            propertyName="Protein"
-            idProperty="Id"
-            titleProperty="Name"
-            options={proteinOptions}
-            renderLabel={radioButtonLabelStructure}
+            property="Side"
+            options={sideOptions}
+            optionIdProperty="Id"
+            optionTitleProperty="Name"
+            renderLabel={radioButtonLabel}
           />
         </div>
       </div>
