@@ -9,11 +9,13 @@ import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
 import { ConditionalRoute } from "./components/ConditionalRoute";
 import { NotFound } from "./pages/NotFound";
+import { Checkout } from "./pages/Checkout";
 
 export type CartModifiers = {
   createOrder: (meal: Meal) => void;
   updateOrder: (updatedOrder: Order) => void;
   removeCurrentOrder: () => void;
+  removeOrder: (orderId: number) => void;
 };
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
             "\n    protein: " +
             order.Protein?.Name +
             "\n    side: " +
-            order.Side?.Name
+            order.Side?.Name +
+            "\n    cocktail: " +
+            order.Cocktail?.CocktailName
         )
     );
   }, [orders]);
@@ -60,6 +64,10 @@ function App() {
     );
   }
 
+  function removeOrder(orderId: number) {
+    setOrders([...orders.filter((o) => o.OrderId !== orderId)]);
+  }
+
   function removeCurrentOrder(): void {
     setOrders([...orders.filter((order) => order !== currentOrder)]);
   }
@@ -78,11 +86,18 @@ function App() {
         <li>
           <NavButton param={"drinkselection"}>Drink selection</NavButton>
         </li>
+        <li>
+          <NavButton param={"checkout"}>Checkout</NavButton>
+        </li>
       </ul>
       <Routes>
         <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
+        <Route
+          path="/checkout"
+          element={<Checkout orders={orders} removeOrder={removeOrder} />}
+        />
         {ConditionalRoute({
           path: "/detail",
           checkIfTrue: currentOrder,
@@ -98,7 +113,12 @@ function App() {
         {ConditionalRoute({
           path: "/drinkselection",
           checkIfTrue: currentOrder,
-          elementIfTrue: <DrinkSelection currentOrder={currentOrder} />,
+          elementIfTrue: (
+            <DrinkSelection
+              currentOrder={currentOrder}
+              updateOrder={updateOrder}
+            />
+          ),
           navigateIfFalse: "/menu",
         })}
       </Routes>
