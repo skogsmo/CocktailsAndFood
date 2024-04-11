@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { CocktailCard } from "../components/CocktailCard";
 import { Cocktail, Order } from "../orderTypes";
+import { Link, useNavigate } from "react-router-dom";
+import { CartModifiers } from "../App";
 
 interface DrinkDetailsResponse {
   drinks: {
@@ -46,9 +48,7 @@ const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse) => {
     drink.strIngredient13,
     drink.strIngredient14,
     drink.strIngredient15,
-  ];
-
-  const filteredIngredients = ingredients.filter((i) => typeof i === "string");
+  ].filter((i) => typeof i === "string");
 
   const cocktail: Cocktail = {
     CocktailName: drink.strDrink,
@@ -56,14 +56,21 @@ const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse) => {
     Description: `This is a ${drink.strAlcoholic} ${
       drink.strCategory
     } with the ingredients 
-    ${filteredIngredients.join(", ")}. It is served in a ${drink.strGlass}.`,
+    ${ingredients.join(", ")}. It is served in a ${drink.strGlass}.`,
     Price: 125,
     ImgUrl: drink.strDrinkThumb,
   };
   return cocktail;
 };
 
-export const DrinkSelection = ({ currentOrder }: { currentOrder: Order }) => {
+export const DrinkSelection = ({
+  currentOrder,
+  updateOrder,
+}: {
+  currentOrder: Order;
+  updateOrder: CartModifiers["updateOrder"];
+}) => {
+  const navigate = useNavigate();
   const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
     undefined
   );
@@ -89,16 +96,37 @@ export const DrinkSelection = ({ currentOrder }: { currentOrder: Order }) => {
       const response = await fetch(
         `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktailId}`
       );
-      console.log("API response:", response);
       const data: DrinkDetailsResponse = await response.json();
       setFormattedDrink(mapDrinkDetailsWithCocktail(data));
-      // const cocktail = data.drinks;
-      console.log("data:", data);
-      // setfetchedCocktail(cocktail);
-      // console.log("fetchedCocktail:", fetchedCocktail);
     };
     getCocktails();
   }, [cocktailId]);
 
-  return <>{formattedDrink && <CocktailCard cocktail={formattedDrink} />}</>;
+  const handleClick = () => {
+    const updatedOrder = {
+      ...currentOrder,
+      Cocktail: formattedDrink,
+    };
+
+    updateOrder(updatedOrder);
+    navigate("/checkout");
+  };
+
+  return (
+    <>
+      <h1>Din cocktailrekommendation</h1>
+      <p>
+        Låt dig inspireras av vårt förslag eller valj att skapa din egen unika
+        smakresa genom att byta ut rekommendationen mot en annan cocktail från
+        vår meny.
+      </p>
+      {formattedDrink && (
+        <>
+          <CocktailCard cocktail={formattedDrink} />
+          <Link to="/drinkmenu">Gå till drinkmenyn</Link>
+          <button onClick={handleClick}>Acceptera förslag</button>
+        </>
+      )}
+    </>
+  );
 };
