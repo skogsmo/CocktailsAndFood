@@ -123,7 +123,7 @@ export const DrinkSelection = ({
       {formattedDrink && (
         <>
           <CocktailCard cocktail={formattedDrink} />
-          <Link to="/drinkmenu">Gå till drinkmenyn</Link>
+          <Link to="/drinklist">Gå till drinkmenyn</Link>
           <button onClick={handleClick}>Acceptera förslag</button>
         </>
       )}
