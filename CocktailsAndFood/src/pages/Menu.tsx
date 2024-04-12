@@ -17,22 +17,24 @@ export const Menu = ({
 
   return (
     <>
-      <h1 className="text-center text-6xl font-ultra my-5">
+      <h1 className="text-center text-6xl font-ultra my-10">
         VÅRA BURRITO BOWLS
       </h1>
       <p className="text-center font-ultra">
         Välj en bowl med ris eller sallad, grönsaker, protein och dessing/salsa.
       </p>
-      <p className="text-center font-ultra">
+      <p className="text-center font-ultra mb-14">
         Du anpassar din beställning i nästa steg.
       </p>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-around gap-4">
-        {meals.map((meal) => (
-          <li key={meal._id}>
-            <MenuCard meal={meal} createOrder={createOrder} />
-          </li>
-        ))}
-      </ul>
+      <div className="flex justify-center">
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-4 w-4/5">
+          {meals.map((meal) => (
+            <li key={meal._id}>
+              <MenuCard meal={meal} createOrder={createOrder} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
