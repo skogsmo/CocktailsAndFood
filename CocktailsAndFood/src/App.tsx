@@ -76,7 +76,7 @@ function App() {
 
   return (
     <>
-      <ul>
+      <ul className="bg-neutral-300">
         <li>
           <NavButton param={""}>Hem</NavButton>
         </li>
