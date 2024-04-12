@@ -16,23 +16,23 @@ export const Menu = ({
   }, []);
 
   return (
-    <>
-      <h1 className="text-center text-6xl font-ultra my-5">
-        VÅRA BURRITO BOWLS
-      </h1>
+    <div className="max-w-[1000px] mx-auto">
+      <h2 className="text-center mt-[75px] mb-[20px]">VÅRA BURRITO BOWLS</h2>
       <p className="text-center font-ultra">
         Välj en bowl med ris eller sallad, grönsaker, protein och dessing/salsa.
       </p>
-      <p className="text-center font-ultra">
+      <p className="text-center font-ultra mb-[50px]">
         Du anpassar din beställning i nästa steg.
       </p>
-      <ul className="flex my-10">
-        {meals.map((meal) => (
-          <li key={meal._id}>
-            <MenuCard meal={meal} createOrder={createOrder} />
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className="flex justify-center mb-[75px]">
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8">
+          {meals.map((meal) => (
+            <li key={meal._id}>
+              <MenuCard meal={meal} createOrder={createOrder} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };

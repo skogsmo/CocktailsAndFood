@@ -6,23 +6,27 @@
 @tailwind utilities;
 
 @layer base {
-    /* img,
+  /* img,
     video {
         @apply max-w-none;
     } */
-    h1 {
-        @apply text-[3.375rem] font-ultra;
-    }
-    h2 {
-        @apply text-[1.75rem] font-ultra;
-    }
-    h3 {
-        @apply text-2xl font-montserrat font-bold;
-    }
-    h4 {
-        @apply text-lg font-montserrat font-bold;
-    }
-    h5 {
-        @apply text-lg font-montserrat font-semibold;
-    }
+  h1 {
+    @apply text-[3.375rem] font-ultra;
+  }
+  h2 {
+    @apply text-[1.75rem] font-ultra;
+  }
+  h3 {
+    @apply text-2xl font-montserrat font-bold;
+  }
+  h4 {
+    @apply text-lg font-montserrat font-bold;
+  }
+  h5 {
+    @apply text-lg font-montserrat font-semibold;
+  }
 }
+
+/* * {
+  border: 1px solid red;
+} */
