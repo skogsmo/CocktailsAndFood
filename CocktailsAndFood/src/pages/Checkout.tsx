@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CartModifiers } from "../App";
 import { Order } from "../orderTypes";
 
@@ -35,6 +36,14 @@ export const Checkout = ({
     );
   });
 
+  const handleClick = () => {
+    if (totalPrice){
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }
+  }
+
+  const buttonClass = totalPrice ? "text-neutral-900" : "text-neutral-500 cursor-default";
+
   return (
     <>
       <h1>Din Varukorg</h1>
@@ -42,6 +51,9 @@ export const Checkout = ({
       <p className="text-xl font-bold">
         Totalt: <span className="text-end">{totalPrice} kr</span>
       </p>
+      <Link to="/menu" className="bg-yellow-400">Beställa mer</Link>
+      <button className={buttonClass} onClick={handleClick}>Slutför order</button>
+      
     </>
   );
 };
