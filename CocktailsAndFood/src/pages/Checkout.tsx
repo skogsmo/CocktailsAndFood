@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CartModifiers } from "../App";
 import { Order } from "../orderTypes";
 
@@ -9,8 +9,6 @@ export const Checkout = ({
   orders: Order[];
   removeOrder: CartModifiers["removeOrder"];
 }) => {
-  
-  const navigate = useNavigate();
   const totalPrice = orders.reduce(
     (total, order) => total + calculateOrderSum(order),
     0
