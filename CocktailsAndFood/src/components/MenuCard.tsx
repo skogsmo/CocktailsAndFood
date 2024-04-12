@@ -25,7 +25,7 @@ export const MenuCard = ({
           <p className="font-medium my-2">{meal.price.toFixed(2)}</p>
           <p className="my-2">{meal.description}</p>
           <button
-            className="my-2 text-black bg-yellow-400"
+            className="my-2 bg-yellow-400"
             onClick={handleClick}
           >
             Välj
