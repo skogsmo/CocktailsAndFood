@@ -26,7 +26,7 @@ export const Menu = ({
       <p className="text-center font-ultra">
         Du anpassar din beställning i nästa steg.
       </p>
-      <ul className="flex my-10">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-around gap-4">
         {meals.map((meal) => (
           <li key={meal._id}>
             <MenuCard meal={meal} createOrder={createOrder} />

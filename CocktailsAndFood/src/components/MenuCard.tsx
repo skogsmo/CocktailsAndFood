@@ -16,9 +16,9 @@ export const MenuCard = ({
   };
   return (
     <>
-      <div className="flex">
-        <div className="">
-          <img src={meal.imageUrl} className="rounded-lg" />
+      <div className="flex bg-white rounded-2xl h-64 shadow-md">
+        <div className="h-full w-64">
+          <img src={meal.imageUrl} className="rounded-lg h-full object-cover w-full" />
         </div>
         <div className="flex flex-col justify-center mx-4">
           <p className="font-bold my-2">{meal.title}</p>
