@@ -8,7 +8,7 @@ export function RadiobuttonSelector<T, U>({
   updateAction,
   object,
   renderLabel,
-  labelClasses,
+  // labelClasses,
   wrapperClasses = "flex gap-2",
 }: {
   options: U[];
@@ -40,25 +40,30 @@ export function RadiobuttonSelector<T, U>({
 
   const mapped = options.map((option) => {
     return (
-      <div
+      <label
         key={`${String(property)}-${option[optionIdProperty]}`}
+        htmlFor={`${String(property)}-${option[optionIdProperty]}`}
         className={wrapperClasses}
       >
+        {/* <label
+          htmlFor={`${String(property)}-${option[optionIdProperty]}`}
+          className={labelClasses}
+        >
+          {renderLabel(option)}
+        </label> */}
+        {renderLabel(option)}
         <input
           id={`${String(property)}-${option[optionIdProperty]}`}
           type="radio"
           name={String(options[0][optionTitleProperty])}
           value={Number(option[optionIdProperty])}
-          checked={propertyObject?.[optionIdProperty] === option[optionIdProperty]}
+          checked={
+            propertyObject?.[optionIdProperty] === option[optionIdProperty]
+          }
           onChange={(e) => handleOnChange(e)}
+          className="size-6 flex-shrink-0 cursor-pointer"
         />
-        <label
-          htmlFor={`${String(property)}-${option[optionIdProperty]}`}
-          className={labelClasses}
-        >
-          {renderLabel(option)}
-        </label>
-      </div>
+      </label>
     );
   });
 

@@ -29,7 +29,7 @@ export const MenuCard = ({
             <p className="text-xs">{meal.description}</p>
           </div>
           <button
-            className="bg-yellow-400 hover:bg-yellow-300 rounded-3xl w-full self-center py-2 text-sm font-bold"
+            className="bg-yellow-400 hover:bg-yellow-300 rounded-3xl w-full self-center py-2 text-sm font-semibold"
             onClick={handleClick}
           >
             Välj
