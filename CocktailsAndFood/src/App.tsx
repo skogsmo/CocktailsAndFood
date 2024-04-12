@@ -9,6 +9,7 @@ import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
 import { ConditionalRoute } from "./components/ConditionalRoute";
 import { NotFound } from "./pages/NotFound";
+import { DrinkList } from "./pages/DrinkList";
 
 export type CartModifiers = {
   createOrder: (meal: Meal) => void;
@@ -83,6 +84,7 @@ function App() {
         <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
+        <Route path="/drinklist" element={<DrinkList />} />
         {ConditionalRoute({
           path: "/detail",
           checkIfTrue: currentOrder,
