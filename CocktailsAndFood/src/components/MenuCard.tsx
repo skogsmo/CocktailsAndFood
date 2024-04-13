@@ -21,11 +21,13 @@ export const MenuCard = ({
           <img src={meal.imageUrl} className="h-full object-cover object-[35%_50%] w-full" />
         </div>
         <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-6">
-          <div>
-            <h4 className="font-bold">{meal.title}</h4>
-            <p className="font-medium my-2 text-sm">
-              {meal.price.toFixed(2)} kr
-            </p>
+          <div className="flex flex-col gap-1">
+            <div>
+              <h4 className="font-bold leading-[0.5]">{meal.title}</h4>
+              <p className="font-semibold my-2 text-sm">  
+                {meal.price.toFixed(2)} kr
+              </p>
+            </div>
             <p className="text-xs">{meal.description}</p>
           </div>
           <button
