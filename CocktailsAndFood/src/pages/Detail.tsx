@@ -69,9 +69,9 @@ const Detail = ({
 
     return (
         <div className="main-wrapper">
-            <div className="px-8 md:px-0 text-center flex flex-col gap-2">
+            <div className="px-8 md:px-0 text-center flex flex-col gap-5 mb-[50px]">
                 <h2>ANPASSA DIN BESTÄLLNING</h2>
-                <p className="text-lg mb-[50px]">
+                <p className="text-lg">
                     Skapa din perfekta kombination av smaker
                 </p>
             </div>
@@ -82,7 +82,7 @@ const Detail = ({
                     alt={currentOrder.Meal.title}
                 />
                 <div className="px-8 py-12">
-                    <h3 className="leading-none mb-[10px]">
+                    <h3 className="mb-[10px]">
                         {currentOrder.Meal.title}
                     </h3>
                     <p className="font-semibold mb-[15px]">
