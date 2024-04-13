@@ -7,7 +7,6 @@ import StandardLinkButton from "../components/StandardLinkButton";
 const Detail = ({
     updateOrder,
     currentOrder,
-    removeOrder,
 }: {
     updateOrder: CartModifiers["updateOrder"];
     currentOrder: Order;
@@ -82,14 +81,14 @@ const Detail = ({
                     src={currentOrder.Meal.imageUrl}
                     alt={currentOrder.Meal.title}
                 />
-                <div className="px-8">
-                    <h3 className="mt-[50px] mb-[10px]">
+                <div className="px-8 py-12">
+                    <h3 className="leading-none mb-[10px]">
                         {currentOrder.Meal.title}
                     </h3>
-                    <span>{currentOrder.Meal.price.toFixed(2)} kr</span>
-                    <p className="mt-[15px] mb-[50px]">
-                        {currentOrder.Meal.description}
+                    <p className="font-semibold mb-[15px]">
+                        {currentOrder.Meal.price.toFixed(2)} kr
                     </p>
+                    <p>{currentOrder.Meal.description}</p>
                 </div>
                 <hr className="border-neutral-300 border-t" />
                 <div className="p-8">
