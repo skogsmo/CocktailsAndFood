@@ -20,7 +20,7 @@ export const MenuCard = ({
         <div className="w-1/3 h-full">
           <img src={meal.imageUrl} className="h-full object-cover object-[35%_50%] w-full" />
         </div>
-        <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-6">
+        <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-7">
           <div className="flex flex-col gap-1">
             <div>
               <h4 className="font-bold leading-[0.5]">{meal.title}</h4>
