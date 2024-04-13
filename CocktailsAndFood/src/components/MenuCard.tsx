@@ -16,11 +16,11 @@ export const MenuCard = ({
   };
   return (
     <>
-      <div className="flex bg-white rounded-2xl shadow-lg overflow-hidden h-full">
+      <div className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full">
         <div className="w-1/3 h-full">
-          <img src={meal.imageUrl} className="h-full object-cover w-full" />
+          <img src={meal.imageUrl} className="h-full object-cover object-[35%_50%] w-full" />
         </div>
-        <div className="flex flex-col justify-between gap-4 w-2/3 p-8">
+        <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-6">
           <div>
             <h4 className="font-bold">{meal.title}</h4>
             <p className="font-medium my-2 text-sm">

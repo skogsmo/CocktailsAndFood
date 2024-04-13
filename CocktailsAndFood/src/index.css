@@ -6,25 +6,32 @@
 @tailwind utilities;
 
 @layer base {
-  /* img,
+    /* img,
     video {
         @apply max-w-none;
     } */
-  h1 {
-    @apply text-[3.375rem] font-ultra;
-  }
-  h2 {
-    @apply text-[1.75rem] font-ultra;
-  }
-  h3 {
-    @apply text-2xl font-montserrat font-bold;
-  }
-  h4 {
-    @apply text-lg font-montserrat font-bold;
-  }
-  h5 {
-    @apply text-lg font-montserrat font-semibold;
-  }
+    
+    h1 {
+        @apply text-[3.375rem] font-ultra;
+    }
+    h2 {
+        @apply text-[1.75rem] font-ultra;
+    }
+    h3 {
+        @apply text-2xl font-montserrat font-bold;
+    }
+    h4 {
+        @apply text-lg font-montserrat font-bold;
+    }
+    h5 {
+        @apply text-lg font-montserrat font-semibold;
+    }
+}
+
+@layer components {
+    .main-wrapper {
+        @apply max-w-[1020px] md:px-[10px] mx-auto flex flex-col items-center py-[75px];
+    }
 }
 
 /* * {
