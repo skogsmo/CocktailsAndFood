@@ -1,74 +1,126 @@
-import { createContext, useState } from "react";
-import { Meal, mealIsFinalized } from "../types/Meal";
+import React, { createContext, useContext, useReducer } from "react";
+import { Meal } from "../types/Meal";
+import { Drink } from "../types/Drink";
 
-export const CartContext = createContext<CartContextType | null>(null);
+export enum ActionType {
+  ADD_MEAL = "ADD_MEAL",
+  UPDATE_MEAL = "UPDATE_MEAL",
+  REMOVE_MEAL = "REMOVE_MEAL",
+  EMPTY_CART = "EMPTY_CART",
+  SET_CURRENT_MEAL = "SET_CURRENT_MEAL",
+  SET_DRINK = "SET_DRINK",
+}
 
-export type CartContextType = {
-    getFinalizedMeals: () => Meal[];
-    addMeal: (meal: Meal) => void;
-    updateMeal: (updatedMeal: Meal) => void;
-    removeMeal: (mealId: string) => void;
-    emptyCart: () => void;
-    getCurrentMeal: () => Meal | undefined;
-    setCurrentMeal: (id: string) => void;
+interface AddMealAction {
+  type: ActionType.ADD_MEAL;
+  payload: Meal;
+}
+
+interface UpdateMealAction {
+  type: ActionType.UPDATE_MEAL;
+  payload: Meal;
+}
+
+interface RemoveMealAction {
+  type: ActionType.REMOVE_MEAL;
+  payload: string;
+}
+
+interface EmptyCartAction {
+  type: ActionType.EMPTY_CART;
+}
+
+interface SetCurrentMealAction {
+  type: ActionType.SET_CURRENT_MEAL;
+  payload: string;
+}
+
+interface SetDrink {
+  type: ActionType.SET_DRINK;
+  payload: Drink | undefined;
+}
+
+type CartAction =
+  | AddMealAction
+  | UpdateMealAction
+  | RemoveMealAction
+  | EmptyCartAction
+  | SetCurrentMealAction
+  | SetDrink;
+
+interface CartState {
+  meals: Meal[];
+  currentMealId?: string;
+}
+
+const initialState: CartState = {
+  meals: [],
+};
+
+const cartReducer = (state: CartState, action: CartAction): CartState => {
+  switch (action.type) {
+    case ActionType.ADD_MEAL:
+      return {
+        ...state,
+        meals: [...state.meals, action.payload],
+      };
+    case ActionType.UPDATE_MEAL:
+      return {
+        ...state,
+        meals: state.meals.map((meal) =>
+          meal.id === action.payload.id ? action.payload : meal
+        ),
+      };
+    case ActionType.REMOVE_MEAL:
+      return {
+        ...state,
+        meals: state.meals.filter((meal) => meal.id !== action.payload),
+      };
+    case ActionType.EMPTY_CART:
+      return {
+        ...state,
+        meals: [],
+      };
+    case ActionType.SET_CURRENT_MEAL:
+      return {
+        ...state,
+        currentMealId: action.payload,
+      };
+    case ActionType.SET_DRINK:
+      return {
+        ...state,
+        meals: state.meals.map((meal) =>
+          meal.id === state.currentMealId
+            ? { ...meal, drink: action.payload }
+            : meal
+        ),
+      };
+    default:
+      return state;
+  }
+};
+
+type CartContextType = {
+  state: CartState;
+  dispatch: React.Dispatch<CartAction>;
+};
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 };
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
-    const [meals, setMeals] = useState<Meal[]>([]);
-    const [currentMealId, setCurrentMealId] = useState<string | undefined>(undefined);
-
-    const addMeal = (meal: Meal) => {
-        console.log("Added meal with id " + meal.id);
-        setMeals([...meals, meal]);
-    }
-
-    const getFinalizedMeals = (): Meal[] => {
-        console.log("Getting finalized meals");
-        return meals.filter(m => mealIsFinalized(m));
-    }
-
-    const getCurrentMeal = (): Meal | undefined => {
-        console.log("Getting current meal");
-        if (meals) {
-            const meal = meals.find(m => m.id === currentMealId);
-            if (meal) return meal;
-            else return undefined;
-        } else {
-            console.warn("No meals found.");
-            return undefined;
-        }
-    }
-
-    const setCurrentMeal = (id: string) => {
-        console.log("Current meal set to " + id);
-        setCurrentMealId(id);
-    }
-
-    const updateMeal = (updatedMeal: Meal) => {
-        console.log("Updating meal " + updatedMeal.id);
-        setMeals(prevMeals =>
-            prevMeals.map(m =>
-                m.id === updatedMeal.id ? updatedMeal : m
-            )
-        );
-    };
-
-    const removeMeal = (mealId: string) => {
-        console.log("Removing meal " + mealId);
-        setMeals(prevMeals => prevMeals.filter(m => m.id !== mealId));
-    };
-
-    const emptyCart = () => {
-        console.log("Emptying cart");
-        setMeals([]);
-    };
-
-    return (
-        <CartContext.Provider value={{ getFinalizedMeals: getFinalizedMeals, addMeal, updateMeal, removeMeal, emptyCart, getCurrentMeal, setCurrentMeal }}>
-            {children}
-        </CartContext.Provider>
-    );
+  return (
+    <CartContext.Provider value={{ state, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
-
-export default CartProvider;

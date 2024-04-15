@@ -1,14 +1,15 @@
-import { Fragment, useContext } from "react";
-import { CartContext, CartContextType } from "../contexts/CartContext";
+import { Fragment } from "react";
+// import { CartContext, CartContextType } from "../contexts/CartContext";
 import MealSummary from "./MealSummary";
-import { getMealTotalPrice } from "../types/Meal";
+import { getMealTotalPrice, mealIsFinalized } from "../types/Meal";
 import { Link, Navigate } from "react-router-dom";
+import { ActionType, useCart } from "../contexts/CartContext";
 
 export default function Summary() {
 
-    const { getFinalizedMeals, removeMeal, emptyCart } = useContext(CartContext) as CartContextType;
+    const { state, dispatch } = useCart();
 
-    const meals = getFinalizedMeals();
+    const meals = state.meals.filter(m => mealIsFinalized(m));
 
     if (meals.length < 1) return <Navigate to="/menu" />;
 
@@ -25,7 +26,7 @@ export default function Summary() {
                     <div className="lg:border-l border-slate-300 px-8 flex flex-col gap-12">
                         {meals.map((meal) => (
                             <Fragment key={meal.id}>
-                                <MealSummary meal={meal} onRemove={() => removeMeal(meal.id)} />
+                                <MealSummary meal={meal} onRemove={() => dispatch({ type: ActionType.REMOVE_MEAL, payload: meal.id })} />
                                 {meal !== meals[meals.length - 1] &&
                                     <hr className="border-t-2 border-slate-300 border-dotted" />
                                 }
@@ -49,7 +50,7 @@ export default function Summary() {
                         <button onClick={handlePayClick} className="w-full py-2 px-4 rounded-full bg-amber-500 hover:bg-amber-400 font-bold text-white hover:shadow-inner">
                             Betala
                         </button>
-                        <button onClick={emptyCart} className="w-full font-semibold text-slate-500 hover:text-slate-600 hover:bg-slate-200 rounded-full px-4 py-2">
+                        <button onClick={() => dispatch({ type: ActionType.EMPTY_CART })} className="w-full font-semibold text-slate-500 hover:text-slate-600 hover:bg-slate-200 rounded-full px-4 py-2">
                             Töm kundvagn
                         </button>
                     </div>

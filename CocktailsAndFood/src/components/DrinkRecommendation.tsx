@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { CartContext, CartContextType } from "../contexts/CartContext";
+import { useEffect, useRef, useState } from "react";
+// import { CartContext, CartContextType } from "../contexts/CartContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import getRandomIndex from "../utils/getRandomIndex";
 import cachableGetUrl from "../utils/apiUrl";
@@ -9,162 +9,214 @@ import IDrinksResponse from "../interfaces/IDrinksResponse";
 import drinkResponseToDrink from "../utils/drinkResponseToDrink";
 import { Drink, getDrinkPrice as getDrinkPrice } from "../types/Drink";
 import DrinkDetails from "./DrinkDetails";
+import { ActionType, useCart } from "../contexts/CartContext";
 
 function DrinkRecommendation() {
+  const { state, dispatch } = useCart();
 
-    const { updateMeal, getCurrentMeal } = useContext(CartContext) as CartContextType;
-    const [meal] = useState(() => getCurrentMeal());
-    if (!meal) return <Navigate to="/menu" />;
+  const currentMeal = state.meals.find(
+    (meal) => meal.id === state.currentMealId
+  );
 
-    const navigate = useNavigate();
+  if (!currentMeal) return <Navigate to="/menu" />;
 
-    const [recommendedDrink, setRecommendedDrink] = useState<Drink | undefined>(undefined)
+  const navigate = useNavigate();
 
-    const [chosenDrinkIngredient, setChosenDrinkIngredient] = useState("");
+  const [recommendedDrink, setRecommendedDrink] = useState<Drink | undefined>(
+    undefined
+  );
 
-    const [imageLoaded, setImageLoaded] = useState(false);
+  const [chosenDrinkIngredient, setChosenDrinkIngredient] = useState("");
 
-    useEffect(() => {
-        newRecommendation();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-        return () => {
-            abortControllerRef.current?.abort();
-        }
-    }, []);
+  useEffect(() => {
+    newRecommendation();
 
-    const newRecommendation = async () => {
-        console.log("New drink recommendation on the way!");
-
-        const ingredients: string[] = meal.food.recommendedDrinkIngredients
-            .filter(ingredient => meal.protein?.recommendedDrinkIngredients.includes(ingredient));
-
-        if (ingredients.length === 0) {
-            ingredients.push(...meal.food.recommendedDrinkIngredients);
-        }
-
-        let randomIndex = getRandomIndex(ingredients.length);
-
-        if (ingredients.length > 1) {
-            while (chosenDrinkIngredient === ingredients[randomIndex]) {
-                randomIndex = getRandomIndex(ingredients.length);
-            }
-        }
-
-        const newIngredient = ingredients[randomIndex];
-
-        setImageLoaded(false);
-
-        const drink = await getRandomDrinkByIngredient(newIngredient);
-
-        if (drink?.id === recommendedDrink?.id) {
-            setImageLoaded(true);
-        }
-
-        if (!drink) return;
-
-        drink.price = getDrinkPrice(drink);
-
-        setChosenDrinkIngredient(newIngredient);
-
-        setRecommendedDrink(drink);
+    return () => {
+      abortControllerRef.current?.abort();
     };
+  }, []);
 
-    const abortControllerRef = useRef<AbortController | undefined>(undefined);
+  const newRecommendation = async () => {
+    console.log("New drink recommendation on the way!");
 
-    const getRandomDrinkByIngredient = async (ingredient: string): Promise<Drink | undefined> => {
-        console.log(`Fetching drinks with ingredient: ${ingredient}`);
+    const ingredients: string[] =
+      currentMeal.food.recommendedDrinkIngredients.filter((ingredient) =>
+        currentMeal.protein?.recommendedDrinkIngredients.includes(ingredient)
+      );
 
-        abortControllerRef.current?.abort();
-        abortControllerRef.current = new AbortController();
-        const signal = abortControllerRef.current.signal;
-
-        try {
-            const response = await fetch(cachableGetUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`, USE_CACHED_API_CALLS, API_CACHER_BASE_URL), { signal });
-            const drinksResponse: IDrinksResponse = await response.json();
-            const drinkIds = drinksResponse.drinks.map((drink) => drink.idDrink);
-            const randomDrinkId = drinkIds[getRandomIndex(drinkIds.length)];
-
-            console.log(`Fetching drink: ${randomDrinkId}`);
-
-            const result = await fetch(cachableGetUrl(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomDrinkId}`, USE_CACHED_API_CALLS, API_CACHER_BASE_URL), { signal });
-            const drinkDetailsResponse: IDrinkDetailsResponse = await result.json();
-            const drink = drinkResponseToDrink(drinkDetailsResponse);
-
-            return drink;
-        } catch (error: any) {
-            if (error.name === 'AbortError') {
-                console.log('Drink fetch aborted');
-            } else {
-                console.error('Error fetching drink:', error);
-            }
-            return undefined;
-        }
-    };
-
-    const handleSubmitClick = async () => {
-        meal.drink = recommendedDrink;
-        updateMeal(meal);
-
-        navigate("/summary")
+    if (ingredients.length === 0) {
+      ingredients.push(...currentMeal.food.recommendedDrinkIngredients);
     }
 
-    return (
-        <div className="flex flex-col gap-4 p-4 bg-slate-200 min-h-screen">
+    let randomIndex = getRandomIndex(ingredients.length);
 
-            <div className="flex flex-col gap-2">
-                <h2 className="font-bold">Rekommenderade drinkingredienser för <span className="text-orange-600">{meal.food.title}</span>:</h2>
-                <ul className="flex flex-wrap gap-2">
-                    {meal.food.recommendedDrinkIngredients.map(ingredient => (
-                        <li key={ingredient} className={`rounded-full px-2 ${ingredient === chosenDrinkIngredient ? "bg-green-600 font-semibold text-white" : "text-gray-700 bg-white"}`}>
-                            <span>{ingredient}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+    if (ingredients.length > 1) {
+      while (chosenDrinkIngredient === ingredients[randomIndex]) {
+        randomIndex = getRandomIndex(ingredients.length);
+      }
+    }
 
-            <div className="flex flex-col gap-2">
-                <h2 className="font-bold">Rekommenderade drinkingredienser för <span className="text-orange-600">{meal.protein?.name}</span>:</h2>
-                <ul className="flex flex-wrap gap-2">
-                    {meal.protein?.recommendedDrinkIngredients.map(ingredient => (
-                        <li key={ingredient} className={`rounded-full px-2 ${ingredient === chosenDrinkIngredient ? "bg-green-600 font-semibold text-white" : "text-gray-700 bg-white"}`}>
-                            <span>{ingredient}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+    const newIngredient = ingredients[randomIndex];
 
-            <div>
-                <h2 className="font-bold">Vald drinkingrediens:</h2>
-                <p className="text-green-600 font-bold text-xl">{chosenDrinkIngredient}</p>
-            </div>
+    setImageLoaded(false);
 
-            {recommendedDrink &&
-                <div className="flex flex-col gap-2">
-                    <div>
-                        <h2 className="font-bold leading-tight">Rekommenderad drink:</h2>
-                        <DrinkDetails drink={recommendedDrink} highlightIngredient={chosenDrinkIngredient.toLowerCase()} onImageLoad={() => setImageLoaded(true)} hidden={!imageLoaded} />
-                    </div>
-                    <div>
-                        <button onClick={handleSubmitClick} className="px-4 py-2 bg-amber-500 hover:bg-amber-400 rounded-full text-white font-bold">
-                            Acceptera dryck och se ordersammanfattning
-                        </button>
-                    </div>
-                    <div>
-                        <button onClick={newRecommendation} className="px-4 py-2 bg-lime-500 hover:bg-lime-400 rounded-full text-white font-bold">
-                            Ny rekommendation
-                        </button>
-                    </div>
-                    <div>
-                        <Link to="/choose-drink">
-                            <button className="px-4 py-2 bg-sky-500 hover:bg-sky-400 rounded-full text-white font-bold">
-                                Välj annan dryck
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-            }
+    const drink = await getRandomDrinkByIngredient(newIngredient);
+
+    if (drink?.id === recommendedDrink?.id) {
+      setImageLoaded(true);
+    }
+
+    if (!drink) return;
+
+    drink.price = getDrinkPrice(drink);
+
+    setChosenDrinkIngredient(newIngredient);
+
+    setRecommendedDrink(drink);
+  };
+
+  const abortControllerRef = useRef<AbortController | undefined>(undefined);
+
+  const getRandomDrinkByIngredient = async (
+    ingredient: string
+  ): Promise<Drink | undefined> => {
+    console.log(`Fetching drinks with ingredient: ${ingredient}`);
+
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
+    try {
+      const response = await fetch(
+        cachableGetUrl(
+          `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`,
+          USE_CACHED_API_CALLS,
+          API_CACHER_BASE_URL
+        ),
+        { signal }
+      );
+      const drinksResponse: IDrinksResponse = await response.json();
+      const drinkIds = drinksResponse.drinks.map((drink) => drink.idDrink);
+      const randomDrinkId = drinkIds[getRandomIndex(drinkIds.length)];
+
+      console.log(`Fetching drink: ${randomDrinkId}`);
+
+      const result = await fetch(
+        cachableGetUrl(
+          `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomDrinkId}`,
+          USE_CACHED_API_CALLS,
+          API_CACHER_BASE_URL
+        ),
+        { signal }
+      );
+      const drinkDetailsResponse: IDrinkDetailsResponse = await result.json();
+      const drink = drinkResponseToDrink(drinkDetailsResponse);
+
+      return drink;
+    } catch (error: any) {
+      if (error.name === "AbortError") {
+        console.log("Drink fetch aborted");
+      } else {
+        console.error("Error fetching drink:", error);
+      }
+      return undefined;
+    }
+  };
+
+  const handleSubmitClick = async () => {
+    dispatch({ type: ActionType.SET_DRINK, payload: recommendedDrink });
+    navigate("/summary");
+  };
+
+  return (
+    <div className="flex flex-col gap-4 p-4 bg-slate-200 min-h-screen">
+      <div className="flex flex-col gap-2">
+        <h2 className="font-bold">
+          Rekommenderade drinkingredienser för{" "}
+          <span className="text-orange-600">{currentMeal.food.title}</span>:
+        </h2>
+        <ul className="flex flex-wrap gap-2">
+          {currentMeal.food.recommendedDrinkIngredients.map((ingredient) => (
+            <li
+              key={ingredient}
+              className={`rounded-full px-2 ${
+                ingredient === chosenDrinkIngredient
+                  ? "bg-green-600 font-semibold text-white"
+                  : "text-gray-700 bg-white"
+              }`}>
+              <span>{ingredient}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h2 className="font-bold">
+          Rekommenderade drinkingredienser för{" "}
+          <span className="text-orange-600">{currentMeal.protein?.name}</span>:
+        </h2>
+        <ul className="flex flex-wrap gap-2">
+          {currentMeal.protein?.recommendedDrinkIngredients.map(
+            (ingredient) => (
+              <li
+                key={ingredient}
+                className={`rounded-full px-2 ${
+                  ingredient === chosenDrinkIngredient
+                    ? "bg-green-600 font-semibold text-white"
+                    : "text-gray-700 bg-white"
+                }`}>
+                <span>{ingredient}</span>
+              </li>
+            )
+          )}
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="font-bold">Vald drinkingrediens:</h2>
+        <p className="text-green-600 font-bold text-xl">
+          {chosenDrinkIngredient}
+        </p>
+      </div>
+
+      {recommendedDrink && (
+        <div className="flex flex-col gap-2">
+          <div>
+            <h2 className="font-bold leading-tight">Rekommenderad drink:</h2>
+            <DrinkDetails
+              drink={recommendedDrink}
+              highlightIngredient={chosenDrinkIngredient.toLowerCase()}
+              onImageLoad={() => setImageLoaded(true)}
+              hidden={!imageLoaded}
+            />
+          </div>
+          <div>
+            <button
+              onClick={handleSubmitClick}
+              className="px-4 py-2 bg-amber-500 hover:bg-amber-400 rounded-full text-white font-bold">
+              Acceptera dryck och se ordersammanfattning
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={newRecommendation}
+              className="px-4 py-2 bg-lime-500 hover:bg-lime-400 rounded-full text-white font-bold">
+              Ny rekommendation
+            </button>
+          </div>
+          <div>
+            <Link to="/choose-drink">
+              <button className="px-4 py-2 bg-sky-500 hover:bg-sky-400 rounded-full text-white font-bold">
+                Välj annan dryck
+              </button>
+            </Link>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default DrinkRecommendation;

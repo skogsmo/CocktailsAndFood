@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Meal } from "../types/Meal";
 import { ExtraIngredient } from "../types/ExtraIngredient";
-import { CartContext, CartContextType } from "../contexts/CartContext";
+import { ActionType, useCart } from "../contexts/CartContext";
 
 export function CustomizeOrder() {
 
     const [proteins, setProteins] = useState<ExtraIngredient[]>([]);
     const [carbs, setCarbs] = useState<ExtraIngredient[]>([]);
     
-    const { updateMeal, getCurrentMeal } = useContext(CartContext) as CartContextType;
+    const { state, dispatch } = useCart();
 
     useEffect(() => {
         fetch("data/proteins.json")
@@ -20,25 +20,25 @@ export function CustomizeOrder() {
             .then((data) => setCarbs(data));
     }, []);
 
-    const [meal] = useState(() => getCurrentMeal());
+    const currentMeal = state.meals.find(meal => meal.id === state.currentMealId);
 
-    if (!meal) {
+    if (!currentMeal) {
         console.warn("Meal not found in CustomizeOrder");
         return <Navigate to="/menu" />;
     }
 
     const handleIngredientChange = (type: keyof Meal, event: React.ChangeEvent<HTMLInputElement>) => {
         const ingredientObject = JSON.parse(event.target.dataset[type] as string);
-        (meal[type] as ExtraIngredient) = ingredientObject;
-        updateMeal(meal);
+        const updatedMeal = {...currentMeal, [type]: ingredientObject};
+        dispatch({ type: ActionType.UPDATE_MEAL, payload: updatedMeal });
     };
 
     return (
         <div className="flex flex-col gap-4 p-4 bg-slate-200 min-h-screen">
-            <img src={meal.food.imageUrl} className="w-[300px]" />
-            <h2 className="font-bold text-xl">{meal.food.title}</h2>
-            <p>{meal.food.description}</p>
-            <p className="font-semibold">Pris: {meal.food.price} kr</p>
+            <img src={currentMeal.food.imageUrl} className="w-[300px]" />
+            <h2 className="font-bold text-xl">{currentMeal.food.title}</h2>
+            <p>{currentMeal.food.description}</p>
+            <p className="font-semibold">Pris: {currentMeal.food.price} kr</p>
 
             <div className="p-2 rounded-lg bg-white w-fit">
                 <h3 className="font-bold">Val av protein, välj 1 st</h3>
@@ -49,7 +49,7 @@ export function CustomizeOrder() {
                             id={`protein-${index}`}
                             name="protein"
                             value={protein.id}
-                            checked={meal.protein ? meal.protein.id === protein.id : false}
+                            checked={currentMeal.protein ? currentMeal.protein.id === protein.id : false}
                             onChange={e => handleIngredientChange("protein", e)}
                             data-protein={JSON.stringify(protein)}
                         />
@@ -67,7 +67,7 @@ export function CustomizeOrder() {
                             id={`carb-${index}`}
                             name="carb"
                             value={carb.id}
-                            checked={meal.carb ? meal.carb.id === carb.id : false}
+                            checked={currentMeal.carb ? currentMeal.carb.id === carb.id : false}
                             onChange={e => handleIngredientChange("carb", e)}
                             data-carb={JSON.stringify(carb)}
                         />
@@ -75,9 +75,9 @@ export function CustomizeOrder() {
                     </div>
                 ))}
             </div>
-            {meal.carb && meal.protein &&
+            {currentMeal.carb && currentMeal.protein &&
                 <div>
-                    <Link to="/drink-recommendation" onClick={() => {meal.drink = undefined; updateMeal(meal)}}>
+                    <Link to="/drink-recommendation" onClick={() => {dispatch({ type: ActionType.SET_DRINK, payload: undefined })}}>
                         <button className="px-4 py-2 bg-amber-500 hover:bg-amber-400 rounded-full text-white font-bold">
                             Till drinkrekommendation!
                         </button>
