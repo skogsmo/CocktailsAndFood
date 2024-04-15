@@ -135,7 +135,7 @@ export const DrinkSelection = ({
               <div>
                 <h2>{formattedDrink.CocktailName}</h2>
                 <p className="font-semibold my-[15px]">
-                  {formattedDrink.Price}
+                  {formattedDrink.Price.toFixed(2)} kr
                 </p>
                 <p>{formattedDrink.Description}</p>
               </div>
