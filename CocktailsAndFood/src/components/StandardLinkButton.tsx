@@ -6,7 +6,7 @@ export default function StandardLinkButton({
     yellow = false,
     width = "w-[290px]",
 }: {
-    children: string;
+    children: React.ReactNode;
     to: string;
     yellow?: boolean;
     width?: string;
