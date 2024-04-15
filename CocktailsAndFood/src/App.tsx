@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
-import { NavButton } from "./components/NavButton";
+// import { NavButton } from "./components/NavButton";
 import Detail from "./pages/Detail";
 import { useEffect, useState } from "react";
 import { Meal, Order } from "./orderTypes";
@@ -77,7 +77,7 @@ function App() {
 
   return (
     <>
-      <ul className="bg-neutral-300">
+      {/* <ul className="bg-neutral-300">
         <li>
           <NavButton param={""}>Hem</NavButton>
         </li>
@@ -90,12 +90,17 @@ function App() {
         <li>
           <NavButton param={"checkout"}>Checkout</NavButton>
         </li>
-      </ul>
+      </ul> */}
       <Routes>
         <Route path="/*" element={<NotFound />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/menu" element={<Menu createOrder={createOrder} />} />
-        <Route path="/drinklist" element={<DrinkList currentOrder={currentOrder} updateOrder={updateOrder}/>} />
+        <Route
+          path="/drinklist"
+          element={
+            <DrinkList currentOrder={currentOrder} updateOrder={updateOrder} />
+          }
+        />
         <Route
           path="/checkout"
           element={<Checkout orders={orders} removeOrder={removeOrder} />}
