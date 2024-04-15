@@ -36,7 +36,7 @@ export default {
           "0px 0px 30px 5px rgba(0,0,0,0.025), 0px 3px 5px 0px rgba(0,0,0,0.05)",
       },
       screens: {
-        "xs": "480px",
+        "xs": "400px",
       },
     },
   },
