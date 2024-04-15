@@ -147,9 +147,9 @@ export const DrinkSelection = ({
               <StandardLinkButton to={"/drinklist"}>
                 Gå till drinkmenyn
               </StandardLinkButton>
-
-              <StandardLinkButton to={"/drinklist"} yellow>
-                <div onClick={handleClick}>Acceptera förslag</div>
+              { /*<button onClick={handleClick}>Acceptera förslag</button> */}
+              <StandardLinkButton to={"/checkout"} yellow>
+                Acceptera förslag
               </StandardLinkButton>
             </div>
           </div>
