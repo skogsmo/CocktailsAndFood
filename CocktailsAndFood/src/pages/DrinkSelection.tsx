@@ -147,10 +147,9 @@ export const DrinkSelection = ({
               <StandardLinkButton to={"/drinklist"}>
                 Gå till drinkmenyn
               </StandardLinkButton>
-              { /*<button onClick={handleClick}>Acceptera förslag</button> */}
-              <StandardLinkButton to={"/checkout"} yellow>
+              <button onClick={handleClick} className="border-yellow-400 hover:border-yellow-300 bg-yellow-400 hover:bg-yellow-300 border-2 rounded-full p-3 text-sm font-semibold text-center w-[290px]">
                 Acceptera förslag
-              </StandardLinkButton>
+              </button>
             </div>
           </div>
         )}
