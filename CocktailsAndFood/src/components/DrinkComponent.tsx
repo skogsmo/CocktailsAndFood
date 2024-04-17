@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/Context";
 
 
+
 export const DrinkCard = ({ drinkId}:
    { drinkId: String}) => {
   const {dispatch, currentOrder} = useOrderContext();
@@ -38,13 +39,17 @@ export const DrinkCard = ({ drinkId}:
   };
 
   return <> 
-    <div>
-    <img src={formattedDrink?.ImgUrl} />
-      <h2>{formattedDrink?.CocktailName}</h2>
-      <p>
-        <strong>{formattedDrink?.Price} KR</strong>
-      </p>
-      <button onClick={(handleClick)}>Välj</button>
+    <div className="h-[300px] w-[212px] mt-[50px]">
+      <img src={formattedDrink?.ImgUrl} className="object-fit md:rounded-[25px]" />
+      <div className="flex flex-col items-center">
+        <div className="flex flex-col gap-1">
+        <h4 className="font-bold leading-[0.5] pt-[25px]">{formattedDrink?.CocktailName}</h4>
+        <p className="font-semibold mb-[15px] mt-[5px]">
+          {formattedDrink?.Price} KR
+        </p>
+        </div>
+        <button onClick={(handleClick)} className="border-neutral-500 text-neutral-900 flex justify-center border-2 rounded-full p-1 text-sm text-center w-[180px] mb-[50px]">Välj</button>
+      </div> 
     </div>
   </>;
 };
