@@ -2,26 +2,21 @@ import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
 import { useState } from "react";
 import StandardLinkButton from "../components/StandardLinkButton";
-import { useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
 
 const Detail = () => {
     console.log("detail reached");
 
-    const {setOrders, currentOrder, isOrdersEmpty} = useOrderContext();
+    const {dispatch, currentOrder, isOrdersEmpty} = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
-    function updateOrder(updatedOrder: Order) {
-        setOrders((prevOrders) =>
-            prevOrders.map((order) => {
-                if (updatedOrder.OrderId === order.OrderId) {
-                    return updatedOrder;
-                } else {
-                    return order;
-                }
-            })
-        );
+    const updateOrder = (updatedOrder: Order) => {
+        dispatch({
+            type: ActionType.UPDATE_ORDER,
+            payload: updatedOrder,
+        });
     }
 
     const [sideOptions] = useState<Extra[]>([

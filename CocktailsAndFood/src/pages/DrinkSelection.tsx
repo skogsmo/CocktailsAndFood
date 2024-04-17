@@ -6,10 +6,10 @@ import {
     mapDrinkDetailsWithCocktail,
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/Context";
 
 export const DrinkSelection = () => {
-    const { currentOrder, updateOrder, isOrdersEmpty } = useOrderContext();
+    const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -51,7 +51,10 @@ export const DrinkSelection = () => {
             Cocktail: formattedDrink,
         };
 
-        updateOrder(updatedOrder);
+        dispatch({
+            type: ActionType.UPDATE_ORDER,
+            payload: updatedOrder,
+        });
         navigate("/checkout");
     };
 

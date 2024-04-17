@@ -3,20 +3,82 @@ import React, {
     createContext,
     useContext,
     useEffect,
-    useState,
+    useReducer
 } from "react";
 import { Meal, Order } from "../orderTypes";
 
 export type OrderContextType = {
-    orders: Order[];
-    setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
-    createOrder: (meal: Meal) => void;
-    updateOrder: (updatedOrder: Order) => void;
-    removeOrder: (orderId: number) => void;
     currentOrder: Order;
     isOrdersEmpty: boolean;
+    state: OrderState;
+    dispatch: React.Dispatch<Action>
 };
 
+interface OrderState {
+    orders: Order[];
+}
+
+type Action = CreateOrderAction | RemoveOrderAction | UpdateOrderAction;
+
+export enum ActionType {
+    CREATE_ORDER,
+    REMOVE_ORDER,
+    UPDATE_ORDER
+}
+
+interface CreateOrderAction {
+    type: ActionType.CREATE_ORDER;
+    payload: Meal;
+}
+
+interface RemoveOrderAction {
+    type: ActionType.REMOVE_ORDER;
+    payload: number
+}
+
+interface UpdateOrderAction {
+    type: ActionType.UPDATE_ORDER;
+    payload: Order;
+}
+
+const initialState: OrderState = {
+    orders: []
+};
+
+const orderReducer = (state: OrderState, action: Action): OrderState => {
+    switch (action.type) {
+        case ActionType.CREATE_ORDER:
+            const newOrder: Order = {
+                OrderId:
+                    state.orders.length === 0
+                        ? 1
+                        : Math.max(...state.orders.map((order) => order.OrderId)) + 1,
+                Meal: action.payload,
+            };
+            return {
+                ...state, 
+                orders: [...state.orders, newOrder]
+            };
+        case ActionType.REMOVE_ORDER:
+            return {
+                ...state,
+                orders: [...state.orders.filter((o) => o.OrderId !== action.payload)]
+            };
+        case ActionType.UPDATE_ORDER:
+            return {
+                ...state,
+                orders: state.orders.map((order) => {
+                    if (action.payload.OrderId === order.OrderId) {
+                        return action.payload;
+                    } else {
+                        return order;
+                    }
+                }),
+            };
+        default:
+            return state;
+    }
+}
 
 export const OrderContext = createContext<OrderContextType | undefined>(
     undefined
@@ -31,12 +93,13 @@ export const useOrderContext = () => {
 };
 
 export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
-    const [orders, setOrders] = useState<Order[]>([]);
+
+    const [state, dispatch] = useReducer(orderReducer, initialState);
 
     useEffect(() => {
         console.log(
             "orders: " +
-                orders.map(
+                state.orders.map(
                     (order) =>
                         "\n  order " +
                         order.OrderId +
@@ -50,47 +113,16 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
                         order.Cocktail?.CocktailName
                 )
         );
-    }, [orders]);
+    }, [state.orders]);
 
-    function createOrder(meal: Meal): void {
-        console.log("Creating new order with title " + meal.title);
-        const newOrder: Order = {
-            OrderId:
-                orders.length === 0
-                    ? 1
-                    : Math.max(...orders.map((order) => order.OrderId)) + 1,
-            Meal: meal,
-        };
-        setOrders([...orders, newOrder]);
-    }
-
-    function updateOrder(updatedOrder: Order) {
-        setOrders((prevOrders) =>
-            prevOrders.map((order) => {
-                if (updatedOrder.OrderId === order.OrderId) {
-                    return updatedOrder;
-                } else {
-                    return order;
-                }
-            })
-        );
-    }
-
-    function removeOrder(orderId: number) {
-        setOrders([...orders.filter((o) => o.OrderId !== orderId)]);
-    }
-
-    const currentOrder = orders[orders.length - 1];
-    const isOrdersEmpty = orders.length < 1;
+    const currentOrder = state.orders[state.orders.length - 1];
+    const isOrdersEmpty = state.orders.length < 1;
 
     return (
         <OrderContext.Provider
             value={{
-                orders,
-                setOrders,
-                createOrder,
-                updateOrder,
-                removeOrder,
+                state,
+                dispatch,
                 currentOrder,
                 isOrdersEmpty
             }}>

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Meal } from "../orderTypes";
 import {
+    ActionType,
     useOrderContext,
 } from "../context/Context";
 export const MenuCard = ({
@@ -10,10 +11,10 @@ export const MenuCard = ({
     }) => {
     const navigate = useNavigate();
 
-    const { createOrder } = useOrderContext();
+    const { dispatch } = useOrderContext();
 
     const handleClick = () => {
-        createOrder(meal);
+        dispatch({ type: ActionType.CREATE_ORDER, payload: meal });
         navigate("/detail");
     };
     return (

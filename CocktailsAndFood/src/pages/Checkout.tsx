@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
 import { Order } from "../orderTypes";
-import { useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/Context";
 
 export const Checkout = () => {
-  const {orders, removeOrder} = useOrderContext();
-  const totalPrice = orders.reduce(
+  const {state, dispatch} = useOrderContext();
+  const totalPrice = state.orders.reduce(
     (total, order) => total + calculateOrderSum(order),
     0
   );
 
-  const mappedOrders = orders.map((o) => {
+  const mappedOrders = state.orders.map((o) => {
     return (
       <li key={o.OrderId}>
-        <button onClick={() => removeOrder(o.OrderId)}>x</button>
+        <button onClick={() => dispatch({
+          type: ActionType.REMOVE_ORDER,
+          payload: o.OrderId
+        })}>x</button>
         <h2>
           {o.Meal.title} ({o.Meal.price} kr)
         </h2>
