@@ -10,19 +10,30 @@
     video {
         @apply max-w-none;
     } */
+    
     h1 {
-        @apply text-[3.375rem] font-ultra;
+        @apply text-[1.75rem] xs:text-[2.5rem] sm:text-[3.375rem] font-ultra leading-none;
     }
     h2 {
-        @apply text-[1.75rem] font-ultra;
+        @apply text-[1.25rem] xs:text-[1.5rem] sm:text-[1.75rem] font-ultra leading-none;
     }
     h3 {
-        @apply text-2xl font-montserrat font-bold;
+        @apply text-2xl font-montserrat font-bold leading-none;
     }
     h4 {
-        @apply text-lg font-montserrat font-bold;
+        @apply text-lg font-montserrat font-bold leading-none;
     }
     h5 {
-        @apply text-lg font-montserrat font-semibold;
+        @apply text-lg font-montserrat font-semibold leading-none;
     }
 }
+
+@layer components {
+    .main-wrapper {
+        @apply max-w-[1064px] md:px-[32px] mx-auto flex flex-col items-center py-[75px];
+    }
+}
+
+/* * {
+  border: 1px solid red;
+} */

@@ -1,32 +1,33 @@
-import ButtonToMenuPage from "../components/ButtonToMenuPage";
+import StandardButton from "../components/StandardButton";
 
 export const Welcome = () => {
-  return (
-    <>
-      <div className="min-h-screen min-w-screen relative">
-        <div className="absolute text-white bg-black/70 w-full h-full flex flex-col items-center">
-          <h2 className="px-4 mb-3 mt-48 text-xs sm:text-3xl md:text-4xl font-ultra">
-            VÄLKOMMEN TILL
-          </h2>
-          <h1 className="px-4 mx-10 text-xl sm:text-5xl md:text-6xl font-ultra">
-            Bowls & cocktails
-          </h1>
-          <p className="px-4 w-2/5 my-5 text-base font-montserrat font-medium text-center">
-            Upplev smakrika burrito bowls och uppfriskande cocktails hos oss.
-            Skapa din perfekta kombination av smaker och låt oss guida dig på en
-            kulinarisk resa. <br /> <br /> Vi erbjuder enastående
-            matupplevelser, kombinerat med unika cocktailrekommendationer, som
-            kompletterar din måltid perfekt.
-          </p>
-          <ButtonToMenuPage />
-        </div>
-
-        <img
-          className="h-full w-full min-h-screen min-w-screen object-cover"
-          src="/images/Bakgrund.jpeg"
-          alt="/"
-        />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="min-h-screen flex flex-col bg-[url('/img/Bakgrund.jpeg')] bg-cover bg-repeat">
+                <img
+                    src="/img/lottas-finest.svg"
+                    alt="bowls and cocktails logo"
+                    className="absolute size-32 top-10 left-10 hidden sm:flex"
+                />
+                <div className="bg-black/70 grow flex flex-col justify-center items-center">
+                    <div className="text-white flex flex-col items-center text-center max-w-[1000px]">
+                        <h2 className="px-4 mb-3">VÄLKOMMEN TILL</h2>
+                        <h1 className="px-4 mb-[35px]">BOWLS & COCKTAILS</h1>
+                        <p className="px-4 text-lg sm:text-xl mb-[50px]">
+                            Upplev smakrika burrito bowls och uppfriskande
+                            cocktails hos oss. Skapa din perfekta kombination av
+                            smaker och låt oss guida dig på en kulinarisk resa.
+                            <br /> <br />
+                            Vår restaurang erbjuder enastående matupplevelser,
+                            kombinerat med unika cocktailrekommendationer, som
+                            kompletterar din måltid perfekt.
+                        </p>
+                        <StandardButton to="/menu" yellow>
+                            Utforska vår meny
+                        </StandardButton>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };

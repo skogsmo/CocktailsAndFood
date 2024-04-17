@@ -1,13 +1,8 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
-import { CartModifiers } from "../App";
 
-export const Menu = ({
-  createOrder,
-}: {
-  createOrder: CartModifiers["createOrder"];
-}) => {
+export const Menu = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   useEffect(() => {
     fetch("https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes")
@@ -16,23 +11,23 @@ export const Menu = ({
   }, []);
 
   return (
-    <>
-      <h1 className="text-center text-6xl font-ultra my-5">
-        VÅRA BURRITO BOWLS
-      </h1>
+    <div className="main-wrapper">
+      <h2 className="text-center mb-[20px]">VÅRA BURRITO BOWLS</h2>
       <p className="text-center font-ultra">
         Välj en bowl med ris eller sallad, grönsaker, protein och dessing/salsa.
       </p>
-      <p className="text-center font-ultra">
+      <p className="text-center font-ultra mb-[50px]">
         Du anpassar din beställning i nästa steg.
       </p>
-      <ul className="flex my-10">
-        {meals.map((meal) => (
-          <li key={meal._id}>
-            <MenuCard meal={meal} createOrder={createOrder} />
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className="flex justify-center">
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8">
+          {meals.map((meal) => (
+            <li key={meal._id}>
+              <MenuCard meal={meal} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
