@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { Order } from "../orderTypes";
 import { useOrderContext } from "../context/Context";
+import StandardLinkButton from "../components/StandardLinkButton";
 
 export const Checkout = () => {
   const {orders, removeOrder} = useOrderContext();
@@ -11,23 +11,33 @@ export const Checkout = () => {
 
   const mappedOrders = orders.map((o) => {
     return (
-      <li key={o.OrderId}>
-        <button onClick={() => removeOrder(o.OrderId)}>x</button>
-        <h2>
-          {o.Meal.title} ({o.Meal.price} kr)
-        </h2>
-        <p>{o.Meal.description}</p>
-        <p>
-          Protein: {o.Protein?.Name} ({o.Protein?.Price} kr)
-        </p>
-        <p>
-          Sidotillbehör: {o.Side?.Name} ({o.Side?.Price} kr)
-        </p>
-        <p>
-          Cocktail: {o.Cocktail?.CocktailName} ({o.Cocktail?.Price} kr)
-        </p>
-        <span>{calculateOrderSum(o).toFixed(2)} kr</span>
-      </li>
+
+        <li key={o.OrderId}>
+          <div className="flex">
+            <div className="w-[90px] pt-[50px]">
+              <button onClick={() => removeOrder(o.OrderId)} className="border border-solid md:rounded-full p-1 w-[30px]">X</button>
+            </div>
+          <div className="pt-[50px]">
+            <h4>
+              {o.Meal.title} ({o.Meal.price} kr)
+            </h4>
+            <p className="text-xs font-bold pt-[15px]">{o.Meal.description}</p>
+            <p className="text-xs pt-[15px]">
+              <span className="font-bold">Protein:</span> {o.Protein?.Name} ({o.Protein?.Price} kr)
+            </p>
+            <p className="text-xs">
+              <span className="font-bold">Sidotillbehör:</span> {o.Side?.Name} ({o.Side?.Price} kr)
+            </p>
+            <p className="text-xs">
+              <span className="font-bold">Cocktail:</span> {o.Cocktail?.CocktailName} ({o.Cocktail?.Price} kr)
+            </p>
+          </div>
+          <div className="w-[250px]">
+            <h3 className="pr-[30px] pl-[60px] pt-[50px]">{calculateOrderSum(o).toFixed(2)} kr</h3>
+          </div>
+          </div>
+          <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
+        </li>
     );
   });
 
@@ -37,19 +47,25 @@ export const Checkout = () => {
     }
   }
 
-  const buttonClass = totalPrice ? "text-neutral-900" : "text-neutral-500 cursor-default";
-
   return (
-    <>
-      <h1>Din Varukorg</h1>
-      <ul>{mappedOrders}</ul>
-      <p className="text-xl font-bold">
-        Totalt: <span className="text-end">{totalPrice} kr</span>
-      </p>
-      <Link to="/menu" className="bg-yellow-400">Beställa mer</Link>
-      <button className={buttonClass} onClick={handleClick}>Slutför order</button>
-      
-    </>
+    <div className="main-wrapper">
+      <h2 className="mb-[50px] mt-[75px]">Din Varukorg</h2>
+      <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big p-[30px]">
+        <ul>{mappedOrders}</ul>
+        <p className="text-xl font-bold">
+          Totalt: <span className="text-end">{totalPrice} kr</span>
+        </p>
+        <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
+        <div className="flex justify-between ">
+
+            <StandardLinkButton to="/menu">Beställa mer</StandardLinkButton>
+
+
+            <StandardLinkButton onClick={handleClick} yellow={true} >Slutför order</StandardLinkButton>
+
+        </div>
+      </div>
+    </div>
   );
 };
 
