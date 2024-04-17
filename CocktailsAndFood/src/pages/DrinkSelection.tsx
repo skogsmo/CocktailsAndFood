@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import StandardLinkButton from "../components/StandardLinkButton";
+import StandardButton from "../components/StandardButton";
 import {
     Cocktail,
     DrinkDetailsResponse,
@@ -89,12 +89,12 @@ export const DrinkSelection = () => {
                         <hr className="border-neutral-300 border-t" />
 
                         <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
-                            <StandardLinkButton to={"/drinklist"}>
+                            <StandardButton to={"/drinklist"}>
                                 Gå till drinkmenyn
-                            </StandardLinkButton>
-                            <StandardLinkButton onClick={handleClick} yellow>
+                            </StandardButton>
+                            <StandardButton onClick={handleClick} yellow>
                                 Acceptera förslag
-                            </StandardLinkButton>
+                            </StandardButton>
                         </div>
                     </div>
                 )}

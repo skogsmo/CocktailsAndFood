@@ -1,7 +1,7 @@
 import { DrinkCard } from "../components/DrinkComponent";
 import { Navigate } from "react-router-dom";
 import { useOrderContext } from "../context/Context";
-import StandardLinkButton from "../components/StandardLinkButton";
+import StandardButton from "../components/StandardButton";
 
 export const DrinkList = () => {
     const { isOrdersEmpty } = useOrderContext();
@@ -25,7 +25,7 @@ export const DrinkList = () => {
                     <DrinkCard drinkId={"13847"} />
                 </div>
                     <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
-                    <StandardLinkButton to="/drinkselection">Tillbaka</StandardLinkButton>
+                    <StandardButton to="/drinkselection">Tillbaka</StandardButton>
                 </div>
             </div>
 

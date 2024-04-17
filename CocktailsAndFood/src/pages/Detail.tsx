@@ -1,7 +1,7 @@
 import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
 import { useState } from "react";
-import StandardLinkButton from "../components/StandardLinkButton";
+import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
 
@@ -132,10 +132,10 @@ const Detail = () => {
 
                 <hr className="border-neutral-300 border-t" />
                 <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
-                    <StandardLinkButton to={"/menu"}>Avbryt</StandardLinkButton>
-                    <StandardLinkButton to={"/drinkselection"} yellow>
+                    <StandardButton to={"/menu"}>Avbryt</StandardButton>
+                    <StandardButton to={"/drinkselection"} yellow>
                         Nästa steg
-                    </StandardLinkButton>
+                    </StandardButton>
                 </div>
             </div>
         </div>

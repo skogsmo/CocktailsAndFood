@@ -6,13 +6,12 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     type?: "button" | "submit" | "reset" | undefined;
     children: string;
     to?: string;
-    onClick?: () => void;
     yellow?: boolean;
     small?: boolean;
     restProps?: ButtonProps;
 }
 
-export default function StandardLinkButton({
+export default function StandardButton({
     className,
     type = "button",
     children,

@@ -1,5 +1,5 @@
 import { Order } from "../orderTypes";
-import StandardLinkButton from "../components/StandardLinkButton";
+import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 
 export const Checkout = () => {
@@ -73,13 +73,13 @@ export const Checkout = () => {
                 </p>
                 <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
                 <div className="flex justify-between ">
-                    <StandardLinkButton to="/menu">
+                    <StandardButton to="/menu">
                         Beställa mer
-                    </StandardLinkButton>
+                    </StandardButton>
 
-                    <StandardLinkButton onClick={handleClick} yellow={true}>
+                    <StandardButton onClick={handleClick} yellow={true}>
                         Slutför order
-                    </StandardLinkButton>
+                    </StandardButton>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ import {
 } from "../orderTypes";
 import { useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/Context";
-import StandardLinkButton from "./StandardLinkButton";
+import StandardButton from "./StandardButton";
 
 export const DrinkCard = ({ drinkId }: { drinkId: String }) => {
     const { dispatch, currentOrder } = useOrderContext();
@@ -56,9 +56,9 @@ export const DrinkCard = ({ drinkId }: { drinkId: String }) => {
                             {formattedDrink?.Price} KR
                         </p>
                     </div>
-                    <StandardLinkButton onClick={handleClick} small className="p-[0.4rem]">
+                    <StandardButton onClick={handleClick} small className="p-[0.4rem]">
                         Välj
-                    </StandardLinkButton>
+                    </StandardButton>
                 </div>
             </div>
         </>

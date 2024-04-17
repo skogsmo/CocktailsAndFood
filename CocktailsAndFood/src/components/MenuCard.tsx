@@ -4,7 +4,7 @@ import {
     ActionType,
     useOrderContext,
 } from "../context/Context";
-import StandardLinkButton from "./StandardLinkButton";
+import StandardButton from "./StandardButton";
 export const MenuCard = ({
     meal
 }: {
@@ -39,9 +39,9 @@ export const MenuCard = ({
                         </div>
                         <p className="text-xs">{meal.description}</p>
                     </div>
-                    <StandardLinkButton onClick={handleClick} yellow small>
+                    <StandardButton onClick={handleClick} yellow small>
                         Välj
-                    </StandardLinkButton>
+                    </StandardButton>
                 </div>
             </div>
         </>

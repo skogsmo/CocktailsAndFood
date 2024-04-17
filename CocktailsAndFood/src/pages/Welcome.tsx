@@ -1,4 +1,4 @@
-import StandardLinkButton from "../components/StandardLinkButton";
+import StandardButton from "../components/StandardButton";
 
 export const Welcome = () => {
     return (
@@ -22,9 +22,9 @@ export const Welcome = () => {
                             kombinerat med unika cocktailrekommendationer, som
                             kompletterar din måltid perfekt.
                         </p>
-                        <StandardLinkButton to="/menu" yellow>
+                        <StandardButton to="/menu" yellow>
                             Utforska vår meny
-                        </StandardLinkButton>
+                        </StandardButton>
                     </div>
                 </div>
             </div>
