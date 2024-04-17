@@ -11,7 +11,7 @@ export const DrinkList = () => {
     return (
         <>
         <div className="main-wrapper">
-            <h2 className="pt-[75px] pb-[50px]">Välj egen cocktails</h2>
+            <h2 className="pb-[50px]">Välj egen cocktails</h2>
 
             <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big p-[30px]">
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(175px,1fr))] gap-8">

@@ -4,6 +4,7 @@ import {
     ActionType,
     useOrderContext,
 } from "../context/Context";
+import StandardLinkButton from "./StandardLinkButton";
 export const MenuCard = ({
     meal
 }: {
@@ -38,11 +39,9 @@ export const MenuCard = ({
                         </div>
                         <p className="text-xs">{meal.description}</p>
                     </div>
-                    <button
-                        className="bg-yellow-400 hover:bg-yellow-300 rounded-3xl w-full self-center py-2 text-sm font-semibold"
-                        onClick={handleClick}>
+                    <StandardLinkButton onClick={handleClick} yellow small>
                         Välj
-                    </button>
+                    </StandardLinkButton>
                 </div>
             </div>
         </>

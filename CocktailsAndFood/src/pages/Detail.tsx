@@ -6,8 +6,6 @@ import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
 
 const Detail = () => {
-    console.log("detail reached");
-
     const {dispatch, currentOrder, isOrdersEmpty} = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
