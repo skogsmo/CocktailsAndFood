@@ -1,13 +1,8 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
-import { CartModifiers } from "../App";
 
-export const Menu = ({
-  createOrder,
-}: {
-  createOrder: CartModifiers["createOrder"];
-}) => {
+export const Menu = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   useEffect(() => {
     fetch("https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes")
@@ -28,7 +23,7 @@ export const Menu = ({
         <ul className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8">
           {meals.map((meal) => (
             <li key={meal._id}>
-              <MenuCard meal={meal} createOrder={createOrder} />
+              <MenuCard meal={meal} />
             </li>
           ))}
         </ul>

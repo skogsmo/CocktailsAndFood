@@ -1,17 +1,29 @@
 import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
-import { CartModifiers } from "../App";
 import { useState } from "react";
 import StandardLinkButton from "../components/StandardLinkButton";
+import { useOrderContext } from "../context/Context";
+import { Navigate } from "react-router-dom";
 
-const Detail = ({
-    updateOrder,
-    currentOrder,
-}: {
-    updateOrder: CartModifiers["updateOrder"];
-    currentOrder: Order;
-    removeOrder: CartModifiers["removeCurrentOrder"];
-}) => {
+const Detail = () => {
+    console.log("detail reached");
+
+    const {setOrders, currentOrder, isOrdersEmpty} = useOrderContext();
+
+    if (isOrdersEmpty) return <Navigate to="/menu" />;
+
+    function updateOrder(updatedOrder: Order) {
+        setOrders((prevOrders) =>
+            prevOrders.map((order) => {
+                if (updatedOrder.OrderId === order.OrderId) {
+                    return updatedOrder;
+                } else {
+                    return order;
+                }
+            })
+        );
+    }
+
     const [sideOptions] = useState<Extra[]>([
         {
             Id: 1,
@@ -82,9 +94,7 @@ const Detail = ({
                     alt={currentOrder.Meal.title}
                 />
                 <div className="px-8 py-12">
-                    <h3 className="mb-[10px]">
-                        {currentOrder.Meal.title}
-                    </h3>
+                    <h3 className="mb-[10px]">{currentOrder.Meal.title}</h3>
                     <p className="font-semibold mb-[15px]">
                         {currentOrder.Meal.price.toFixed(2)} kr
                     </p>

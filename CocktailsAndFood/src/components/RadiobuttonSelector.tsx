@@ -8,7 +8,6 @@ export function RadiobuttonSelector<T, U>({
   updateAction,
   object,
   renderLabel,
-  // labelClasses,
   wrapperClasses = "flex gap-2",
 }: {
   options: U[];
@@ -45,12 +44,6 @@ export function RadiobuttonSelector<T, U>({
         htmlFor={`${String(property)}-${option[optionIdProperty]}`}
         className={wrapperClasses}
       >
-        {/* <label
-          htmlFor={`${String(property)}-${option[optionIdProperty]}`}
-          className={labelClasses}
-        >
-          {renderLabel(option)}
-        </label> */}
         {renderLabel(option)}
         <input
           id={`${String(property)}-${option[optionIdProperty]}`}
