@@ -65,7 +65,7 @@ export const Checkout = () => {
 
     return (
         <div className="main-wrapper">
-            <h2 className="mb-[50px] mt-[75px]">Din Varukorg</h2>
+            <h2 className="mb-[50px]">Din Varukorg</h2>
             <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big p-[30px]">
                 <ul>{mappedOrders}</ul>
                 <p className="text-xl font-bold">

@@ -56,7 +56,7 @@ export const DrinkCard = ({ drinkId }: { drinkId: String }) => {
                             {formattedDrink?.Price} KR
                         </p>
                     </div>
-                    <StandardButton onClick={handleClick} small className="p-[0.4rem]">
+                    <StandardButton onClick={handleClick} small>
                         Välj
                     </StandardButton>
                 </div>
