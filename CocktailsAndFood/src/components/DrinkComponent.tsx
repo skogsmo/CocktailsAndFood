@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Cocktail, DrinkDetailsResponse, mapDrinkDetailsWithCocktail } from "../orderTypes";
 import { useNavigate } from "react-router-dom";
-import { useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/Context";
 
 
 
 export const DrinkCard = ({ drinkId}:
    { drinkId: String}) => {
-  const {updateOrder, currentOrder} = useOrderContext();
+  const {dispatch, currentOrder} = useOrderContext();
   const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
     undefined
   );
@@ -31,7 +31,10 @@ export const DrinkCard = ({ drinkId}:
       Cocktail: formattedDrink,
     };
 
-    updateOrder(updatedOrder);
+    dispatch({
+      type: ActionType.UPDATE_ORDER,
+      payload: updatedOrder,
+    });
     navigate("/checkout");
   };
 

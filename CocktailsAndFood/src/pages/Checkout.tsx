@@ -1,21 +1,24 @@
 import { Order } from "../orderTypes";
-import { useOrderContext } from "../context/Context";
 import StandardLinkButton from "../components/StandardLinkButton";
+import { ActionType, useOrderContext } from "../context/Context";
 
 export const Checkout = () => {
-  const {orders, removeOrder} = useOrderContext();
-  const totalPrice = orders.reduce(
+  const {state, dispatch} = useOrderContext();
+  const totalPrice = state.orders.reduce(
     (total, order) => total + calculateOrderSum(order),
     0
   );
 
-  const mappedOrders = orders.map((o) => {
+  const mappedOrders = state.orders.map((o) => {
     return (
 
         <li key={o.OrderId}>
           <div className="flex">
             <div className="w-[90px] pt-[50px]">
-              <button onClick={() => removeOrder(o.OrderId)} className="border border-solid md:rounded-full p-1 w-[30px]">X</button>
+              <button onClick={() => dispatch({
+          type: ActionType.REMOVE_ORDER,
+          payload: o.OrderId
+        })} className="border border-solid md:rounded-full p-1 w-[30px]">X</button>
             </div>
           <div className="pt-[50px]">
             <h4>
