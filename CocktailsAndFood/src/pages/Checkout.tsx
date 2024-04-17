@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
-import { CartModifiers } from "../App";
 import { Order } from "../orderTypes";
+import { useOrderContext } from "../context/Context";
 
-export const Checkout = ({
-  orders,
-  removeOrder,
-}: {
-  orders: Order[];
-  removeOrder: CartModifiers["removeOrder"];
-}) => {
+export const Checkout = () => {
+  const {orders, removeOrder} = useOrderContext();
   const totalPrice = orders.reduce(
     (total, order) => total + calculateOrderSum(order),
     0
