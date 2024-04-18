@@ -8,7 +8,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     to?: string;
     yellow?: boolean;
     small?: boolean;
-    restProps?: ButtonProps;
 }
 
 export default function StandardButton({
