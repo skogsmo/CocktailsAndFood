@@ -34,7 +34,7 @@ export default function StandardButton({
 
     if (to) {
         return (
-            <Link to={to}>
+            <Link to={to} className="w-fit block">
                 <button type={type} className={classes} {...restProps}>
                     {children}
                 </button>
