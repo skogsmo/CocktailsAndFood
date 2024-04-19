@@ -12,7 +12,7 @@ export const Checkout = () => {
   const mappedOrders = state.orders.map((o) => {
     return (
       <li key={o.OrderId}>
-        <div className="flex flex-row justify-between gap-[30px] pt-[50px] pb-[35px]">
+        <div className="flex flex-row gap-[30px] pt-[50px] pb-[35px]">
           <div className="">
             <button
               onClick={() =>
@@ -27,37 +27,48 @@ export const Checkout = () => {
             </button>
           </div>
 
-          <div className="flex flex-row gap-[20px] h-[200px] w-[200px] pr-[8px]">
+          <div className="flex flex-row gap-[20px] shrink-0">
             <img
-              className="object-cover"
+              className="object-cover size-[200px] rounded-[25px]"
               src={o.Meal.imageUrl}
               alt="meal image"
             />
             <img
-              className="object-cover"
+              className="object-cover size-[200px] rounded-[25px]"
               src={o.Cocktail?.ImgUrl}
               alt="meal image"
             />
           </div>
 
-          <div className="pl-[30px]">
-            <h4>
-              {o.Meal.title} ({o.Meal.price} kr)
-            </h4>
-            <p className="text-xs font-bold pt-[15px]">{o.Meal.description}</p>
-            <p className="text-xs pt-[15px]">
-              <span className="font-bold">Protein:</span> {o.Protein?.Name} (
-              {o.Protein?.Price} kr)
-            </p>
-            <p className="text-xs">
-              <span className="font-bold">Sidotillbehör:</span> {o.Side?.Name} (
-              {o.Side?.Price} kr)
-            </p>
-            <p className="text-xs">
-              <span className="font-bold">Cocktail:</span>{" "}
-              {o.Cocktail?.CocktailName} ({o.Cocktail?.Price} kr)
-            </p>
-            <h3 className="">{calculateOrderSum(o).toFixed(2)} kr</h3>
+          <div className="flex flex-col grow mr-[30px] justify-between">
+            <div className="bg-yellow-400">
+              <div className="flex justify-between">
+                <h4>{o.Meal.title}</h4>
+                <span>{o.Meal.price} kr</span>
+              </div>
+
+              <p>Bortvalt:</p>
+
+              <div className="flex justify-between">
+                <p className="font-bold">{o.Protein?.Name}</p>
+                <span>{o.Protein?.Price} kr</span>
+              </div>
+
+              <div className="flex justify-between">
+                <p className="font-bold">{o.Side?.Name}</p>
+                <span>{o.Side?.Price} kr</span>
+              </div>
+            </div>
+
+            <div className="bg-yellow-100">
+              <div className="flex justify-between">
+                <h4 className="font-bold">{o.Cocktail?.CocktailName}</h4>
+                <span>{o.Cocktail?.Price} kr</span>
+              </div>
+              <div className="flex justify-end">
+                <h3>{calculateOrderSum(o).toFixed(2)} kr</h3>
+              </div>
+            </div>
           </div>
         </div>
         <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
