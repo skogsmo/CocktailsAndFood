@@ -1,6 +1,6 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
-import { Ingredient, Meal } from "../orderTypes";
+import { Meal } from "../orderTypes";
 
 export const Menu = () => {
     const [meals, setMeals] = useState<Meal[]>([]);
