@@ -8,7 +8,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
     to?: string;
     yellow?: boolean;
     small?: boolean;
-    restProps?: ButtonProps;
 }
 
 export default function StandardButton({
@@ -34,7 +33,7 @@ export default function StandardButton({
 
     if (to) {
         return (
-            <Link to={to}>
+            <Link to={to} className="w-fit block">
                 <button type={type} className={classes} {...restProps}>
                     {children}
                 </button>
