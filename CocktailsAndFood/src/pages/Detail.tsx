@@ -4,6 +4,7 @@ import { useState } from "react";
 import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
+import IngredientSelector from "../components/IngredientSelector";
 
 const Detail = () => {
     const {dispatch, currentOrder, isOrdersEmpty} = useOrderContext();
@@ -130,7 +131,18 @@ const Detail = () => {
                     </div>
                 </div>
 
+
                 <hr className="border-neutral-300 border-t" />
+                
+                <div className="p-8">
+                    <h5 className="mb-5">Anpassa ingredienser</h5>
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-8">
+                        <IngredientSelector />
+                    </div>
+                </div>
+
+                <hr className="border-neutral-300 border-t" />
+
                 <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
                     <StandardButton to={"/menu"}>Avbryt</StandardButton>
                     <StandardButton to={"/drinkselection"} yellow>

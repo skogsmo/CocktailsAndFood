@@ -4,7 +4,13 @@ export type Meal = {
   imageUrl: string;
   description: string;
   price: number;
+  ingredients: Ingredient[];
 };
+
+export type Ingredient = {
+  Name: string;
+  IsIncluded: boolean; 
+}
 
 export type Cocktail = {
   CocktailName: string;
