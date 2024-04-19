@@ -113,6 +113,9 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
             order.Cocktail?.CocktailName
         )
     );
+
+    // console.log(state.orders);
+    
   }, [state.orders]);
 
   const currentOrder = state.orders[state.orders.length - 1];
