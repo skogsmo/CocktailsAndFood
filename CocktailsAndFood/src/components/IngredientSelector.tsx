@@ -12,7 +12,7 @@ export default function IngredientSelector() {
                 ingredients: currentOrder.Meal.ingredients.map((i) =>
                     i.Name === e.target.value
                         ? { ...i, IsIncluded: !i.IsIncluded }
-                        : i
+                        : { ...i }
                 ),
             },
         };
