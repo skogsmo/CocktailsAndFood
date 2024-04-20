@@ -102,29 +102,27 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         console.log(
-            "orders: " +
-                state.orders
-                    .map(
-                        (order) =>
-                            "\n  order " +
-                            order.OrderId +
-                            "\n    meal: " +
-                            order.Meal.title +
-                            "\n    protein: " +
-                            order.Protein?.Name +
-                            "\n    side: " +
-                            order.Side?.Name +
-                            "\n    cocktail: " +
-                            order.Cocktail?.CocktailName +
-                            (order.Meal.ingredients.some((i) => !i.IsIncluded)
-                                ? "\n    excluded ingredients: " +
-                                  order.Meal.ingredients
-                                      .filter((i) => !i.IsIncluded)
-                                      .map((i) => "\n      " + i.Name)
-                                      .join("")
-                                : "")
-                    )
-                    .join("")
+            "orders: ",
+            ...state.orders.map(
+                (order) =>
+                    "\n  order " +
+                    order.OrderId +
+                    "\n    meal: " +
+                    order.Meal.title +
+                    "\n    protein: " +
+                    order.Protein?.Name +
+                    "\n    side: " +
+                    order.Side?.Name +
+                    "\n    cocktail: " +
+                    order.Cocktail?.CocktailName +
+                    (order.Meal.ingredients.some((i) => !i.IsIncluded)
+                        ? "\n    excluded ingredients: " +
+                          order.Meal.ingredients
+                              .filter((i) => !i.IsIncluded)
+                              .map((i) => "\n      " + i.Name)
+                              .join("")
+                        : "")
+            )
         );
     }, [state.orders]);
 
