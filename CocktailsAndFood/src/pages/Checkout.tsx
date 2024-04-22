@@ -41,37 +41,42 @@ export const Checkout = () => {
           </div>
 
           <div className="flex flex-col grow mr-[30px] justify-between">
-            <div className="bg-yellow-400">
+            <div>
               <div className="flex justify-between">
-                <h4>{o.Meal.title}</h4>
-                <span>{o.Meal.price} kr</span>
+                <h5>{o.Meal.title}</h5>
+                <span className="font-bold">{o.Meal.price} kr</span>
               </div>
 
-              <p>Bortvalt:</p>
+              <p className="font-bold py-[5px]">Bortvalt:</p>
 
               <div className="flex justify-between">
-                <p className="font-bold">{o.Protein?.Name}</p>
+                <p>{o.Protein?.Name}</p>
                 <span>{o.Protein?.Price} kr</span>
               </div>
 
               <div className="flex justify-between">
-                <p className="font-bold">{o.Side?.Name}</p>
+                <p>{o.Side?.Name}</p>
                 <span>{o.Side?.Price} kr</span>
               </div>
             </div>
 
-            <div className="bg-yellow-100">
+            <div>
               <div className="flex justify-between">
-                <h4 className="font-bold">{o.Cocktail?.CocktailName}</h4>
-                <span>{o.Cocktail?.Price} kr</span>
+                <h5 className="font-bold pb-[20px]">
+                  {o.Cocktail?.CocktailName}
+                </h5>
+                <span className="font-bold">{o.Cocktail?.Price} kr</span>
               </div>
               <div className="flex justify-end">
-                <h3>{calculateOrderSum(o).toFixed(2)} kr</h3>
+                <h4>
+                  <span className="pr-[10px]">Pris:</span>{" "}
+                  {calculateOrderSum(o).toFixed(2)} kr
+                </h4>
               </div>
             </div>
           </div>
         </div>
-        <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
+        <hr className="border-neutral-300 border-t mb-[35px]" />
       </li>
     );
   });
@@ -87,11 +92,14 @@ export const Checkout = () => {
       <h2 className="mb-[50px] uppercase">Din Varukorg</h2>
       <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
         <ul>{mappedOrders}</ul>
-        <p className="text-xl font-bold">
-          Totalt: <span className="text-end">{totalPrice} kr</span>
-        </p>
-        <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
-        <div className="flex justify-between ">
+        <div className="flex justify-end">
+          <h3 className="text-xl font-bold px-[15px]">
+            <span className="pr-[10px]">Totalt: </span>
+            {totalPrice} kr
+          </h3>
+        </div>
+        <hr className="border-neutral-300 border-t mt-[35px] mb-[35px]" />
+        <div className="flex justify-between mb-[35px] mx-[35px]">
           <StandardButton to="/menu">Beställa mer</StandardButton>
 
           <StandardButton onClick={handleClick} yellow={true}>
