@@ -8,6 +8,7 @@ import { DrinkSelection } from "./pages/DrinkSelection";
 import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
+import { ButtonToCart } from "./components/ButtonToCart";
 
 export type CartModifiers = {
     createOrder: (meal: Meal) => void;
@@ -18,15 +19,17 @@ export type CartModifiers = {
 
 function App() {
     return (
-        <Routes>
-            <Route path="/*" element={<NotFound />} />
-            <Route path="/" element={<Welcome />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/drinklist" element={<DrinkList />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/detail" element={<Detail />} />
-            <Route path="/drinkselection" element={<DrinkSelection />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/*" element={<NotFound />} />
+                <Route path="/" element={<Welcome />} />
+                <Route path="/menu" element={<><Menu /><ButtonToCart /></>} />
+                <Route path="/drinklist" element={<><DrinkList /><ButtonToCart /></>} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/detail" element={<><Detail /><ButtonToCart /></>} />
+                <Route path="/drinkselection" element={<><DrinkSelection /><ButtonToCart /></>} />
+            </Routes>
+        </>
     );
 }
 

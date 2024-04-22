@@ -91,7 +91,7 @@ export const Checkout = () => {
   );
 };
 
-const calculateOrderSum = (order: Order): number => {
+export const calculateOrderSum = (order: Order): number => {
   let sum = 0;
   sum += order.Meal.price;
   sum += order.Protein?.Price ?? 0;
