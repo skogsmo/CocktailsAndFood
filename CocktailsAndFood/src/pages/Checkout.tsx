@@ -1,6 +1,7 @@
 import { Order } from "../orderTypes";
 import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
+import { CancelOrderBar } from "../components/CancelOrderBar";
 
 export const Checkout = () => {
   const { state, dispatch } = useOrderContext();
@@ -97,26 +98,29 @@ export const Checkout = () => {
   };
 
   return (
-    <div className="main-wrapper">
-      <h2 className="mb-[50px] uppercase">Din Varukorg</h2>
-      <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
-        <ul>{mappedOrders}</ul>
-        <div className="flex justify-end">
-          <h3 className="text-xl font-bold px-[15px]">
-            <span className="pr-[10px]">Totalt: </span>
-            {totalPrice} kr
-          </h3>
-        </div>
-        <hr className="border-neutral-300 border-t mt-[35px] mb-[35px]" />
-        <div className="flex justify-between mb-[35px] mx-[35px]">
-          <StandardButton to="/menu">Beställa mer</StandardButton>
+    <>
+      <div className="main-wrapper">
+        <h2 className="mb-[50px] uppercase">Din Varukorg</h2>
+        <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
+          <ul>{mappedOrders}</ul>
+          <div className="flex justify-end">
+            <h3 className="text-xl font-bold px-[15px]">
+              <span className="pr-[10px]">Totalt: </span>
+              {totalPrice} kr
+            </h3>
+          </div>
+          <hr className="border-neutral-300 border-t mt-[35px] mb-[35px]" />
+          <div className="flex justify-between mb-[35px] mx-[35px]">
+            <StandardButton to="/menu">Beställa mer</StandardButton>
 
-          <StandardButton onClick={handleClick} yellow={true}>
-            Slutför order
-          </StandardButton>
+            <StandardButton onClick={handleClick} yellow={true}>
+              Slutför order
+            </StandardButton>
+          </div>
         </div>
       </div>
-    </div>
+      <CancelOrderBar />
+    </>
   );
 };
 
