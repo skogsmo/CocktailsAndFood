@@ -1,17 +1,32 @@
 import React, {
+<<<<<<< HEAD
   ReactNode,
   createContext,
   useContext,
   useEffect,
   useReducer,
+=======
+    ReactNode,
+    createContext,
+    useContext,
+    useEffect,
+    useReducer,
+>>>>>>> bdc1e4931b1d9f803b13d0d3ab76e47d897f8983
 } from "react";
 import { Meal, Order } from "../orderTypes";
 
 export type OrderContextType = {
+<<<<<<< HEAD
   currentOrder: Order;
   isOrdersEmpty: boolean;
   state: OrderState;
   dispatch: React.Dispatch<Action>;
+=======
+    currentOrder: Order;
+    isOrdersEmpty: boolean;
+    state: OrderState;
+    dispatch: React.Dispatch<Action>;
+>>>>>>> bdc1e4931b1d9f803b13d0d3ab76e47d897f8983
 };
 
 interface OrderState {
