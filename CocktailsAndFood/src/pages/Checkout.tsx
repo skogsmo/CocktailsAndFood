@@ -47,7 +47,16 @@ export const Checkout = () => {
                 <span className="font-bold">{o.Meal.price} kr</span>
               </div>
 
-              <p className="font-bold py-[5px]">Bortvalt:</p>
+              <p className="font-bold py-[5px]">
+                Bortvalt:
+                {o.Meal.ingredients.map((i) => {
+                  return !i.IsIncluded ? (
+                    <span className="font-normal pl-[3px]">{i.Name}</span>
+                  ) : (
+                    ""
+                  );
+                })}
+              </p>
 
               <div className="flex justify-between">
                 <p>{o.Protein?.Name}</p>
