@@ -9,20 +9,11 @@ export const Checkout = () => {
     0
   );
 
-  state.orders.forEach((order) => {
-    if (order.Cocktail === undefined) {
-      dispatch({
-        type: ActionType.REMOVE_ORDER,
-        payload: order.OrderId,
-      });
-    }
-  });
-
   const mappedOrders = state.orders.map((o) => {
     return (
       <li key={o.OrderId}>
-        <div className="flex">
-          <div className="w-[90px] pt-[50px]">
+        <div className="flex flex-row gap-[30px] pt-[50px] pb-[35px]">
+          <div className="">
             <button
               onClick={() =>
                 dispatch({
@@ -30,36 +21,71 @@ export const Checkout = () => {
                   payload: o.OrderId,
                 })
               }
-              className="border border-solid md:rounded-full p-1 w-[30px]"
+              className="border border-solid rounded-full p-1 w-[30px] ml-[30px]"
             >
               X
             </button>
           </div>
-          <div className="pt-[50px]">
-            <h4>
-              {o.Meal.title} ({o.Meal.price} kr)
-            </h4>
-            <p className="text-xs font-bold pt-[15px]">{o.Meal.description}</p>
-            <p className="text-xs pt-[15px]">
-              <span className="font-bold">Protein:</span> {o.Protein?.Name} (
-              {o.Protein?.Price} kr)
-            </p>
-            <p className="text-xs">
-              <span className="font-bold">Sidotillbehör:</span> {o.Side?.Name} (
-              {o.Side?.Price} kr)
-            </p>
-            <p className="text-xs">
-              <span className="font-bold">Cocktail:</span>{" "}
-              {o.Cocktail?.CocktailName} ({o.Cocktail?.Price} kr)
-            </p>
+
+          <div className="flex flex-row gap-[20px] shrink-0">
+            <img
+              className="object-cover size-[200px] rounded-[25px]"
+              src={o.Meal.imageUrl}
+              alt="meal image"
+            />
+            <img
+              className="object-cover size-[200px] rounded-[25px]"
+              src={o.Cocktail?.ImgUrl}
+              alt="meal image"
+            />
           </div>
-          <div className="w-[250px]">
-            <h3 className="pr-[30px] pl-[60px] pt-[50px]">
-              {calculateOrderSum(o).toFixed(2)} kr
-            </h3>
+
+          <div className="flex flex-col grow mr-[30px] justify-between">
+            <div>
+              <div className="flex justify-between">
+                <h5>{o.Meal.title}</h5>
+                <span className="font-bold">{o.Meal.price} kr</span>
+              </div>
+
+              <p className="font-bold py-[5px]">
+                Bortvalt:
+                {o.Meal.ingredients.map((i) => {
+                  return !i.IsIncluded ? (
+                    <span className="font-normal pl-[3px]">{i.Name}</span>
+                  ) : (
+                    ""
+                  );
+                })}
+              </p>
+
+              <div className="flex justify-between">
+                <p>{o.Protein?.Name}</p>
+                <span>{o.Protein?.Price} kr</span>
+              </div>
+
+              <div className="flex justify-between">
+                <p>{o.Side?.Name}</p>
+                <span>{o.Side?.Price} kr</span>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between">
+                <h5 className="font-bold pb-[20px]">
+                  {o.Cocktail?.CocktailName}
+                </h5>
+                <span className="font-bold">{o.Cocktail?.Price} kr</span>
+              </div>
+              <div className="flex justify-end">
+                <h4>
+                  <span className="pr-[10px]">Pris:</span>{" "}
+                  {calculateOrderSum(o).toFixed(2)} kr
+                </h4>
+              </div>
+            </div>
           </div>
         </div>
-        <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
+        <hr className="border-neutral-300 border-t mb-[35px]" />
       </li>
     );
   });
@@ -72,14 +98,17 @@ export const Checkout = () => {
 
   return (
     <div className="main-wrapper">
-      <h2 className="mb-[50px]">Din Varukorg</h2>
-      <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big p-[30px]">
+      <h2 className="mb-[50px] uppercase">Din Varukorg</h2>
+      <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
         <ul>{mappedOrders}</ul>
-        <p className="text-xl font-bold">
-          Totalt: <span className="text-end">{totalPrice} kr</span>
-        </p>
-        <hr className="border-neutral-300 border-t mt-[50px] mb-[35px]" />
-        <div className="flex justify-between ">
+        <div className="flex justify-end">
+          <h3 className="text-xl font-bold px-[15px]">
+            <span className="pr-[10px]">Totalt: </span>
+            {totalPrice} kr
+          </h3>
+        </div>
+        <hr className="border-neutral-300 border-t mt-[35px] mb-[35px]" />
+        <div className="flex justify-between mb-[35px] mx-[35px]">
           <StandardButton to="/menu">Beställa mer</StandardButton>
 
           <StandardButton onClick={handleClick} yellow={true}>
