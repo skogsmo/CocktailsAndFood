@@ -8,7 +8,7 @@ import { DrinkSelection } from "./pages/DrinkSelection";
 import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
-import { ButtonToCart } from "./components/ButtonToCart";
+import Layout from "./layout/Layout";
 
 export type CartModifiers = {
     createOrder: (meal: Meal) => void;
@@ -21,13 +21,48 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/*" element={<NotFound />} />
                 <Route path="/" element={<Welcome />} />
-                <Route path="/menu" element={<><Menu /><ButtonToCart /></>} />
-                <Route path="/drinklist" element={<><DrinkList /><ButtonToCart /></>} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/detail" element={<><Detail /><ButtonToCart /></>} />
-                <Route path="/drinkselection" element={<><DrinkSelection /><ButtonToCart /></>} />
+                <Route
+                    path="/menu"
+                    element={
+                        <Layout cartButton>
+                            <Menu />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/detail"
+                    element={
+                        <Layout cartButton cancelOrderBar>
+                            <Detail />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/drinkselection"
+                    element={
+                        <Layout cartButton cancelOrderBar>
+                            <DrinkSelection />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/drinklist"
+                    element={
+                        <Layout cartButton cancelOrderBar>
+                            <DrinkList />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/checkout"
+                    element={
+                        <Layout cancelOrderBar>
+                            <Checkout />
+                        </Layout>
+                    }
+                />
+                <Route path="/*" element={<NotFound />} />
             </Routes>
         </>
     );
