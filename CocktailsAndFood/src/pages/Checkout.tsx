@@ -20,6 +20,7 @@ export const Checkout = () => {
         });
       }
     });
+    // Code credit end
   }, []);
 
   const mappedOrders = state.orders.map((o) => {
