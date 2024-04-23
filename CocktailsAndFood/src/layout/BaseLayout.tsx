@@ -20,13 +20,13 @@ const LayoutContext = createContext<{
 
 export const useCartButton = (showCartButton: boolean) => {
     const { setShowCartButton, setDisableLayout } = useContext(LayoutContext);
-    setDisableLayout(false);
+    if (showCartButton) setDisableLayout(false);
     setShowCartButton(showCartButton);
 };
 
 export const useCancelOrderBar = (showCancelOrderBar: boolean) => {
     const { setShowCancelOrderBar, setDisableLayout } = useContext(LayoutContext);
-    setDisableLayout(false);
+    if (showCancelOrderBar) setDisableLayout(false);
     setShowCancelOrderBar(showCancelOrderBar);
 };
 

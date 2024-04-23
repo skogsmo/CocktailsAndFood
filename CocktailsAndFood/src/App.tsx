@@ -3,7 +3,6 @@ import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
 import Detail from "./pages/Detail";
-import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
 import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
@@ -13,13 +12,6 @@ import CancelOrderBarLayout from "./layout/CancelOrderBarLayout";
 import CartButtonLayout from "./layout/CartButtonLayout";
 import Layout from "./layout/Layout";
 import { useState } from "react";
-
-export type CartModifiers = {
-    createOrder: (meal: Meal) => void;
-    updateOrder: (updatedOrder: Order) => void;
-    removeCurrentOrder: () => void;
-    removeOrder: (orderId: number) => void;
-};
 
 function App() {
     const [layoutParadigm] = useState(1);
