@@ -1,99 +1,44 @@
 import { ButtonToCart } from "../components/ButtonToCart";
 import { CancelOrderBar } from "../components/CancelOrderBar";
 import {
+    Dispatch,
     ReactNode,
     createContext,
     useContext,
-    useEffect,
-    useReducer,
+    useState,
 } from "react";
 
-type LayoutState = {
-    showCancelOrderBar: boolean;
-    showCartButton: boolean;
-    disableLayout: boolean;
+const LayoutContext = createContext<{
+    setShowCartButton: Dispatch<React.SetStateAction<boolean>>;
+    setShowCancelOrderBar: Dispatch<React.SetStateAction<boolean>>;
+    setDisableLayout: Dispatch<React.SetStateAction<boolean>>;
+}>({
+    setShowCartButton: () => {},
+    setShowCancelOrderBar: () => {},
+    setDisableLayout: () => {},
+});
+
+export const useCartButton = (showCartButton: boolean) => {
+    const { setShowCartButton, setDisableLayout } = useContext(LayoutContext);
+    setDisableLayout(false);
+    setShowCartButton(showCartButton);
 };
 
-const layoutReducer = (state: LayoutState, action: string): LayoutState => {
-    switch (action) {
-        case "enableCartButton":
-            return {
-                ...state,
-                showCartButton: true,
-                disableLayout: false,
-            };
-        case "disableCartButton":
-            return {
-                ...state,
-                showCartButton: false,
-                disableLayout: false,
-            };
-        case "enableCancelOrderBar":
-            return {
-                ...state,
-                showCancelOrderBar: true,
-                disableLayout: false,
-            };
-        case "disableCancelOrderBar":
-            return {
-                ...state,
-                showCancelOrderBar: false,
-                disableLayout: false,
-            };
-        case "enableLayout":
-            return {
-                ...state,
-                disableLayout: false,
-            };
-        case "disableLayout":
-            return {
-                ...state,
-                disableLayout: true,
-            };
-        default:
-            console.warn("called layoutReducer with unknown action: " + action);
-            return state;
-    }
-};
-
-export const useCartButton = (useCartButton: boolean) => {
-    const { dispatch } = useContext(LayoutContext);
-    useEffect(() => {
-        dispatch(useCartButton ? "enableCartButton" : "disableCartButton");
-    }, []);
-};
-
-export const useCancelOrderBar = (useCancelOrderBar: boolean) => {
-    const { dispatch } = useContext(LayoutContext);
-    useEffect(() => {
-        dispatch(
-            useCancelOrderBar ? "enableCancelOrderBar" : "disableCancelOrderBar"
-        );
-    }, []);
+export const useCancelOrderBar = (showCancelOrderBar: boolean) => {
+    const { setShowCancelOrderBar, setDisableLayout } = useContext(LayoutContext);
+    setDisableLayout(false);
+    setShowCancelOrderBar(showCancelOrderBar);
 };
 
 export const useLayout = (useLayout: boolean) => {
-    const { dispatch } = useContext(LayoutContext);
-    useEffect(() => {
-        dispatch(useLayout ? "enableLayout" : "disableLayout");
-    }, []);
+    const { setDisableLayout } = useContext(LayoutContext);
+    setDisableLayout(!useLayout);
 };
 
-const LayoutContext = createContext<{ dispatch: React.Dispatch<string> }>({
-    dispatch: () => {
-        console.warn(
-            "Called dispatch in BaseLayout without a LayoutContext.Provider"
-        );
-    },
-});
-
 export default function BaseLayout({ children }: { children: ReactNode }) {
-    const [{ showCartButton, showCancelOrderBar, disableLayout }, dispatch] =
-        useReducer(layoutReducer, {
-            showCancelOrderBar: false,
-            showCartButton: false,
-            disableLayout: true,
-        });
+    const [showCartButton, setShowCartButton] = useState(false);
+    const [showCancelOrderBar, setShowCancelOrderBar] = useState(false);
+    const [disableLayout, setDisableLayout] = useState(true);
 
     const output = disableLayout ? (
         children
@@ -113,7 +58,12 @@ export default function BaseLayout({ children }: { children: ReactNode }) {
     );
 
     return (
-        <LayoutContext.Provider value={{ dispatch }}>
+        <LayoutContext.Provider
+            value={{
+                setShowCartButton,
+                setShowCancelOrderBar,
+                setDisableLayout,
+            }}>
             {output}
         </LayoutContext.Provider>
     );
