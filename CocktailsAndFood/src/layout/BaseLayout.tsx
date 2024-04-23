@@ -9,8 +9,8 @@ import {
 } from "react";
 
 type LayoutState = {
-    cancelOrderBar: boolean;
-    cartButton: boolean;
+    showCancelOrderBar: boolean;
+    showCartButton: boolean;
     disableLayout: boolean;
 };
 
@@ -19,25 +19,25 @@ const layoutReducer = (state: LayoutState, action: string): LayoutState => {
         case "enableCartButton":
             return {
                 ...state,
-                cartButton: true,
+                showCartButton: true,
                 disableLayout: false,
             };
         case "disableCartButton":
             return {
                 ...state,
-                cartButton: false,
+                showCartButton: false,
                 disableLayout: false,
             };
         case "enableCancelOrderBar":
             return {
                 ...state,
-                cancelOrderBar: true,
+                showCancelOrderBar: true,
                 disableLayout: false,
             };
         case "disableCancelOrderBar":
             return {
                 ...state,
-                cancelOrderBar: false,
+                showCancelOrderBar: false,
                 disableLayout: false,
             };
         case "enableLayout":
@@ -88,10 +88,10 @@ const LayoutContext = createContext<{ dispatch: React.Dispatch<string> }>({
 });
 
 export default function BaseLayout({ children }: { children: ReactNode }) {
-    const [{ cartButton, cancelOrderBar, disableLayout }, dispatch] =
+    const [{ showCartButton, showCancelOrderBar, disableLayout }, dispatch] =
         useReducer(layoutReducer, {
-            cancelOrderBar: false,
-            cartButton: false,
+            showCancelOrderBar: false,
+            showCartButton: false,
             disableLayout: true,
         });
 
@@ -103,11 +103,11 @@ export default function BaseLayout({ children }: { children: ReactNode }) {
                 <div></div>
                 <div className="w-full">{children}</div>
                 <div className="sticky top-16 h-fit w-fit flex justify-start">
-                    {cartButton && <ButtonToCart />}
+                    {showCartButton && <ButtonToCart />}
                 </div>
             </div>
             <div className="sticky bottom-0">
-                {cancelOrderBar && <CancelOrderBar />}
+                {showCancelOrderBar && <CancelOrderBar />}
             </div>
         </div>
     );
