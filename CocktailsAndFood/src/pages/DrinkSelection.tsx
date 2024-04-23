@@ -7,8 +7,12 @@ import {
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/Context";
+import { useCancelOrderBar, useCartButton } from "../layout/BaseLayout";
 
 export const DrinkSelection = () => {
+    useCartButton(true);
+    useCancelOrderBar(true);
+    
     const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;

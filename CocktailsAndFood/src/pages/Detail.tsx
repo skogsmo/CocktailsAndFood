@@ -5,9 +5,13 @@ import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
 import IngredientSelector from "../components/IngredientSelector";
+import { useCancelOrderBar, useCartButton } from "../layout/BaseLayout";
 
 const Detail = () => {
-    const {dispatch, currentOrder, isOrdersEmpty} = useOrderContext();
+    useCartButton(true);
+    useCancelOrderBar(true);
+
+    const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -16,7 +20,7 @@ const Detail = () => {
             type: ActionType.UPDATE_ORDER,
             payload: updatedOrder,
         });
-    }
+    };
 
     const [sideOptions] = useState<Extra[]>([
         {
@@ -131,9 +135,8 @@ const Detail = () => {
                     </div>
                 </div>
 
-
                 <hr className="border-neutral-300 border-t" />
-                
+
                 <div className="p-8">
                     <h5 className="mb-5">Anpassa ingredienser</h5>
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-8">

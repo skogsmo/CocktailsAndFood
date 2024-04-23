@@ -1,6 +1,9 @@
 import StandardButton from "../components/StandardButton";
+import { useLayout } from "../layout/BaseLayout";
 
 export const Welcome = () => {
+    useLayout(false);
+
     return (
         <>
             <div className="min-h-screen flex flex-col bg-[url('/img/Bakgrund.jpeg')] bg-cover bg-repeat">

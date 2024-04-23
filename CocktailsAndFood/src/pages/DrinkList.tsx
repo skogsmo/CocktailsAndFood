@@ -2,8 +2,12 @@ import { DrinkCard } from "../components/DrinkComponent";
 import { Navigate } from "react-router-dom";
 import { useOrderContext } from "../context/Context";
 import StandardButton from "../components/StandardButton";
+import { useCancelOrderBar, useCartButton } from "../layout/BaseLayout";
 
 export const DrinkList = () => {
+    useCartButton(true);
+    useCancelOrderBar(true);
+    
     const { isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;

@@ -1,8 +1,12 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
+import { useCancelOrderBar, useCartButton } from "../layout/BaseLayout";
 
 export const Menu = () => {
+    useCartButton(true);
+    useCancelOrderBar(true);
+
     const [meals, setMeals] = useState<Meal[]>([]);
     useEffect(() => {
         const fetchMeals = async () => {
