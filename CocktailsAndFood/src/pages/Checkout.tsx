@@ -21,7 +21,7 @@ export const Checkout = () => {
       }
     });
     // Code credit end
-  }, []);
+  }, [dispatch, state.orders]);
 
   const mappedOrders = state.orders.map((o) => {
     return (
