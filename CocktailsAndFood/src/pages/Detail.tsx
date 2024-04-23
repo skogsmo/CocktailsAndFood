@@ -5,7 +5,6 @@ import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
 import IngredientSelector from "../components/IngredientSelector";
-import { CancelOrderBar } from "../components/CancelOrderBar";
 
 const Detail = () => {
   const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
@@ -145,7 +144,6 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <CancelOrderBar />
     </>
   );
 };

@@ -1,7 +1,6 @@
 import { MenuCard } from "../components/MenuCard";
 import { useEffect, useState } from "react";
 import { Meal } from "../orderTypes";
-import { CancelOrderBar } from "../components/CancelOrderBar";
 
 export const Menu = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -56,7 +55,6 @@ export const Menu = () => {
           </ul>
         </div>
       </div>
-      <CancelOrderBar />
     </>
   );
 };

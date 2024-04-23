@@ -1,7 +1,7 @@
 import { Order } from "../orderTypes";
 import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
-import { CancelOrderBar } from "../components/CancelOrderBar";
+import { useEffect } from "react";
 
 export const Checkout = () => {
   const { state, dispatch } = useOrderContext();
@@ -9,6 +9,18 @@ export const Checkout = () => {
     (total, order) => total + calculateOrderSum(order),
     0
   );
+
+  useEffect(() => {
+    // Code credit: Claes Wikman et al.
+    state.orders.forEach((order) => {
+      if (order.Cocktail === undefined) {
+        dispatch({
+          type: ActionType.REMOVE_ORDER,
+          payload: order.OrderId,
+        });
+      }
+    });
+  }, []);
 
   const mappedOrders = state.orders.map((o) => {
     return (
@@ -119,12 +131,11 @@ export const Checkout = () => {
           </div>
         </div>
       </div>
-      <CancelOrderBar />
     </>
   );
 };
 
-const calculateOrderSum = (order: Order): number => {
+export const calculateOrderSum = (order: Order): number => {
   let sum = 0;
   sum += order.Meal.price;
   sum += order.Protein?.Price ?? 0;

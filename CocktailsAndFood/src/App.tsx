@@ -3,29 +3,59 @@ import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
 import Detail from "./pages/Detail";
-import { Meal, Order } from "./orderTypes";
 import { DrinkSelection } from "./pages/DrinkSelection";
 import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
+import StandardLayout from "./layout/StandardLayout";
 
-export type CartModifiers = {
-    createOrder: (meal: Meal) => void;
-    updateOrder: (updatedOrder: Order) => void;
-    removeCurrentOrder: () => void;
-    removeOrder: (orderId: number) => void;
-};
+export type CartModifiers = {};
 
 function App() {
     return (
         <Routes>
-            <Route path="/*" element={<NotFound />} />
             <Route path="/" element={<Welcome />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/drinklist" element={<DrinkList />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/detail" element={<Detail />} />
-            <Route path="/drinkselection" element={<DrinkSelection />} />
+            <Route
+                path="/menu"
+                element={
+                    <StandardLayout cartButton cancelOrderBar>
+                        <Menu />
+                    </StandardLayout>
+                }
+            />
+            <Route
+                path="/detail"
+                element={
+                    <StandardLayout cartButton cancelOrderBar>
+                        <Detail />
+                    </StandardLayout>
+                }
+            />
+            <Route
+                path="/drinkselection"
+                element={
+                    <StandardLayout cartButton cancelOrderBar>
+                        <DrinkSelection />
+                    </StandardLayout>
+                }
+            />
+            <Route
+                path="/drinklist"
+                element={
+                    <StandardLayout cartButton cancelOrderBar>
+                        <DrinkList />
+                    </StandardLayout>
+                }
+            />
+            <Route
+                path="/checkout"
+                element={
+                    <StandardLayout cancelOrderBar>
+                        <Checkout />
+                    </StandardLayout>
+                }
+            />
+            <Route path="/*" element={<NotFound />} />
         </Routes>
     );
 }

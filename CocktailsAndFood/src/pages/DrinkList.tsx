@@ -2,7 +2,6 @@ import { DrinkCard } from "../components/DrinkComponent";
 import { Navigate } from "react-router-dom";
 import { useOrderContext } from "../context/Context";
 import StandardButton from "../components/StandardButton";
-import { CancelOrderBar } from "../components/CancelOrderBar";
 
 export const DrinkList = () => {
   const { isOrdersEmpty } = useOrderContext();
@@ -29,7 +28,6 @@ export const DrinkList = () => {
           <StandardButton to="/drinkselection">Tillbaka</StandardButton>
         </div>
       </div>
-      <CancelOrderBar />
     </>
   );
 };

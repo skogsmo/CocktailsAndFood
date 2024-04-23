@@ -7,7 +7,6 @@ import {
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/Context";
-import { CancelOrderBar } from "../components/CancelOrderBar";
 
 export const DrinkSelection = () => {
   const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
@@ -102,7 +101,6 @@ export const DrinkSelection = () => {
           )}
         </div>
       </div>
-      <CancelOrderBar />
     </>
   );
 };
