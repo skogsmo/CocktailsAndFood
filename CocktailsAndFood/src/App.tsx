@@ -8,7 +8,9 @@ import { DrinkSelection } from "./pages/DrinkSelection";
 import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
-import Layout from "./layout/Layout";
+import CancelOrderBarLayout from "./layout/CancelOrderBarLayout";
+import CartButtonLayout from "./layout/CartButtonLayout";
+// import Layout from "./layout/Layout";
 
 export type CartModifiers = {
     createOrder: (meal: Meal) => void;
@@ -21,6 +23,23 @@ function App() {
     return (
         <>
             <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route element={<CancelOrderBarLayout />}>
+                    <Route element={<CartButtonLayout />}>
+                        <Route path="/menu" element={<Menu />} />
+                        <Route path="/detail" element={<Detail />} />
+                        <Route
+                            path="/drinkselection"
+                            element={<DrinkSelection />}
+                        />
+                        <Route path="/drinklist" element={<DrinkList />} />
+                    </Route>
+                    <Route path="/checkout" element={<Checkout />} />
+                </Route>
+                <Route path="/*" element={<NotFound />} />
+            </Routes>
+
+            {/* <Routes>
                 <Route path="/" element={<Welcome />} />
                 <Route
                     path="/menu"
@@ -63,7 +82,7 @@ function App() {
                     }
                 />
                 <Route path="/*" element={<NotFound />} />
-            </Routes>
+            </Routes> */}
         </>
     );
 }
