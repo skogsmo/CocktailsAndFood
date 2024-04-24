@@ -166,7 +166,7 @@ export const Checkout = () => {
                     <BigWhiteBoxSection>
                         <div className="flex justify-between">
                             <StandardButton to="/menu">
-                                Beställa mer
+                                Beställ mer
                             </StandardButton>
 
                             <StandardButton onClick={handleClick} yellow={true}>
