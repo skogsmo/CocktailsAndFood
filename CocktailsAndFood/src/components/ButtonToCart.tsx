@@ -17,7 +17,7 @@ export const ButtonToCart = () => {
                 yellow
                 noFixedWidth
                 to="/checkout"
-                className="">
+                className="shadow-custom-big">
                 <div className="flex items-center gap-4 px-8">
                     <i className="fa-solid fa-cart-shopping text-xl"></i>
                     <span>{totalPrice} kr</span>

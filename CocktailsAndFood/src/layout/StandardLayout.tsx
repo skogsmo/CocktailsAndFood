@@ -13,10 +13,12 @@ export default function StandardLayout({
 }) {
     return (
         <div className="flex flex-col gap-[75px] min-h-screen">
-            <div className="grid grid-cols-[minmax(0,_1fr)_minmax(auto,_1064px)_minmax(0,_1fr)] grow">
+            <div className="grow grid grid-cols-[minmax(0,_1fr)_minmax(auto,_1064px)_minmax(0,_1fr)] pt-[75px]">
                 <div></div>
-                <div className="w-full">{children}</div>
-                <div className="sticky top-8 h-fit w-fit flex justify-start">
+                <div className="max-w-[1064px] md:px-[32px]">
+                    {children}
+                </div>
+                <div className="sticky top-[75px] h-fit w-fit flex justify-start">
                     {cartButton && <ButtonToCart />}
                 </div>
             </div>

@@ -1,10 +1,11 @@
 import { Order } from "../orderTypes";
 import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import BigWhiteBox from "../layout_components/BigWhiteBox";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
+import StandardHeader from "../layout_components/StandardHeader";
 
 export const Checkout = () => {
     const { state, dispatch } = useOrderContext();
@@ -31,7 +32,7 @@ export const Checkout = () => {
             (i) => !i.IsIncluded
         );
         return (
-            <>
+            <Fragment key={o.OrderId}>
                 <BigWhiteBoxSection>
                     <li key={o.OrderId} className="list-none">
                         <div className="flex gap-8">
@@ -44,13 +45,13 @@ export const Checkout = () => {
                                         })
                                     }
                                     className="group size-10 flex items-center justify-center">
-                                    <div className="border border-neutral-300 border-solid rounded-full p-1 size-6 flex items-center justify-center group-hover:bg-neutral-100 group-hover:border-neutral-400">
-                                        <i className="fa-solid fa-xmark text-neutral-600"></i>
+                                    <div className="border-2 border-neutral-300 rounded-full p-1 size-6 flex items-center justify-center group-hover:border-neutral-400">
+                                        <i className="fa-solid fa-xmark text-neutral-500 group-hover:text-neutral-600"></i>
                                     </div>
                                 </button>
                             </div>
 
-                            <div className="flex flex-row gap-[20px] shrink-0">
+                            <div className="flex flex-row gap-4 shrink-0 overflow-hidden">
                                 <img
                                     className="object-cover size-[200px] rounded-[25px]"
                                     src={o.Meal.imageUrl}
@@ -65,51 +66,64 @@ export const Checkout = () => {
 
                             <div className="flex flex-col grow justify-between">
                                 <div>
-                                    <div className="flex justify-between text-lg font-semibold">
-                                        <h6>{o.Meal.title}</h6>
+                                    <div className="flex gap-3 justify-between text-lg font-semibold">
+                                        <h6 className="font-bold">
+                                            {o.Meal.title}
+                                        </h6>
+                                        <div className="h-[20px] border-b-2 border-dotted border-white grow"></div>
                                         <span>{o.Meal.price} kr</span>
                                     </div>
 
-                                    {o.Meal.ingredients.some(
-                                        (i) => !i.IsIncluded
-                                    ) && (
-                                        <p className="font-medium text-sm pr-12">
-                                            Bortvalt:
-                                            {excludedIngredients.map(
-                                                (i, index) => (
-                                                    <span
-                                                        key={i.Name}
-                                                        className="font-normal pl-[3px]">
-                                                        {i.Name +
-                                                            (index !=
-                                                            excludedIngredients.length -
-                                                                1
-                                                                ? ","
-                                                                : "")}
-                                                    </span>
-                                                )
-                                            )}
-                                        </p>
-                                    )}
+                                    <div className="pl-3">
+                                        {o.Meal.ingredients.some(
+                                            (i) => !i.IsIncluded
+                                        ) && (
+                                            <p className="font-semibold text-sm pt-1 pr-12 w-[85%]">
+                                                <span>Bortvalt: </span>
+                                                {excludedIngredients.map(
+                                                    (i, index) => (
+                                                        <span
+                                                            key={i.Name}
+                                                            className="font-medium">
+                                                            {i.Name +
+                                                                (index !=
+                                                                excludedIngredients.length -
+                                                                    1
+                                                                    ? ", "
+                                                                    : "")}
+                                                        </span>
+                                                    )
+                                                )}
+                                            </p>
+                                        )}
 
-                                    <div className="text-base pt-2">
-                                        <div className="flex justify-between">
-                                            <p>{o.Protein?.Name}</p>
-                                            <span>{o.Protein?.Price} kr</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <p>{o.Side?.Name}</p>
-                                            <span>{o.Side?.Price} kr</span>
+                                        <div className="text-base pt-2">
+                                            <div className="flex gap-3 justify-between text-nowrap">
+                                                <p>{o.Protein?.Name}</p>
+                                                <div className="h-[17px] border-b-2 border-dotted border-white grow"></div>
+                                                <span>
+                                                    {o.Protein?.Price} kr
+                                                </span>
+                                            </div>
+                                            <div className="flex gap-3 justify-between text-nowrap">
+                                                <p>{o.Side?.Name}</p>
+                                                <div className="h-[17px] border-b-2 border-dotted border-white grow"></div>
+                                                <span>{o.Side?.Price} kr</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="text-lg font-semibold flex justify-between pt-2">
-                                        <h6>{o.Cocktail?.CocktailName}</h6>
+
+                                    <div className="text-lg font-semibold flex gap-3 justify-between text-nowrap pt-2">
+                                        <h6 className="font-bold">
+                                            {o.Cocktail?.CocktailName}
+                                        </h6>
+                                        <div className="h-[20px] border-b-2 border-dotted border-white grow"></div>
                                         <span>{o.Cocktail?.Price} kr</span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <div className="flex justify-end leading-none -mb-[2px]">
+                                    <div className="flex gap-2 justify-end leading-none mt-2 -mb-[6px]">
                                         <p className="text-lg font-bold">
                                             <span className="pr-[10px]">
                                                 Pris:
@@ -123,7 +137,7 @@ export const Checkout = () => {
                     </li>
                 </BigWhiteBoxSection>
                 <BigWhiteBoxDivider />
-            </>
+            </Fragment>
         );
     });
 
@@ -136,52 +150,48 @@ export const Checkout = () => {
 
     return (
         <>
-            <div className="main-wrapper">
-                <h2 className="mb-[50px] uppercase">Din Varukorg</h2>
-                {totalPrice > 0 ? (
-                    <BigWhiteBox>
-                        {mappedOrders}
-                        <BigWhiteBoxSection>
-                            <div className="flex justify-end">
-                                <h3 className="text-xl font-bold flex gap-4">
-                                    <span>Totalt: </span>
-                                    <span>{totalPrice} kr</span>
-                                </h3>
-                            </div>
-                        </BigWhiteBoxSection>
-                        <BigWhiteBoxDivider />
-                        <BigWhiteBoxSection>
-                            <div className="flex justify-between">
-                                <StandardButton to="/menu">
-                                    Beställa mer
-                                </StandardButton>
+            <StandardHeader head={"Din Varukorg"} />
+            {totalPrice > 0 ? (
+                <BigWhiteBox>
+                    {mappedOrders}
+                    <BigWhiteBoxSection>
+                        <div className="flex justify-end">
+                            <h3 className="text-xl font-bold flex gap-4">
+                                <span>Totalt: </span>
+                                <span>{totalPrice} kr</span>
+                            </h3>
+                        </div>
+                    </BigWhiteBoxSection>
+                    <BigWhiteBoxDivider />
+                    <BigWhiteBoxSection>
+                        <div className="flex justify-between">
+                            <StandardButton to="/menu">
+                                Beställa mer
+                            </StandardButton>
 
-                                <StandardButton
-                                    onClick={handleClick}
-                                    yellow={true}>
-                                    Slutför order
-                                </StandardButton>
-                            </div>
-                        </BigWhiteBoxSection>
-                    </BigWhiteBox>
-                ) : (
-                    <BigWhiteBox>
-                        <BigWhiteBoxSection>
-                            <div className="text-center text-xl">
-                                Din varukorg är tom
-                            </div>
-                        </BigWhiteBoxSection>
-                        <BigWhiteBoxDivider />
-                        <BigWhiteBoxSection>
-                            <div className="flex justify-center">
-                                <StandardButton to="/menu" yellow>
-                                    Beställ mat
-                                </StandardButton>                               
-                            </div>
-                        </BigWhiteBoxSection>
-                    </BigWhiteBox>
-                )}
-            </div>
+                            <StandardButton onClick={handleClick} yellow={true}>
+                                Slutför order
+                            </StandardButton>
+                        </div>
+                    </BigWhiteBoxSection>
+                </BigWhiteBox>
+            ) : (
+                <BigWhiteBox>
+                    <BigWhiteBoxSection>
+                        <div className="text-center text-xl">
+                            Din varukorg är tom
+                        </div>
+                    </BigWhiteBoxSection>
+                    <BigWhiteBoxDivider />
+                    <BigWhiteBoxSection>
+                        <div className="flex justify-center">
+                            <StandardButton to="/menu" yellow>
+                                Beställ mat
+                            </StandardButton>
+                        </div>
+                    </BigWhiteBoxSection>
+                </BigWhiteBox>
+            )}
         </>
     );
 };
