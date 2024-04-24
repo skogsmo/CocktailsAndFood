@@ -4,9 +4,14 @@ import { useState } from "react";
 import StandardButton from "../components/StandardButton";
 import { ActionType, useOrderContext } from "../context/Context";
 import { Navigate } from "react-router-dom";
+import IngredientSelector from "../components/IngredientSelector";
+import BigWhiteBox from "../layout_components/BigWhiteBox";
+import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
+import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
+import StandardHeader from "../layout_components/StandardHeader";
 
 const Detail = () => {
-    const {dispatch, currentOrder, isOrdersEmpty} = useOrderContext();
+    const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -15,7 +20,7 @@ const Detail = () => {
             type: ActionType.UPDATE_ORDER,
             payload: updatedOrder,
         });
-    }
+    };
 
     const [sideOptions] = useState<Extra[]>([
         {
@@ -73,28 +78,29 @@ const Detail = () => {
     );
 
     return (
-        <div className="main-wrapper">
-            <div className="px-8 md:px-0 text-center flex flex-col gap-5 mb-[50px]">
-                <h2>ANPASSA DIN BESTÄLLNING</h2>
-                <p className="text-lg">
-                    Skapa din perfekta kombination av smaker
-                </p>
-            </div>
-            <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
+        <>
+            <StandardHeader
+                head={"Anpassa din beställning"}
+                subHead={"Skapa din perfekta kombination av smaker."}
+            />
+            <BigWhiteBox>
                 <img
                     className="h-[350px] w-full object-cover"
                     src={currentOrder.Meal.imageUrl}
                     alt={currentOrder.Meal.title}
                 />
-                <div className="px-8 py-12">
+
+                <BigWhiteBoxSection>
                     <h3 className="mb-[10px]">{currentOrder.Meal.title}</h3>
                     <p className="font-semibold mb-[15px]">
                         {currentOrder.Meal.price.toFixed(2)} kr
                     </p>
                     <p>{currentOrder.Meal.description}</p>
-                </div>
-                <hr className="border-neutral-300 border-t" />
-                <div className="p-8">
+                </BigWhiteBoxSection>
+
+                <BigWhiteBoxDivider />
+
+                <BigWhiteBoxSection>
                     <h5 className="mb-5">Val av protein, välj 1 st</h5>
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-8">
                         <RadiobuttonSelector
@@ -108,11 +114,11 @@ const Detail = () => {
                             wrapperClasses="flex justify-between p-4 rounded-xl border-2 border-neutral-300 items-center gap-2 hover:bg-neutral-100 cursor-pointer"
                         />
                     </div>
-                </div>
+                </BigWhiteBoxSection>
 
-                <hr className="border-neutral-300 border-t" />
+                <BigWhiteBoxDivider />
 
-                <div className="p-8">
+                <BigWhiteBoxSection>
                     <h5 className="mb-5">
                         Ris eller sallad för bowl, välj 1 st
                     </h5>
@@ -128,17 +134,29 @@ const Detail = () => {
                             wrapperClasses="flex justify-between p-4 rounded-xl border-2 border-neutral-300 items-center gap-2 hover:bg-neutral-100 cursor-pointer"
                         />
                     </div>
-                </div>
+                </BigWhiteBoxSection>
 
-                <hr className="border-neutral-300 border-t" />
-                <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
-                    <StandardButton to={"/menu"}>Avbryt</StandardButton>
-                    <StandardButton to={"/drinkselection"} yellow>
-                        Nästa steg
-                    </StandardButton>
-                </div>
-            </div>
-        </div>
+                <BigWhiteBoxDivider />
+
+                <BigWhiteBoxSection>
+                    <h5 className="mb-5">Anpassa ingredienser</h5>
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-8">
+                        <IngredientSelector />
+                    </div>
+                </BigWhiteBoxSection>
+
+                <BigWhiteBoxDivider />
+
+                <BigWhiteBoxSection>
+                    <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between">
+                        <StandardButton to={"/menu"}>Avbryt</StandardButton>
+                        <StandardButton to={"/drinkselection"} yellow>
+                            Nästa steg
+                        </StandardButton>
+                    </div>
+                </BigWhiteBoxSection>
+            </BigWhiteBox>
+        </>
     );
 };
 

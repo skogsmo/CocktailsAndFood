@@ -7,6 +7,10 @@ import {
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/Context";
+import StandardHeader from "../layout_components/StandardHeader";
+import BigWhiteBox from "../layout_components/BigWhiteBox";
+import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
+import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 
 export const DrinkSelection = () => {
     const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
@@ -60,45 +64,45 @@ export const DrinkSelection = () => {
 
     return (
         <>
-            <div className="main-wrapper">
-                <div className="px-8 md:px-0 text-center flex flex-col gap-5 mb-[50px]">
-                    <h2>Din cocktailrekommendation</h2>
-                    <p className="text-lg">
-                        Låt dig inspireras av vårt förslag eller valj att skapa
-                        din egen unika smakresa genom att byta ut
-                        rekommendationen mot en annan cocktail från vår meny.
-                    </p>
-                </div>
-
-                {formattedDrink && (
-                    <div className="w-full md:rounded-[25px] overflow-hidden bg-white shadow-custom-big">
-                        <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
+            <StandardHeader
+                head={"Din cocktailrekommendation"}
+                subHead="Låt dig inspireras av vårt förslag eller valj att skapa din egen unika smakresa genom att byta ut rekommendationen mot en annan cocktail från vår meny."
+            />
+            {formattedDrink && (
+                <BigWhiteBox>
+                    <BigWhiteBoxSection>
+                        <div className="w-full flex flex-col-reverse gap-10 items-center md:flex-row justify-between">
                             <img
-                                className="h-[350px] w-full object-fit md:rounded-[25px]"
+                                className="h-52 md:rounded-[25px]"
                                 src={formattedDrink.ImgUrl}
                             />
                             <div>
-                                <h2>{formattedDrink.CocktailName}</h2>
-                                <p className="font-semibold my-[15px]">
+                                <h3>{formattedDrink.CocktailName}</h3>
+                                <p className="font-semibold mt-2 mb-4">
                                     {formattedDrink.Price.toFixed(2)} kr
                                 </p>
                                 <p>{formattedDrink.Description}</p>
                             </div>
                         </div>
+                    </BigWhiteBoxSection>
 
-                        <hr className="border-neutral-300 border-t" />
+                    <BigWhiteBoxDivider />
 
-                        <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between p-8">
+                    <BigWhiteBoxSection>
+                        <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between">
+                            <StandardButton to={"/detail"}>
+                                Tillbaka
+                            </StandardButton>
                             <StandardButton to={"/drinklist"}>
-                                Gå till drinkmenyn
+                                Välj egen cocktail
                             </StandardButton>
                             <StandardButton onClick={handleClick} yellow>
                                 Acceptera förslag
                             </StandardButton>
                         </div>
-                    </div>
-                )}
-            </div>
+                    </BigWhiteBoxSection>
+                </BigWhiteBox>
+            )}
         </>
     );
 };
