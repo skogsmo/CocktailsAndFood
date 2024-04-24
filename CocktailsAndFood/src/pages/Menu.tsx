@@ -38,13 +38,15 @@ export const Menu = () => {
     <>
       <div className="main-wrapper">
         <h2 className="text-center mb-[20px]">VÅRA BURRITO BOWLS</h2>
-        <p className="text-center font-ultra">
-          Välj en bowl med ris eller sallad, grönsaker, protein och
-          dessing/salsa.
-        </p>
-        <p className="text-center font-ultra mb-[50px]">
-          Du anpassar din beställning i nästa steg.
-        </p>
+        <div className="text-center text-lg mb-[50px]">
+          <p>
+            Välj en bowl med ris eller sallad, grönsaker, protein och
+            dessing/salsa.
+          </p>
+          <p>
+            Du anpassar din beställning i nästa steg.
+          </p>
+        </div>
         <div className="flex justify-center">
           <ul className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8">
             {meals.map((meal) => (

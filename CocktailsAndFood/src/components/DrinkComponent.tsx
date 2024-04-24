@@ -42,18 +42,18 @@ export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
 
   return (
     <>
-      <div className="h-[300px] w-[212px] mt-[50px]">
+      <div className="py-4">
         <img
           src={formattedDrink?.ImgUrl}
           className="object-fit md:rounded-[25px]"
         />
         <div className="flex flex-col items-center">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 text-center">
             <h4 className="font-bold leading-[0.5] pt-[25px]">
               {formattedDrink?.CocktailName}
             </h4>
             <p className="font-semibold mb-[15px] mt-[5px]">
-              {formattedDrink?.Price} KR
+              {formattedDrink?.Price} kr
             </p>
           </div>
           <StandardButton onClick={handleClick} small>
