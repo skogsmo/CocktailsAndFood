@@ -11,7 +11,7 @@ import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import StandardHeader from "../layout_components/StandardHeader";
 
 const Detail = () => {
-    const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
+    const { state, dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -22,50 +22,9 @@ const Detail = () => {
         });
     };
 
-    const [sideOptions] = useState<Extra[]>([
-        {
-            Id: 1,
-            Name: "Ris",
-            Price: 15,
-        },
-        {
-            Id: 2,
-            Name: "Romansallad",
-            Price: 25,
-        },
-        {
-            Id: 3,
-            Name: "Ris och romansallad",
-            Price: 35,
-        },
-    ]);
-    const [proteinOptions] = useState<Extra[]>([
-        {
-            Id: 1,
-            Name: "Chipotlegrillad kyckling",
-            Price: 5,
-        },
-        {
-            Id: 2,
-            Name: "Barbecue biff",
-            Price: 15,
-        },
-        {
-            Id: 3,
-            Name: "Carnitas",
-            Price: 10,
-        },
-        {
-            Id: 4,
-            Name: "Pulled jackfruit",
-            Price: 20,
-        },
-        {
-            Id: 5,
-            Name: "Veggie strips",
-            Price: 25,
-        },
-    ]);
+    const [sideOptions] = useState<Extra[]>(state.sideOptions);
+
+    const [proteinOptions] = useState<Extra[]>(state.proteinOptions);
 
     const radioButtonLabel = (option: Extra) => (
         <div className="flex gap-2 text-xs flex-wrap text-nowrap select-none">

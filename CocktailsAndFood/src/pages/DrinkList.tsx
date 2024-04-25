@@ -8,7 +8,7 @@ import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 
 export const DrinkList = () => {
-    const { isOrdersEmpty } = useOrderContext();
+    const { state, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -18,14 +18,11 @@ export const DrinkList = () => {
             <BigWhiteBox>
                 <BigWhiteBoxSection>
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(175px,1fr))] gap-x-8 gap-y-12">
-                        <DrinkCard drinkId={"11000"} />
-                        <DrinkCard drinkId={"11002"} />
-                        <DrinkCard drinkId={"11007"} />
-                        <DrinkCard drinkId={"178369"} />
-                        <DrinkCard drinkId={"12572"} />
-                        <DrinkCard drinkId={"15801"} />
-                        <DrinkCard drinkId={"11938"} />
-                        <DrinkCard drinkId={"13847"} />
+                        {state.drinksInfo
+                            .filter((d) => d.selectable)
+                            .map((d) => (
+                                <DrinkCard drinkId={d.drinkId} drinkPrice={d.price} />
+                            ))}
                     </div>
                 </BigWhiteBoxSection>
 
