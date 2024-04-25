@@ -30,7 +30,7 @@ export const MenuCard = ({
                 <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-7">
                     <div className="flex flex-col gap-1">
                         <div>
-                            <h4 className="font-bold leading-[0.5]">
+                            <h4 className="font-bold leading-tight -my-1">
                                 {meal.title}
                             </h4>
                             <p className="font-semibold my-2 text-sm">
