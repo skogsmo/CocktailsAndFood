@@ -1,0 +1,72 @@
+[
+    {
+        "drinkId": "11410",
+        "price": 125,
+        "selectable": false,
+        "associatedProteinId": 1
+    },
+    {
+        "drinkId": "12198",
+        "price": 125,
+        "selectable": false,
+        "associatedProteinId": 2
+    },
+    {
+        "drinkId": "11422",
+        "price": 125,
+        "selectable": false,
+        "associatedProteinId": 3
+    },
+    {
+        "drinkId": "13731",
+        "price": 125,
+        "selectable": false,
+        "associatedProteinId": 4
+    },
+    {
+        "drinkId": "12690",
+        "price": 125,
+        "selectable": false,
+        "associatedProteinId": 5
+    },
+    {
+        "drinkId": "11000",
+        "price": 85,
+        "selectable": true
+    },
+    {
+        "drinkId": "11002",
+        "price": 105,
+        "selectable": true
+    },
+    {
+        "drinkId": "11007",
+        "price": 95,
+        "selectable": true
+    },
+    {
+        "drinkId": "178369",
+        "price": 120,
+        "selectable": true
+    },
+    {
+        "drinkId": "12572",
+        "price": 100,
+        "selectable": true
+    },
+    {
+        "drinkId": "15801",
+        "price": 110,
+        "selectable": true
+    },
+    {
+        "drinkId": "11938",
+        "price": 90,
+        "selectable": true
+    },
+    {
+        "drinkId": "13847",
+        "price": 115,
+        "selectable": true
+    }
+]

@@ -5,7 +5,7 @@ import React, {
     useEffect,
     useReducer,
 } from "react";
-import { Meal, Order } from "../orderTypes";
+import { DrinkInfo, Extra, Meal, Order } from "../orderTypes";
 
 export type OrderContextType = {
     currentOrder: Order;
@@ -16,14 +16,26 @@ export type OrderContextType = {
 
 interface OrderState {
     orders: Order[];
+    drinksInfo: DrinkInfo[];
+    proteinOptions: Extra[];
+    sideOptions: Extra[];
 }
 
-type Action = CreateOrderAction | RemoveOrderAction | UpdateOrderAction;
+type Action =
+    | CreateOrderAction
+    | RemoveOrderAction
+    | UpdateOrderAction
+    | SetDrinkInfo
+    | SetProteinOptions
+    | SetSideOptions;
 
 export enum ActionType {
     CREATE_ORDER,
     REMOVE_ORDER,
     UPDATE_ORDER,
+    SET_DRINK_INFO,
+    SET_PROTEIN_OPTIONS,
+    SET_SIDE_OPTIONS,
 }
 
 interface CreateOrderAction {
@@ -41,8 +53,26 @@ interface UpdateOrderAction {
     payload: Order;
 }
 
+interface SetDrinkInfo {
+    type: ActionType.SET_DRINK_INFO;
+    payload: DrinkInfo[];
+}
+
+interface SetProteinOptions {
+    type: ActionType.SET_PROTEIN_OPTIONS;
+    payload: Extra[];
+}
+
+interface SetSideOptions {
+    type: ActionType.SET_SIDE_OPTIONS;
+    payload: Extra[];
+}
+
 const initialState: OrderState = {
     orders: [],
+    drinksInfo: [],
+    proteinOptions: [],
+    sideOptions: [],
 };
 
 const orderReducer = (state: OrderState, action: Action): OrderState => {
@@ -68,6 +98,21 @@ const orderReducer = (state: OrderState, action: Action): OrderState => {
                 orders: [
                     ...state.orders.filter((o) => o.OrderId !== action.payload),
                 ],
+            };
+        case ActionType.SET_DRINK_INFO:
+            return {
+                ...state,
+                drinksInfo: [...action.payload],
+            };
+        case ActionType.SET_PROTEIN_OPTIONS:
+            return {
+                ...state,
+                proteinOptions: [...action.payload],
+            };
+        case ActionType.SET_SIDE_OPTIONS:
+            return {
+                ...state,
+                sideOptions: [...action.payload],
             };
         case ActionType.UPDATE_ORDER:
             return {
@@ -127,6 +172,29 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
                     .join("")
         );
     }, [state.orders]);
+
+    useEffect(() => {
+        console.log("drinkinfo: ", state.drinksInfo);
+    }, [state.drinksInfo]);
+
+    useEffect(() => {
+        fetch("data/drink-info.json")
+            .then((response) => response.json())
+            .then((data: DrinkInfo[]) =>
+                dispatch({ type: ActionType.SET_DRINK_INFO, payload: data })
+            );
+        fetch("data/proteins.json")
+            .then((response) => response.json())
+            .then((data: Extra[]) =>
+                dispatch({ type: ActionType.SET_PROTEIN_OPTIONS, payload: data })
+            );
+        fetch("data/sides.json")
+            .then((response) => response.json())
+            .then((data: Extra[]) =>
+                dispatch({ type: ActionType.SET_SIDE_OPTIONS, payload: data })
+            );
+        console.log("fetched drinkinfo");
+    }, []);
 
     const currentOrder = state.orders[state.orders.length - 1];
     const isOrdersEmpty = state.orders.length < 1;

@@ -3,6 +3,7 @@ import StandardButton from "../components/StandardButton";
 import {
     Cocktail,
     DrinkDetailsResponse,
+    DrinkInfo,
     mapDrinkDetailsWithCocktail,
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -13,41 +14,33 @@ import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 
 export const DrinkSelection = () => {
-    const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
+    const { state, currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
     const navigate = useNavigate();
+
     const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
         undefined
     );
-    const [cocktailId] = useState(() => {
-        switch (currentOrder.Protein?.Id) {
-            case 1:
-                return "11410";
-            case 2:
-                return "12198";
-            case 3:
-                return "11422";
-            case 4:
-                return "13731";
-            case 5:
-                return "12690";
-            default:
-                break;
-        }
-    });
+
+    const [drinkInfo] = useState<DrinkInfo | undefined>(() =>
+        state.drinksInfo.find(
+            (d) => d.associatedProteinId === currentOrder.Protein?.Id
+        )
+    );
 
     useEffect(() => {
         const getCocktails = async () => {
+            if (!drinkInfo) return;
             const response = await fetch(
-                `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktailId}`
+                `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkInfo.drinkId}`
             );
             const data: DrinkDetailsResponse = await response.json();
-            setFormattedDrink(mapDrinkDetailsWithCocktail(data));
+            setFormattedDrink(mapDrinkDetailsWithCocktail(data, drinkInfo.price));
         };
         getCocktails();
-    }, [cocktailId]);
+    }, [drinkInfo]);
 
     const handleClick = () => {
         const updatedOrder = {

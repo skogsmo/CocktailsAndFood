@@ -61,7 +61,7 @@ export interface DrinkDetailsResponse {
     }[];
 }
 
-export const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse) => {
+export const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse, price?: number) => {
     const drink = response.drinks[0];
     const ingredients = [
         drink.strIngredient1,
@@ -100,41 +100,15 @@ export const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse) => {
             "It is served in a",
             drink.strGlass + ".",
         ].join(" "),
-        Price: getDrinkPrice(drink.idDrink),
+        Price: price ?? 0,
         ImgUrl: drink.strDrinkThumb,
     };
     return cocktail;
 };
 
-const getDrinkPrice = (drinkId: string) => {
-    switch (drinkId) {
-        case "11000":
-            return 85;
-        case "11002":
-            return 105;
-        case "11007":
-            return 95;
-        case "178369":
-            return 120;
-        case "12572":
-            return 100;
-        case "15801":
-            return 110;
-        case "11938":
-            return 90;
-        case "13847":
-            return 115;
-        case "11410":
-            return 125;
-        case "12198":
-            return 80;
-        case "11422":
-            return 130;
-        case "13731":
-            return 100;
-        case "12690":
-            return 85;
-        default:
-            return 125;
-    }
+export type DrinkInfo = {
+    drinkId: string;
+    price: number;
+    selectable: boolean;
+    associatedProteinId?: number;
 };
