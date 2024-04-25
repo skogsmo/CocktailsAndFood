@@ -193,7 +193,7 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
             .then((data: Extra[]) =>
                 dispatch({ type: ActionType.SET_SIDE_OPTIONS, payload: data })
             );
-        console.log("fetched drinkinfo");
+        console.log("Fetched json data");
     }, []);
 
     const currentOrder = state.orders[state.orders.length - 1];
