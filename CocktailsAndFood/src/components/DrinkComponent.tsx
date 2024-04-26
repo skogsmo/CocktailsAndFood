@@ -5,7 +5,7 @@ import {
     mapDrinkDetailsWithCocktail,
 } from "../orderTypes";
 import { useNavigate } from "react-router-dom";
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import StandardButton from "./StandardButton";
 
 export const DrinkCard = ({ drinkId, drinkPrice }: { drinkId: string, drinkPrice: number; }) => {

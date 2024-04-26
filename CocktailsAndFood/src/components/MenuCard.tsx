@@ -3,7 +3,7 @@ import { Meal } from "../orderTypes";
 import {
     ActionType,
     useOrderContext,
-} from "../context/Context";
+} from "../context/OrderContext";
 import StandardButton from "./StandardButton";
 export const MenuCard = ({
     meal

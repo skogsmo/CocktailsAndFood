@@ -7,14 +7,17 @@ import {
     mapDrinkDetailsWithCocktail,
 } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import StandardHeader from "../layout_components/StandardHeader";
 import BigWhiteBox from "../layout_components/BigWhiteBox";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
+import { useDataContext } from "../context/DataContext";
 
 export const DrinkSelection = () => {
-    const { state, currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
+    const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
+
+    const {drinksInfo} = useDataContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -25,7 +28,7 @@ export const DrinkSelection = () => {
     );
 
     const [drinkInfo] = useState<DrinkInfo | undefined>(() =>
-        state.drinksInfo.find(
+        drinksInfo.find(
             (d) => d.associatedProteinId === currentOrder.Protein?.Id
         )
     );

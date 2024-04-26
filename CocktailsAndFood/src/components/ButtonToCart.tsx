@@ -1,4 +1,4 @@
-import { useOrderContext } from "../context/Context";
+import { useOrderContext } from "../context/OrderContext";
 import { Order } from "../orderTypes";
 import { calculateOrderSum } from "../pages/Checkout";
 import StandardButton from "./StandardButton";
