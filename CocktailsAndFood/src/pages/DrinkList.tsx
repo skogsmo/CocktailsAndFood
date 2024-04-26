@@ -29,11 +29,8 @@ export const DrinkList = () => {
             <BigWhiteBox>
                 <BigWhiteBoxSection>
                     <div className="flex justify-center">
-                        <StandardButton
-                            to="/drinkselection"
-                            className="min-w-fit px-8 flex items-center gap-4">
-                            <i className="fa-solid fa-arrow-left-long"></i>
-                            <span>Tillbaka</span>
+                        <StandardButton to="/drinkselection" backArrow>
+                            Tillbaka
                         </StandardButton>
                     </div>
                 </BigWhiteBoxSection>

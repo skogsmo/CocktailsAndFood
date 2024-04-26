@@ -18,17 +18,15 @@ export const DrinkSelection = () => {
 
     const navigate = useNavigate();
 
-    const [cocktail, setCocktail] = useState<Cocktail | undefined>(
-        undefined
-    );
+    const [cocktail, setCocktail] = useState<Cocktail | undefined>(undefined);
 
     useEffect(() => {
         (async () => {
             const drinkInfo = drinksInfo.find(
-                (d) => d.associatedProteinId === currentOrder.Protein?.Id
+                (di) => di.associatedProteinId === currentOrder.Protein?.Id
             );
             if (!drinkInfo) return;
-            const cocktail = await getCocktail(drinkInfo?.drinkId);
+            const cocktail = await getCocktail(drinkInfo.drinkId);
             setCocktail(cocktail);
         })();
     }, []);
@@ -74,7 +72,7 @@ export const DrinkSelection = () => {
 
                     <BigWhiteBoxSection>
                         <div className="w-full flex flex-col-reverse gap-4 items-center md:flex-row justify-between">
-                            <StandardButton to={"/detail"}>
+                            <StandardButton to="/detail" backArrow>
                                 Tillbaka
                             </StandardButton>
                             <StandardButton to={"/drinklist"}>
