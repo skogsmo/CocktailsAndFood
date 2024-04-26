@@ -18,7 +18,7 @@ export const DrinkSelection = () => {
 
     const navigate = useNavigate();
 
-    const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
+    const [cocktail, setCocktail] = useState<Cocktail | undefined>(
         undefined
     );
 
@@ -29,14 +29,14 @@ export const DrinkSelection = () => {
             );
             if (!drinkInfo) return;
             const cocktail = await getCocktail(drinkInfo?.drinkId);
-            setFormattedDrink(cocktail);
+            setCocktail(cocktail);
         })();
     }, []);
 
     const handleClick = () => {
         const updatedOrder = {
             ...currentOrder,
-            Cocktail: formattedDrink,
+            Cocktail: cocktail,
         };
 
         dispatch({
@@ -52,20 +52,20 @@ export const DrinkSelection = () => {
                 head={"Din cocktailrekommendation"}
                 subHead="Låt dig inspireras av vårt förslag eller valj att skapa din egen unika smakresa genom att byta ut rekommendationen mot en annan cocktail från vår meny."
             />
-            {formattedDrink ? (
+            {cocktail ? (
                 <BigWhiteBox>
                     <BigWhiteBoxSection>
                         <div className="w-full flex flex-col-reverse gap-10 items-center md:flex-row justify-between">
                             <img
                                 className="h-52 md:rounded-[25px]"
-                                src={formattedDrink.ImgUrl}
+                                src={cocktail.ImgUrl}
                             />
                             <div>
-                                <h3>{formattedDrink.CocktailName}</h3>
+                                <h3>{cocktail.CocktailName}</h3>
                                 <p className="font-semibold mt-2 mb-4">
-                                    {formattedDrink.Price.toFixed(2)} kr
+                                    {cocktail.Price.toFixed(2)} kr
                                 </p>
-                                <p>{formattedDrink.Description}</p>
+                                <p>{cocktail.Description}</p>
                             </div>
                         </div>
                     </BigWhiteBoxSection>
