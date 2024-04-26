@@ -8,9 +8,7 @@ import { useDataContext } from "../context/DataContext";
 export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
     const { dispatch, currentOrder } = useOrderContext();
     const { getCocktail } = useDataContext();
-    const [cocktail, setCocktail] = useState<Cocktail | undefined>(
-        undefined
-    );
+    const [cocktail, setCocktail] = useState<Cocktail | undefined>(undefined);
 
     const navigate = useNavigate();
 
@@ -36,24 +34,37 @@ export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
 
     return (
         <>
-            <div>
-                <img
-                    src={cocktail?.ImgUrl}
-                    className="object-fit md:rounded-[25px]"
-                />
-                <div className="flex flex-col items-center">
-                    <div className="flex flex-col gap-1 text-center">
-                        <h4 className="font-bold leading-tight pt-[20px]">
-                            {cocktail?.CocktailName}
-                        </h4>
-                        <p className="font-semibold mb-[15px]">
-                            {cocktail?.Price} kr
-                        </p>
+            <div
+                className="bg-white rounded-2xl overflow-hidden shadow-custom-big hover:shadow-custom-bigger flex flex-col hover:scale-[1.02] transition duration-[150ms] cursor-pointer"
+                onClick={handleClick}>
+                {cocktail ? (
+                    <>
+                        <img
+                            src={cocktail?.ImgUrl}
+                            className="object-cover aspect-square"
+                        />
+                        <div className="flex flex-col p-6 pb-8 gap-4 items-center justify-between grow">
+                            <div className="flex flex-col gap-1 text-center">
+                                <h4 className="font-bold leading-tight">
+                                    {cocktail.CocktailName}
+                                </h4>
+                                <p className="font-semibold">
+                                    {cocktail.Price} kr
+                                </p>
+                            </div>
+                            <StandardButton
+                                onClick={handleClick}
+                                small
+                                className="">
+                                Välj
+                            </StandardButton>
+                        </div>
+                    </>
+                ) : (
+                    <div className="w-full p-8 text-center">
+                        Laddar cocktail...
                     </div>
-                    <StandardButton onClick={handleClick} small>
-                        Välj
-                    </StandardButton>
-                </div>
+                )}
             </div>
         </>
     );
