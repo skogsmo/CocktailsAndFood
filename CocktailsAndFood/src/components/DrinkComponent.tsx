@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import {
-    Cocktail,
-    DrinkDetailsResponse,
-    mapDrinkDetailsWithCocktail,
-} from "../orderTypes";
+import { Cocktail } from "../orderTypes";
 import { useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/OrderContext";
 import StandardButton from "./StandardButton";
+import { useDataContext } from "../context/DataContext";
 
-export const DrinkCard = ({ drinkId, drinkPrice }: { drinkId: string, drinkPrice: number; }) => {
+export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
     const { dispatch, currentOrder } = useOrderContext();
+    const { getCocktail } = useDataContext();
     const [formattedDrink, setFormattedDrink] = useState<Cocktail | undefined>(
         undefined
     );
@@ -17,15 +15,11 @@ export const DrinkCard = ({ drinkId, drinkPrice }: { drinkId: string, drinkPrice
     const navigate = useNavigate();
 
     useEffect(() => {
-        const getCocktails = async () => {
-            const response = await fetch(
-                `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
-            );
-            const data: DrinkDetailsResponse = await response.json();
-            setFormattedDrink(mapDrinkDetailsWithCocktail(data, drinkPrice));
-        };
-        getCocktails();
-    }, [drinkId]);
+        (async () => {
+            const cocktail = await getCocktail(drinkId);
+            setFormattedDrink(cocktail);
+        })();
+    }, []);
 
     const handleClick = () => {
         const updatedOrder = {

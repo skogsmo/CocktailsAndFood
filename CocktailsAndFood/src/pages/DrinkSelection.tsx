@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import StandardButton from "../components/StandardButton";
-import {
-    Cocktail,
-    DrinkDetailsResponse,
-    DrinkInfo,
-    mapDrinkDetailsWithCocktail,
-} from "../orderTypes";
+import { Cocktail } from "../orderTypes";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ActionType, useOrderContext } from "../context/OrderContext";
 import StandardHeader from "../layout_components/StandardHeader";
@@ -17,7 +12,7 @@ import { useDataContext } from "../context/DataContext";
 export const DrinkSelection = () => {
     const { currentOrder, dispatch, isOrdersEmpty } = useOrderContext();
 
-    const {drinksInfo} = useDataContext();
+    const { drinksInfo, getCocktail } = useDataContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -27,23 +22,16 @@ export const DrinkSelection = () => {
         undefined
     );
 
-    const [drinkInfo] = useState<DrinkInfo | undefined>(() =>
-        drinksInfo.find(
-            (d) => d.associatedProteinId === currentOrder.Protein?.Id
-        )
-    );
-
     useEffect(() => {
-        const getCocktails = async () => {
-            if (!drinkInfo) return;
-            const response = await fetch(
-                `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkInfo.drinkId}`
+        (async () => {
+            const drinkInfo = drinksInfo.find(
+                (d) => d.associatedProteinId === currentOrder.Protein?.Id
             );
-            const data: DrinkDetailsResponse = await response.json();
-            setFormattedDrink(mapDrinkDetailsWithCocktail(data, drinkInfo.price));
-        };
-        getCocktails();
-    }, [drinkInfo]);
+            if (!drinkInfo) return;
+            const cocktail = await getCocktail(drinkInfo?.drinkId);
+            setFormattedDrink(cocktail);
+        })();
+    }, []);
 
     const handleClick = () => {
         const updatedOrder = {
@@ -64,7 +52,7 @@ export const DrinkSelection = () => {
                 head={"Din cocktailrekommendation"}
                 subHead="Låt dig inspireras av vårt förslag eller valj att skapa din egen unika smakresa genom att byta ut rekommendationen mot en annan cocktail från vår meny."
             />
-            {formattedDrink && (
+            {formattedDrink ? (
                 <BigWhiteBox>
                     <BigWhiteBoxSection>
                         <div className="w-full flex flex-col-reverse gap-10 items-center md:flex-row justify-between">
@@ -95,6 +83,14 @@ export const DrinkSelection = () => {
                             <StandardButton onClick={handleClick} yellow>
                                 Acceptera förslag
                             </StandardButton>
+                        </div>
+                    </BigWhiteBoxSection>
+                </BigWhiteBox>
+            ) : (
+                <BigWhiteBox>
+                    <BigWhiteBoxSection>
+                        <div className="w-full text-center">
+                            Laddar cocktail...
                         </div>
                     </BigWhiteBoxSection>
                 </BigWhiteBox>

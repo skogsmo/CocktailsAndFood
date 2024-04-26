@@ -24,7 +24,7 @@ export const DrinkList = () => {
                         {drinksInfo
                             .filter((d) => d.selectable)
                             .map((d) => (
-                                <DrinkCard key={d.drinkId} drinkId={d.drinkId} drinkPrice={d.price} />
+                                <DrinkCard key={d.drinkId} drinkId={d.drinkId} />
                             ))}
                     </div>
                 </BigWhiteBoxSection>
