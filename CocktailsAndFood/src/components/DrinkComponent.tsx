@@ -35,7 +35,7 @@ export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
     return (
         <>
             <div
-                className="bg-white rounded-2xl overflow-hidden shadow-custom-big hover:shadow-custom-bigger flex flex-col hover:scale-[1.02] transition duration-[150ms] cursor-pointer"
+                className="bg-white rounded-2xl overflow-hidden shadow-custom-big flex flex-col hover:scale-[1.02] transition duration-[150ms] cursor-pointer"
                 onClick={handleClick}>
                 {cocktail ? (
                     <>
