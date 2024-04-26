@@ -5,7 +5,7 @@ import StandardHeader from "../layout_components/StandardHeader";
 import { useDataContext } from "../context/DataContext";
 
 export const Menu = () => {
-    const {getMenu} = useDataContext();
+    const { getMenu } = useDataContext();
     const [meals, setMeals] = useState<Meal[]>([]);
 
     useEffect(() => {
