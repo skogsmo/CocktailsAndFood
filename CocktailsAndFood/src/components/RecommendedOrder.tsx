@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import {
   Cocktail,
   DrinkDetailsResponse,
@@ -78,9 +78,12 @@ export const RecommendedOrder = () => {
 
   return (
     <>
-      <h3>Kockens val!</h3>
-      <p>BBQ Block Party Bowl med chipotlegrillad kyckling, ris & Gin Fizz</p>
-      <button onClick={handleClick}>Acceptera förslag</button>
+      <button onClick={handleClick}>
+        <img className="size-56" src="/img/chefs-choice-logo.png" alt="" />
+        <h3 className="text-center py-2 font-ultra tracking-wider">
+          KOCKENS VAL
+        </h3>
+      </button>
     </>
   );
 };

@@ -23,9 +23,7 @@ export const Welcome = () => {
               unika cocktailrekommendationer, som kompletterar din måltid
               perfekt.
             </p>
-            <div>
-              <RecommendedOrder />
-            </div>
+
             <StandardButton to="/menu" yellow>
               Utforska vår meny
             </StandardButton>
