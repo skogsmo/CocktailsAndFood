@@ -13,6 +13,7 @@ import {
     Meal,
     mapDrinkDetailsWithCocktail,
 } from "../orderTypes";
+import { GET_MENU_FROM_JSON } from "../constants";
 
 type DataContextType = {
     drinksInfo: DrinkInfo[];
@@ -70,9 +71,16 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const getMenu = async () => {
-        const res = await fetch(
-            "https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes"
-        );
+        let res: Response;
+
+        if (GET_MENU_FROM_JSON) {
+            res = await fetch("data/menu.json");
+        } else {
+            res = await fetch(
+                "https://iths-2024-recept-grupp3-3j1u35.reky.se/recipes"
+            );
+        }
+
         const json: {
             _id: string;
             title: string;
@@ -80,7 +88,9 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
             description: string;
             price: number;
             categories: string[];
+            timeInMins: number;
         }[] = await res.json();
+
         const meals: Meal[] = json.map((item) => ({
             _id: item._id,
             title: item.title,
@@ -91,7 +101,9 @@ export const DataContextProvider = ({ children }: { children: ReactNode }) => {
                 Name,
                 IsIncluded: true,
             })),
+            spiciness: item.timeInMins,
         }));
+
         return meals;
     };
 
