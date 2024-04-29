@@ -55,7 +55,11 @@ function App() {
                     </StandardLayout>
                 }
             />
-            <Route path="/*" element={<NotFound />} />
+            <Route path="/*" element={
+                    <StandardLayout>
+                        <NotFound />
+                    </StandardLayout>
+                } />
         </Routes>
     );
 }

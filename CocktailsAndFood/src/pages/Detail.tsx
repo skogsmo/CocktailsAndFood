@@ -1,17 +1,20 @@
 import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
-import { useState } from "react";
+// import { useState } from "react";
 import StandardButton from "../components/StandardButton";
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import { Navigate } from "react-router-dom";
 import IngredientSelector from "../components/IngredientSelector";
 import BigWhiteBox from "../layout_components/BigWhiteBox";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import StandardHeader from "../layout_components/StandardHeader";
+import { useDataContext } from "../context/DataContext";
 
 const Detail = () => {
     const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
+
+    const {sideOptions, proteinOptions} = useDataContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -21,51 +24,6 @@ const Detail = () => {
             payload: updatedOrder,
         });
     };
-
-    const [sideOptions] = useState<Extra[]>([
-        {
-            Id: 1,
-            Name: "Ris",
-            Price: 15,
-        },
-        {
-            Id: 2,
-            Name: "Romansallad",
-            Price: 25,
-        },
-        {
-            Id: 3,
-            Name: "Ris och romansallad",
-            Price: 35,
-        },
-    ]);
-    const [proteinOptions] = useState<Extra[]>([
-        {
-            Id: 1,
-            Name: "Chipotlegrillad kyckling",
-            Price: 5,
-        },
-        {
-            Id: 2,
-            Name: "Barbecue biff",
-            Price: 15,
-        },
-        {
-            Id: 3,
-            Name: "Carnitas",
-            Price: 10,
-        },
-        {
-            Id: 4,
-            Name: "Pulled jackfruit",
-            Price: 20,
-        },
-        {
-            Id: 5,
-            Name: "Veggie strips",
-            Price: 25,
-        },
-    ]);
 
     const radioButtonLabel = (option: Extra) => (
         <div className="flex gap-2 text-xs flex-wrap text-nowrap select-none">
