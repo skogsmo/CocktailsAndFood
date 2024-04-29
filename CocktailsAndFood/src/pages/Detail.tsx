@@ -1,17 +1,20 @@
 import { Extra, Order } from "../orderTypes";
 import { RadiobuttonSelector } from "../components/RadiobuttonSelector";
-import { useState } from "react";
+// import { useState } from "react";
 import StandardButton from "../components/StandardButton";
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import { Navigate } from "react-router-dom";
 import IngredientSelector from "../components/IngredientSelector";
 import BigWhiteBox from "../layout_components/BigWhiteBox";
 import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import StandardHeader from "../layout_components/StandardHeader";
+import { useDataContext } from "../context/DataContext";
 
 const Detail = () => {
-    const { state, dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
+    const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
+
+    const {sideOptions, proteinOptions} = useDataContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -21,10 +24,6 @@ const Detail = () => {
             payload: updatedOrder,
         });
     };
-
-    const [sideOptions] = useState<Extra[]>(state.sideOptions);
-
-    const [proteinOptions] = useState<Extra[]>(state.proteinOptions);
 
     const radioButtonLabel = (option: Extra) => (
         <div className="flex gap-2 text-xs flex-wrap text-nowrap select-none">

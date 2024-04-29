@@ -1,4 +1,4 @@
-import { ActionType, useOrderContext } from "../context/Context";
+import { ActionType, useOrderContext } from "../context/OrderContext";
 import { Order } from "../orderTypes";
 
 export default function IngredientSelector() {

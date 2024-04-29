@@ -1,4 +1,4 @@
-import { useOrderContext } from "../context/Context";
+import { useOrderContext } from "../context/OrderContext";
 import { Order } from "../orderTypes";
 import { calculateOrderSum } from "../pages/Checkout";
 import StandardButton from "./StandardButton";
@@ -15,10 +15,9 @@ export const ButtonToCart = () => {
         <>
             <StandardButton
                 yellow
-                noFixedWidth
                 to="/checkout"
-                className="shadow-custom-big">
-                <div className="flex items-center gap-4 px-8">
+                className="shadow-custom-big w-fit">
+                <div className="flex items-center gap-4">
                     <i className="fa-solid fa-cart-shopping text-xl"></i>
                     <span>{totalPrice} kr</span>
                 </div>
