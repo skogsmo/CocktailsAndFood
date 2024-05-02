@@ -18,7 +18,7 @@ export const DrinkList = () => {
         <>
             <StandardHeader head={"Välj egen cocktail"} />
 
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-8 mb-8">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8 mb-8">
                 {drinksInfo
                     .filter((d) => d.selectable)
                     .map((d) => (

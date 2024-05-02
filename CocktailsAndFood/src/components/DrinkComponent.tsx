@@ -34,38 +34,40 @@ export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
 
     return (
         <>
-            <div
-                className="bg-white rounded-2xl overflow-hidden shadow-custom-big flex flex-col hover:scale-[1.02] transition duration-[150ms] cursor-pointer"
-                onClick={handleClick}>
-                {cocktail ? (
-                    <>
+            {cocktail ? (
+                <div
+                    onClick={handleClick}
+                    className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full cursor-pointer group">
+                    <div className="w-1/3 h-full">
                         <img
-                            src={cocktail?.ImgUrl}
-                            className="object-cover aspect-square"
+                            src={cocktail.ImgUrl}
+                            className="h-full object-cover w-full"
                         />
-                        <div className="flex flex-col p-6 pb-8 gap-4 items-center justify-between grow">
-                            <div className="flex flex-col gap-1 text-center">
-                                <h4 className="font-bold leading-tight">
+                    </div>
+                    <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-7">
+                        <div className="flex flex-col gap-1">
+                            <div>
+                                <h4 className="font-bold leading-tight -my-1">
                                     {cocktail.CocktailName}
                                 </h4>
-                                <p className="font-semibold">
-                                    {cocktail.Price} kr
-                                </p>
+                                <div className="flex gap-3 items-center">
+                                    <p className="font-semibold my-2 text-sm">
+                                        {cocktail.Price.toFixed(2)} kr
+                                    </p>
+                                </div>
                             </div>
-                            <StandardButton
-                                onClick={handleClick}
-                                small
-                                className="">
-                                Välj
-                            </StandardButton>
+                            <p className="text-xs">{cocktail.Description}</p>
                         </div>
-                    </>
-                ) : (
-                    <div className="w-full p-8 text-center">
-                        Laddar cocktail...
+                        <StandardButton yellow small>
+                            Välj
+                        </StandardButton>
                     </div>
-                )}
-            </div>
+                </div>
+            ) : (
+                <div className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full cursor-pointer group p-8">
+                    Laddar cocktail...
+                </div>
+            )}
         </>
     );
 };

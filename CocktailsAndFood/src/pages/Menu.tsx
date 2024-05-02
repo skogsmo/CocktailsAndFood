@@ -4,7 +4,7 @@ import { Meal } from "../orderTypes";
 import StandardHeader from "../layout_components/StandardHeader";
 import { useDataContext } from "../context/DataContext";
 import StandardButton from "../components/StandardButton";
-import ChefsChoice from "../components/ChefsChoice";
+// import RecommendedOrder from "../components/RecommendedOrder";
 
 export const Menu = () => {
   const { getMenu } = useDataContext();
@@ -68,10 +68,6 @@ export const Menu = () => {
           "Du anpassar din beställning i nästa steg.",
         ]}
       />
-
-      <div className="absolute left-[80px] top-24 origin-top-right -rotate-12">
-        <ChefsChoice />
-      </div>
 
       <div className="flex flex-col gap-8">
         <div className="gap-4 items-center px-8 py-4 flex w-full md:rounded-2xl overflow-hidden bg-white shadow-custom-big text-nowrap">

@@ -4,7 +4,7 @@ export const SpicyChilis = ({ spiciness }: { spiciness: number }) => {
     const chiliImages: ReactNode[] = [];
 
     for (let i = 0; i < spiciness; i++) {
-        chiliImages.push(<img src="/img/chili.png" className="size-5" />);
+        chiliImages.push(<img key={i} src="/img/chili.png" className="size-5" />);
     }
 
     return (

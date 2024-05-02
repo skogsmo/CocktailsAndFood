@@ -1,6 +1,6 @@
 [
     {
-        "drinkId": "11410",
+        "drinkId": "11007",
         "price": 125,
         "selectable": false,
         "associatedProteinId": 1
@@ -40,7 +40,7 @@
         "selectable": true
     },
     {
-        "drinkId": "11007",
+        "drinkId": "11410",
         "price": 95,
         "selectable": true
     },
