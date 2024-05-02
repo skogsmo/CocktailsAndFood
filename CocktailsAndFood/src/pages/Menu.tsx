@@ -4,7 +4,7 @@ import { Meal } from "../orderTypes";
 import StandardHeader from "../layout_components/StandardHeader";
 import { useDataContext } from "../context/DataContext";
 import StandardButton from "../components/StandardButton";
-import { RecommendedOrder } from "../components/RecommendedOrder";
+import ChefsChoice from "../components/ChefsChoice";
 
 export const Menu = () => {
   const { getMenu } = useDataContext();
@@ -70,7 +70,7 @@ export const Menu = () => {
       />
 
       <div className="absolute left-[80px] top-24 origin-top-right -rotate-12">
-        <RecommendedOrder />
+        <ChefsChoice />
       </div>
 
       <div className="flex flex-col gap-8">
