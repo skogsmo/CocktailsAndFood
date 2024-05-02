@@ -17,14 +17,14 @@ export const CancelPopup = ({
 
             {isPopupOpen && (
                 <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white m-auto z-20 rounded-[25px] shadow-custom-big">
-                    <div className="flex flex-col gap-8 items-center">
-                        <p className="text-center text-xl pt-10">
+                    <div className="flex flex-col items-center">
+                        <p className="text-center text-xl p-10 -mb-2">
                             Vill du avbryta beställningen?
                         </p>
 
                         <hr className="w-full border-neutral-300" />
 
-                        <div className="flex flex-row justify-between gap-8 p-10 pt-0">
+                        <div className="flex flex-row justify-between gap-8 p-10">
                             <StandardButton
                                 small
                                 onClick={closePopup}
