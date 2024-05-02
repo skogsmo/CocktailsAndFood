@@ -29,14 +29,9 @@ export default function StandardLayout({
     }, []);
 
     return (
-        <>
-            <div className="flex flex-col gap-[75px] pt-[75px] min-h-screen items-center">
-                <div className="grow w-full max-w-[1064px] md:px-[32px]">
-                    {children}
-                </div>
-                <div className="sticky bottom-0 w-full">
-                    {cancelOrderBar && <CancelOrderBar />}
-                </div>
+        <div className="flex flex-col min-h-screen items-center">
+            <div className="grow flex flex-col py-[75px] items-center w-full max-w-[1064px] md:px-[32px]">
+                {children}
             </div>
             {chefsChoice && (
                 <div
@@ -52,6 +47,9 @@ export default function StandardLayout({
                     <ButtonToCart />
                 </div>
             )}
-        </>
+            <div className="sticky bottom-0 w-full">
+                {cancelOrderBar && <CancelOrderBar />}
+            </div>
+        </div>
     );
 }
