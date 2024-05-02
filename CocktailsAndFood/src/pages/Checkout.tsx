@@ -122,9 +122,9 @@ export const Checkout = () => {
               </div>
               {order.IsRecommended && (
                 <img
-                  src="public\img\stamp.png"
+                  src="public\img\kockens-val-stamp.png"
                   alt="a stamperino"
-                  className="absolute bottom-[-80px] right-[200px]"
+                  className="absolute top-[30px] right-[70px] h-40 opacity-80 rotate-12"
                 />
               )}
             </div>
