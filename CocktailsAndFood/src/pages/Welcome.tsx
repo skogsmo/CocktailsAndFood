@@ -1,5 +1,4 @@
 import StandardButton from "../components/StandardButton";
-import { RecommendedOrder } from "../components/RecommendedOrder";
 
 export const Welcome = () => {
   return (

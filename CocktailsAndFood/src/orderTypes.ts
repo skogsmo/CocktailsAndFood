@@ -5,6 +5,7 @@ export type Meal = {
     description: string;
     price: number;
     ingredients: Ingredient[];
+    spiciness: number;
 };
 
 export type Ingredient = {

@@ -28,13 +28,16 @@ export const RecommendedOrder = () => {
         description: string;
         price: number;
         categories: string[];
+        timeInMins: number;
       } = await res.json();
+
       const meal: Meal = {
         _id: json._id,
         title: json.title,
         imageUrl: json.imageUrl,
         description: json.description,
         price: json.price,
+        spiciness: json.timeInMins,
         ingredients: json.categories.map((Name) => ({
           Name,
           IsIncluded: true,
