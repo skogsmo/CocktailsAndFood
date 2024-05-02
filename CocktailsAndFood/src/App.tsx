@@ -25,7 +25,7 @@ function App() {
             <Route
                 path="/menu"
                 element={
-                    <StandardLayout cartButton cancelOrderBar>
+                    <StandardLayout cartButton chefsChoice cancelOrderBar>
                         <Menu />
                     </StandardLayout>
                 }
