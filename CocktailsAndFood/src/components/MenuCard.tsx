@@ -15,7 +15,7 @@ export const MenuCard = ({ meal }: { meal: Meal }) => {
 
     return (
         <>
-            <div className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full">
+            <div onClick={handleClick} className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full cursor-pointer group">
                 <div className="w-1/3 h-full">
                     <img
                         src={meal.imageUrl}
@@ -37,7 +37,7 @@ export const MenuCard = ({ meal }: { meal: Meal }) => {
                         </div>
                         <p className="text-xs">{meal.description}</p>
                     </div>
-                    <StandardButton onClick={handleClick} yellow small>
+                    <StandardButton yellow small>
                         Välj
                     </StandardButton>
                 </div>

@@ -1,3 +1,5 @@
+import capitalizeString from "./utils/capitalizeString";
+
 export type Meal = {
     _id: string;
     title: string;
@@ -85,22 +87,24 @@ export const mapDrinkDetailsWithCocktail = (response: DrinkDetailsResponse, pric
     const cocktail: Cocktail = {
         CocktailName: drink.strDrink,
         CocktailId: drink.idDrink,
-        Description: [
-            "This is",
-            drink.strAlcoholic[0].toLowerCase() === "a" ? "an" : "a",
-            drink.strAlcoholic,
-            drink.strCategory,
-            "with the ingredients",
-            ...ingredients.map((ingredient, index) =>
-                index === ingredients.length - 2
-                    ? ingredient + " and"
-                    : index !== ingredients.length - 1
-                    ? ingredient + ","
-                    : ingredient + "."
-            ),
-            "It is served in a",
-            drink.strGlass + ".",
-        ].join(" "),
+        Description: capitalizeString(
+            [
+                "this is",
+                drink.strAlcoholic[0].toLowerCase() === "a" ? "an" : "a",
+                drink.strAlcoholic,
+                drink.strCategory,
+                "with the ingredients",
+                ...ingredients.map((ingredient, index) =>
+                    index === ingredients.length - 2
+                        ? ingredient + " and"
+                        : index !== ingredients.length - 1
+                        ? ingredient + ","
+                        : ingredient + "."
+                ),
+                "it is served in a",
+                drink.strGlass + ".",
+            ].join(" ")
+        ),
         Price: price ?? 0,
         ImgUrl: drink.strDrinkThumb,
     };

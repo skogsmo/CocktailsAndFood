@@ -69,8 +69,8 @@ export const Menu = () => {
         ]}
       />
 
-      <div className="absolute left-[80px] top-24 origin-top-right -rotate-12">
-        <RecommendedOrder />
+      <div className="absolute left-[90px] top-24 -rotate-12 hover:scale-105 duration-200">
+        <RecommendedOrder/>
       </div>
 
       <div className="flex flex-col gap-8">

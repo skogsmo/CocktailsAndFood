@@ -1,4 +1,3 @@
-import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 import StandardButton from "./StandardButton";
 
 export const CancelPopup = ({
