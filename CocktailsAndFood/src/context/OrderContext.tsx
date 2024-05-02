@@ -24,6 +24,7 @@ type Action =
   | RemoveOrderAction
   | UpdateOrderAction;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export enum ActionType {
   CREATE_ORDER,
   CREATE_RECOMMENDED_ORDER,
@@ -75,12 +76,14 @@ const orderReducer = (state: OrderState, action: Action): OrderState => {
       };
 
     case ActionType.CREATE_RECOMMENDED_ORDER:
+      // eslint-disable-next-line no-case-declarations
       const recOrder: Order = {
         OrderId: action.payload.OrderId,
         Meal: action.payload.Meal,
         Cocktail: action.payload.Cocktail,
         Protein: action.payload.Protein,
         Side: action.payload.Side,
+        IsRecommended: true,
       };
       return {
         ...state,
