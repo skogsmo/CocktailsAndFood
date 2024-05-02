@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import { Welcome } from "./pages/Welcome";
 import { Menu } from "./pages/Menu";
@@ -8,10 +8,17 @@ import { NotFound } from "./pages/NotFound";
 import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
 import StandardLayout from "./layout/StandardLayout";
+import { useEffect } from "react";
 
 export type CartModifiers = {};
 
 function App() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    
     return (
         <Routes>
             <Route path="/" element={<Welcome />} />
