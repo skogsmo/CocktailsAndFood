@@ -124,7 +124,7 @@ export const Checkout = () => {
                 <img
                   src="public\img\stamp.png"
                   alt="a stamperino"
-                  className="absolute bottom-[-50px] left-[1px]"
+                  className="absolute bottom-[-80px] right-[200px]"
                 />
               )}
             </div>
