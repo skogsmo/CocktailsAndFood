@@ -3,10 +3,10 @@ import { AboutUsInfo } from "../pages/AboutUs";
 export const AboutUsCard = ({ name, title, description, imageUrl }: AboutUsInfo) => {
     return (
         <>
-            <div className="bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-105">
+            <div className="bg-white w-[250px] md:rounded-2xl shadow-custom-big overflow-hidden h-full transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-105">
                 <div className="h-[250px]">
                     <img
-                        src={imageUrl}
+                        src={"https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"}
                         className="h-full object-fit w-full"
                     />
                 </div>
