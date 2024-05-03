@@ -38,10 +38,10 @@ export const DrinkCard = ({ drinkId }: { drinkId: string }) => {
                 <div
                     onClick={handleClick}
                     className="flex bg-white md:rounded-2xl shadow-custom-big overflow-hidden h-full cursor-pointer group">
-                    <div className="w-1/3 h-full">
+                    <div className="w-1/3 h-full overflow-hidden">
                         <img
                             src={cocktail.ImgUrl}
-                            className="h-full object-cover w-full"
+                            className="h-full object-cover w-full group-hover:scale-110 duration-150"
                         />
                     </div>
                     <div className="flex flex-col justify-between gap-4 w-2/3 p-8 pt-7">

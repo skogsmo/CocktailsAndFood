@@ -10,7 +10,7 @@ export const Menu = () => {
   const { getMenu } = useDataContext();
   const [meals, setMeals] = useState<Meal[]>([]);
 
-  const [spicinessDescending, setSpicinessDescending] = useState(false);
+  const [spicinessDescending, setSpicinessDescending] = useState(true);
   const [priceDescending, setPriceDescending] = useState(false);
   const [titleDescending, setTitleDescending] = useState(false);
   const [sortBy, setSortBy] = useState("");
@@ -81,7 +81,7 @@ export const Menu = () => {
             Kryddighet{" "}
             <i
               className={
-                "fa-solid " +
+                "fa-solid translate-y-[1px] " +
                 (spicinessDescending === true ? "fa-angle-up" : "fa-angle-down")
               }
             ></i>
@@ -95,7 +95,7 @@ export const Menu = () => {
             Pris{" "}
             <i
               className={
-                "fa-solid " +
+                "fa-solid translate-y-[1px] " +
                 (priceDescending === true ? "fa-angle-up" : "fa-angle-down")
               }
             ></i>
@@ -109,7 +109,7 @@ export const Menu = () => {
             Namn{" "}
             <i
               className={
-                "fa-solid " +
+                "fa-solid translate-y-[1px] " +
                 (titleDescending === true ? "fa-angle-up" : "fa-angle-down")
               }
             ></i>
