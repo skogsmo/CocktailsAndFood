@@ -14,8 +14,8 @@ export const AboutUsCard = ({
                         src={imageUrl}
                         className="aspect-[1/1.25] object-cover w-full"
                     />
-                    <div className="absolute bg-[#e79569] w-full h-full inset-0 opacity-20 mix-blend-lighten"></div>
-                    <img src="img/scratches.jpg" className="absolute bg-[#e79569] w-full h-full object-cover inset-0 opacity-20 mix-blend-screen"/>
+                    <div className="absolute bg-[#ff7e67] w-full h-full inset-0 opacity-15 mix-blend-lighten"></div>
+                    <img src="img/scratches.jpg" className="absolute w-full h-full object-cover inset-0 opacity-20 mix-blend-screen"/>
                 </div>
                 <div className="grow flex flex-col items-center gap-4 p-6">
                     <div className="flex flex-col">
