@@ -4,7 +4,6 @@ import { Meal } from "../orderTypes";
 import StandardHeader from "../layout_components/StandardHeader";
 import { useDataContext } from "../context/DataContext";
 import StandardButton from "../components/StandardButton";
-// import RecommendedOrder from "../components/RecommendedOrder";
 
 export const Menu = () => {
   const { getMenu } = useDataContext();
@@ -15,8 +14,6 @@ export const Menu = () => {
   const [titleDescending, setTitleDescending] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [filter, setFilter] = useState("");
-
-  console.log(filter);
 
   useEffect(() => {
     (async () => {

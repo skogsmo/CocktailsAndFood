@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Alexander",
+        "title": "utvecklare",
+        "description": "¡Hola!",
+        "imageUrl": "img/alexander.png"
+    },
+    {
+        "name": "Dan",
+        "title": "utvecklare",
+        "description": "¡Hola!",
+        "imageUrl": "img/dan.png"
+    },
+    {
+        "name": "Lotta",
+        "title": "utvecklare",
+        "description": "¡Cuanto más cocineros, mejor el Burrito Bowl!",
+        "imageUrl": "img/lotta.png"
+    },
+    {
+        "name": "Niclas",
+        "title": "utvecklare",
+        "description": "¡Hola!",
+        "imageUrl": "img/wanted-poster.jpg"
+    },
+    {
+        "name": "Benjamin",
+        "title": "utvecklare",
+        "description": "¡Los burritos: el fuego que enciende el alma!",
+        "imageUrl": "img/benjamin.jpg"
+    },
+    {
+        "name": "Linnea",
+        "title": "utvecklare",
+        "description": "La vida es demasiado corta para bebidas aburridas. ¡Vámonos!",
+        "imageUrl": "img/linnea.png"
+    },
+    {
+        "name": "Claes",
+        "title": "utvecklare",
+        "description": "El día perfecto comienza con un burrito",
+        "imageUrl": "img/claes-ese.png"
+    },
+    {
+        "name": "Selma",
+        "title": "projektledare",
+        "description": "¡En cada envoltura, un tsunami de felicidad!",
+        "imageUrl": "img/wanted-poster.jpg"
+    },
+    {
+        "name": "Niclas",
+        "title": "projektledare",
+        "description": "¡En un mundo sin burritos, qué tristeza!",
+        "imageUrl": "img/wanted-poster.jpg"
+    }
+]
