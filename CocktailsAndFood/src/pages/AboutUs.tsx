@@ -4,7 +4,7 @@ import StandardButton from "../components/StandardButton";
 import BigWhiteBox from "../layout_components/BigWhiteBox";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import StandardHeader from "../layout_components/StandardHeader";
-import getTailwindColumnsNoSingleItem from "../utils/getTailwindColumnsNoSingleItem";
+import getTailwindColumns from "../utils/getTailwindColumns";
 import { twMerge } from "tailwind-merge";
 
 export interface TeamMemberInfo {
@@ -39,7 +39,7 @@ export const AboutUs = () => {
                             <ul
                                 className={twMerge(
                                     "gap-8 justify-start grid",
-                                    getTailwindColumnsNoSingleItem(teamMembers.length, 3)
+                                    getTailwindColumns(teamMembers.length, 3)
                                 )}>
                                 {teamMembers.sort((a, b) => a.name.localeCompare(b.name)).map((person) => (
                                     <li key={person.name}>
