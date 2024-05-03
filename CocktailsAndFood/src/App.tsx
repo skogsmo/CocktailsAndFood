@@ -9,6 +9,7 @@ import { Checkout } from "./pages/Checkout";
 import { DrinkList } from "./pages/DrinkList";
 import StandardLayout from "./layout/StandardLayout";
 import { useEffect } from "react";
+import { AboutUs } from "./pages/AboutUs";
 
 export type CartModifiers = {};
 
@@ -67,7 +68,13 @@ function App() {
                         <NotFound />
                     </StandardLayout>
                 } />
-        </Routes>
+
+            <Route path="/about" element={
+                    <StandardLayout>
+                        <AboutUs />
+                    </StandardLayout>
+                } />
+            </Routes>
     );
 }
 
