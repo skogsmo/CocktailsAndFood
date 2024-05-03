@@ -124,7 +124,7 @@ export const Checkout = () => {
                 <img
                   src="public\img\kockens-val-stamp.png"
                   alt="a stamperino"
-                  className="absolute top-[30px] right-[70px] h-40 opacity-80 rotate-12"
+                  className="absolute top-[30px] right-[70px] h-40 opacity-80 rotate-12 select-none"
                 />
               )}
             </div>
