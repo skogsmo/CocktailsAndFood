@@ -35,7 +35,7 @@ export default function ItemCard<T extends Item>({
                                 <p className="font-semibold my-2 text-sm">
                                     {price.toFixed(2)} kr
                                 </p>
-                                {spiciness && (
+                                {spiciness !== undefined && (
                                     <SpicyChilis spiciness={spiciness} />
                                 )}
                             </div>
