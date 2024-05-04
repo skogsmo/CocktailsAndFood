@@ -1,26 +1,24 @@
 import capitalizeString from "./utils/capitalizeString";
 
-export type Meal = {
+export interface Item {
   _id: string;
   title: string;
-  imageUrl: string;
   description: string;
   price: number;
+  imageUrl: string;
+}
+
+export type Meal = Item & {
+  _id: string;
   ingredients: Ingredient[];
   spiciness: number;
 };
 
+export type Cocktail = Item;
+
 export type Ingredient = {
   Name: string;
   IsIncluded: boolean;
-};
-
-export type Cocktail = {
-  CocktailName: string;
-  CocktailId: string;
-  Description: string;
-  Price: number;
-  ImgUrl: string;
 };
 
 export type Extra = {
@@ -89,9 +87,9 @@ export const mapDrinkDetailsWithCocktail = (
   ].filter((i) => typeof i === "string");
 
   const cocktail: Cocktail = {
-    CocktailName: drink.strDrink,
-    CocktailId: drink.idDrink,
-    Description: capitalizeString(
+    title: drink.strDrink,
+    _id: drink.idDrink,
+    description: capitalizeString(
       [
         "this is",
         drink.strAlcoholic[0].toLowerCase() === "a" ? "an" : "a",
@@ -109,8 +107,8 @@ export const mapDrinkDetailsWithCocktail = (
         drink.strGlass + ".",
       ].join(" ")
     ),
-    Price: price ?? 0,
-    ImgUrl: drink.strDrinkThumb,
+    price: price ?? 0,
+    imageUrl: drink.strDrinkThumb,
   };
   return cocktail;
 };

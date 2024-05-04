@@ -139,7 +139,7 @@ export const OrderContextProvider = ({ children }: { children: ReactNode }) => {
             "\n    side: " +
             order.Side?.Name +
             "\n    cocktail: " +
-            order.Cocktail?.CocktailName +
+            order.Cocktail?.title +
             (order.Meal.ingredients.some((i) => !i.IsIncluded)
               ? "\n    excluded ingredients: " +
                 order.Meal.ingredients

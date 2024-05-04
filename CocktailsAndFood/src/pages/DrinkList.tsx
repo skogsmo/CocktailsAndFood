@@ -1,4 +1,4 @@
-import { DrinkCard } from "../components/DrinkComponent";
+import { DrinkComponent } from "../components/DrinkComponent";
 import { Navigate } from "react-router-dom";
 import { useOrderContext } from "../context/OrderContext";
 import StandardButton from "../components/StandardButton";
@@ -22,7 +22,7 @@ export const DrinkList = () => {
                 {drinksInfo
                     .filter((d) => d.selectable)
                     .map((d) => (
-                        <DrinkCard key={d.drinkId} drinkId={d.drinkId} />
+                        <DrinkComponent key={d.drinkId} drinkId={d.drinkId} />
                     ))}
             </div>
 

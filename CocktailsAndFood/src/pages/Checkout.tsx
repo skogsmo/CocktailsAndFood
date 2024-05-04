@@ -60,7 +60,7 @@ export const Checkout = () => {
                 />
                 <img
                   className="object-cover size-[200px] rounded-[25px]"
-                  src={order.Cocktail?.ImgUrl}
+                  src={order.Cocktail?.imageUrl}
                   alt="meal image"
                 />
               </div>
@@ -104,10 +104,10 @@ export const Checkout = () => {
 
                   <div className="text-lg font-semibold flex gap-3 justify-between text-nowrap pt-2">
                     <h6 className="font-bold">
-                      {order.Cocktail?.CocktailName}
+                      {order.Cocktail?.title}
                     </h6>
                     <div className="h-[20px] border-b-2 border-dotted border-white grow"></div>
-                    <span>{order.Cocktail?.Price} kr</span>
+                    <span>{order.Cocktail?.price} kr</span>
                   </div>
                 </div>
 
@@ -190,7 +190,7 @@ export const calculateOrderSum = (order: Order): number => {
   sum += order.Meal.price;
   sum += order.Protein?.Price ?? 0;
   sum += order.Side?.Price ?? 0;
-  sum += order.Cocktail?.Price ?? 0;
+  sum += order.Cocktail?.price ?? 0;
 
   return sum;
 };
