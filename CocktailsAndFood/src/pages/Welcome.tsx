@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
 import StandardButton from "../components/StandardButton";
-import { RecommendedOrder } from "../components/RecommendedOrder";
 
 export const Welcome = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col bg-[url('/img/Bakgrund.jpeg')] bg-cover bg-repeat">
-        <img
-          src="/img/lottas-finest.svg"
-          alt="bowls and cocktails logo"
-          className="absolute size-32 top-10 left-10 hidden sm:flex"
-        />
+        <Link to="/about">
+          <img
+            src="/img/lottas-finest.svg"
+            alt="bowls and cocktails logo"
+            className="absolute size-32 top-10 left-10 hidden sm:flex hover:rotate-[360deg] duration-1000 active:scale-0"
+          />
+        </Link>
         <div className="bg-black/70 grow flex flex-col justify-center items-center">
           <div className="text-white flex flex-col items-center text-center max-w-[1000px]">
             <h2 className="px-4 mb-3">VÄLKOMMEN TILL</h2>

@@ -3,11 +3,11 @@ import { Cocktail } from "../orderTypes";
 export const CocktailCard = ({ cocktail }: { cocktail: Cocktail }) => {
   return (
     <div>
-      <img src={cocktail.ImgUrl} />
-      <h2>{cocktail.CocktailName}</h2>
-      <p>{cocktail.Description}</p>
+      <img src={cocktail.imageUrl} />
+      <h2>{cocktail.title}</h2>
+      <p>{cocktail.description}</p>
       <p>
-        <strong>{cocktail.Price}</strong>
+        <strong>{cocktail.price}</strong>
       </p>
     </div>
   );

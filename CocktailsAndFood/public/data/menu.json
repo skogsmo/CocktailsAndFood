@@ -1,0 +1,291 @@
+[
+    {
+        "_id": "66016d4529f983c33c7c7a50",
+        "title": "Chipotle Mexican Bowl",
+        "description": "Mexikanskt ris/ romansallad, ditt val av protein, raw slaw, majssalsa, frökrisp, nachos, koriander, pico de gallo & chipotlecréme",
+        "imageUrl": "img/chipotle-mexican-bowl.png",
+        "timeInMins": 2,
+        "price": 125,
+        "categories": [
+            "raw slaw",
+            "majssalsa",
+            "frökrisp",
+            "nachos",
+            "koriander",
+            "pico de gallo",
+            "chipotlecréme"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66016db329f983c33c7c866e",
+        "title": "BBQ Block Party Bowl",
+        "description": "Mexikanskt ris/ romansallad, ditt val av protein, mexican slaw, svarta bönor, nachos, BBQ-sås & chipotlecréme",
+        "imageUrl": "img/bbq-block-party-bowl.png",
+        "timeInMins": 1,
+        "price": 130,
+        "categories": [
+            "mexican slaw",
+            "svarta bönor",
+            "nachos",
+            "BBQ-sås",
+            "chipotlecréme"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "660176ee29f983c33c835771",
+        "title": "Mission District Bowl",
+        "description": "Mexikanskt ris/ romansallad, ditt val av protein, ost, mexican slaw, svarta bönor, pico de gallo, koriander, jalapeños & habanerocréme",
+        "imageUrl": "img/mission-district-bowl.png",
+        "timeInMins": 3,
+        "price": 135,
+        "categories": [
+            "ost",
+            "mexican slaw",
+            "svarta bönor",
+            "pico de gallo",
+            "koriander",
+            "jalapeños",
+            "habanerocréme"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "6601773029f983c33c835ca9",
+        "title": "Dolores Green Bowl",
+        "description": "Mexikanskt ris/ romansallad, ditt val av protein, svarta bönor, raw slaw, nachos, majssalsa, koriander, frökrisp, guacamole & mango-ananassalsa",
+        "imageUrl": "img/dolores-green-bowl.png",
+        "timeInMins": 0,
+        "price": 135,
+        "categories": [
+            "svarta bönor",
+            "raw slaw",
+            "nachos",
+            "majssalsa",
+            "koriander",
+            "frökrisp",
+            "guacamole",
+            "mango-ananassalsa"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "6601774829f983c33c835cab",
+        "title": "Lucha Libre Bowl",
+        "description": "Mexikanskt ris/ romansallad, ditt val av protein, raw slaw, syltad rödlök, avokado, frökrisp, koriander, salsa verde & koriandercréme",
+        "imageUrl": "img/lucha-libre-bowl.png",
+        "timeInMins": 3,
+        "price": 135,
+        "categories": [
+            "raw slaw",
+            "syltad rödlök",
+            "avokado",
+            "frökrisp",
+            "koriander",
+            "salsa verde",
+            "koriandercréme"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017ae829f983c33c838512",
+        "title": "Smokey Chipotle Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, chipotle-rödkål, sötpotatispuré, grillad majs, koriander, avokado & rökt paprika dressing",
+        "imageUrl": "img/smokey-chipotle-bowl.png",
+        "timeInMins": 2,
+        "price": 140,
+        "categories": [
+            "chipotle-rödkål",
+            "sötpotatispuré",
+            "grillad majs",
+            "koriander",
+            "avokado",
+            "rökt paprika dressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017b0f29f983c33c838618",
+        "title": "Spicy Habanero Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, habanero-chilimajonnäs, picklad rödkål, friterade jalapeños, koriander, limeklyfta & het mangochutney",
+        "imageUrl": "img/spicy-habanero-bowl.png",
+        "timeInMins": 3,
+        "price": 145,
+        "categories": [
+            "habanero-chilimajonnäs",
+            "picklad rödkål",
+            "friterade jalapeños",
+            "koriander",
+            "limeklyfta",
+            "het mangochutney"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017b2b29f983c33c8386a1",
+        "title": "Tropical Pineapple Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, ananas-svartbönssalsa, kokosris, färsk koriander, limeklyfta, grön lök & mangodressing",
+        "imageUrl": "img/tropical-pineapple-bowl.png",
+        "timeInMins": 0,
+        "price": 140,
+        "categories": [
+            "ananas-svartbönssalsa",
+            "kokosris",
+            "färsk koriander",
+            "limeklyfta",
+            "grön lök",
+            "mangodressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017b4029f983c33c8386df",
+        "title": "Zesty Citrus Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, citrussallad, rostad paprika, quinoa, limeklyfta, färsk koriander & citronpeppar-dressing",
+        "imageUrl": "img/zesty-citrus-bowl.png",
+        "timeInMins": 2,
+        "price": 140,
+        "categories": [
+            "citrussallad",
+            "rostad paprika",
+            "quinoa",
+            "limeklyfta",
+            "färsk koriander",
+            "citronpeppar dressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017c1029f983c33c8388ba",
+        "title": "Fuego Inferno Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, jalapeño-mango salsa, picklad habanero, friterad chili, koriander, limeklyfta & het chilidressing",
+        "imageUrl": "img/fuego-inferno-bowl.png",
+        "timeInMins": 3,
+        "price": 150,
+        "categories": [
+            "jalapeño-mango salsa",
+            "picklad habanero",
+            "friterad chili",
+            "koriander",
+            "limeklyfta",
+            "het chilidressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017c3429f983c33c838916",
+        "title": "Sizzling Sriracha Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, sriracha-sojaglaze, wokad paprika, kimchimajonnäs, sesamfrön, koriander, limeklyfta & picklad ingefära",
+        "imageUrl": "img/sizzling-sriracha-bowl.png",
+        "timeInMins": 2,
+        "price": 145,
+        "categories": [
+            "sriracha-sojaglaze",
+            "wokad paprika",
+            "kimchimajonnäs",
+            "sesamfrön",
+            "koriander",
+            "limeklyfta",
+            "picklad ingefära"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017c5629f983c33c83897c",
+        "title": "Mild Mango Tango Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, mangochutney, grillad paprika, riven ost, koriander, limeklyfta & mild chilidressing",
+        "imageUrl": "img/mild-mango-tango-bowl.png",
+        "timeInMins": 0,
+        "price": 140,
+        "categories": [
+            "mangochutney",
+            "grillad paprika",
+            "riven ost",
+            "koriander",
+            "limeklyfta",
+            "mild chilidressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017c7529f983c33c8389de",
+        "title": "Savory Salsa Verde Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, salsa verde, svamp- och lökmix, svarta bönor, koriander, limeklyfta & krämig avokadodressing",
+        "imageUrl": "img/savory-salsa-verde-bowl.png",
+        "timeInMins": 1,
+        "price": 145,
+        "categories": [
+            "salsa verde",
+            "svamp- och lökmix",
+            "svarta bönor",
+            "koriander",
+            "limeklyfta",
+            "krämig avokadodressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017c9429f983c33c838a37",
+        "title": "Sweet Honey Chipotle Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, chipotle-honungsmarinad, grillad ananas, rostad majs, koriander, limeklyfta & sötsyrlig mango dressing",
+        "imageUrl": "img/sweet-honey-chipotle-bowl.png",
+        "timeInMins": 0,
+        "price": 140,
+        "categories": [
+            "chipotle-honungsmarinad",
+            "grillad ananas",
+            "rostad majs",
+            "koriander",
+            "limeklyfta",
+            "sötsyrlig mango dressing"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    },
+    {
+        "_id": "66017cb429f983c33c838a7e",
+        "title": "Fiery Cajun Bowl",
+        "description": "Mexikanskt ris/romansallad, ditt val av protein, krämig jambalaya ris, svarta bönor, koriander, limeklyfta & het chilimayo",
+        "imageUrl": "img/fiery-cajun-bowl.png",
+        "timeInMins": 3,
+        "price": 150,
+        "categories": [
+            "krämig jambalaya ris",
+            "svarta bönor",
+            "koriander",
+            "limeklyfta",
+            "het chilimayo"
+        ],
+        "instructions": [],
+        "ingredients": [],
+        "avgRating": null
+    }
+]

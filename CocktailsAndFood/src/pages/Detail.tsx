@@ -10,11 +10,12 @@ import BigWhiteBoxDivider from "../layout_components/BigWhiteBoxDivider";
 import BigWhiteBoxSection from "../layout_components/BigWhiteBoxSection";
 import StandardHeader from "../layout_components/StandardHeader";
 import { useDataContext } from "../context/DataContext";
+import { SpicyChilis } from "../components/SpicyChilis";
 
 const Detail = () => {
     const { dispatch, currentOrder, isOrdersEmpty } = useOrderContext();
 
-    const {sideOptions, proteinOptions} = useDataContext();
+    const { sideOptions, proteinOptions } = useDataContext();
 
     if (isOrdersEmpty) return <Navigate to="/menu" />;
 
@@ -50,9 +51,12 @@ const Detail = () => {
 
                 <BigWhiteBoxSection>
                     <h3 className="mb-[10px]">{currentOrder.Meal.title}</h3>
-                    <p className="font-semibold mb-[15px]">
-                        {currentOrder.Meal.price.toFixed(2)} kr
-                    </p>
+                    <div className="flex gap-3">
+                        <p className="font-semibold mb-[15px]">
+                            {currentOrder.Meal.price.toFixed(2)} kr
+                        </p>
+                        <SpicyChilis spiciness={currentOrder.Meal.spiciness}/>
+                    </div>
                     <p>{currentOrder.Meal.description}</p>
                 </BigWhiteBoxSection>
 

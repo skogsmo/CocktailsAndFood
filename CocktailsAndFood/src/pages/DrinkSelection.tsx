@@ -56,14 +56,14 @@ export const DrinkSelection = () => {
                         <div className="w-full flex flex-col-reverse gap-10 items-center md:flex-row justify-between">
                             <img
                                 className="h-52 md:rounded-[25px]"
-                                src={cocktail.ImgUrl}
+                                src={cocktail.imageUrl}
                             />
                             <div>
-                                <h3>{cocktail.CocktailName}</h3>
+                                <h3>{cocktail.title}</h3>
                                 <p className="font-semibold mt-2 mb-4">
-                                    {cocktail.Price.toFixed(2)} kr
+                                    {cocktail.price.toFixed(2)} kr
                                 </p>
-                                <p>{cocktail.Description}</p>
+                                <p>{cocktail.description}</p>
                             </div>
                         </div>
                     </BigWhiteBoxSection>
